@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import HomeGuestHeader from "./HomeGuestHeader";
+import HomeGuestHeader from "./section/HomeGuestHeader";
 
 const GuestLayout = () => {
   return (
