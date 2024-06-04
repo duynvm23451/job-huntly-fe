@@ -1,10 +1,10 @@
-import logo from "./../assets/Logo.svg";
-import Content from "./shared/Content";
-import RectangleButton from "./shared/RectangleButton";
+import logo from "../../../assets/logo.svg";
+import Content from "../../shared/Content";
+import RectangleButton from "../../shared/RectangleButton";
 
 const HomeGuestHeader = () => {
   return (
-    <header className="fixed top-0 right-0 left-0 bg-white z-10">
+    <header className="fixed top-0 right-0 left-0 bg-white z-20">
       <Content className={"pt-6 flex"}>
         <img src={logo} alt="logo" className="w-52 pb-6" />
         <menu className="ml-16 mt-4 h-fit">
@@ -16,9 +16,9 @@ const HomeGuestHeader = () => {
           </ul>
         </menu>
         <div className="ml-auto flex">
-          <RectangleButton type={"white"}>Login</RectangleButton>
+          <RectangleButton type={"white"}>Đăng nhập</RectangleButton>
           <div className="w-0.5 bg-gray-200 mx-4 mb-4" />
-          <RectangleButton type={"violet"}>Sign Up</RectangleButton>
+          <RectangleButton type={"violet"}>Đăng ký</RectangleButton>
         </div>
       </Content>
     </header>

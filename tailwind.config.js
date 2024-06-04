@@ -11,11 +11,13 @@ export default {
         "custom-gray": "#f8f8fd",
       },
       colors: {
-        "custom-violet": "#4f40db",
+        "custom-violet": "#4640de",
         "custom-blue": "#4ba2fc",
+        "custom-neutral": "#f8f8fd",
       },
       boxShadow: {
         custom: "0 3px 20px rgba(192, 192, 192, .21)",
+        "for-banner": "inset 3rem 0 0 transparent",
       },
       maxWidth: {
         106: "106rem",

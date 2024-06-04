@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import GuestLayout from "../components/GuestLayout";
+import GuestLayout from "../components/layout/GuestLayout";
 import HomeGuest from "../pages/HomeGuest";
 
 const router = createBrowserRouter([
