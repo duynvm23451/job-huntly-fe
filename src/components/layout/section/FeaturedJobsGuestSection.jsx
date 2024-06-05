@@ -1,13 +1,20 @@
 import FeaturedJobGuestCard from "../../disposable/FeaturedJobGuestCard";
+import ArrowRightIcon from "../../icons/ArrowRightIcon";
 import Content from "../../shared/Content";
 
 const FeaturedJobsGuestSection = () => {
   return (
     <section className="mt-48 pb-24">
       <Content>
-        <h1 className="text-5xl font-bold">
-          Công việc <span className="text-custom-blue">nổi bật</span>
-        </h1>
+        <div className="flex justify-between items-center">
+          <h1 className="text-5xl font-bold">
+            Công việc <span className="text-custom-blue">nổi bật</span>
+          </h1>
+          <p className="flex items-center text-2xl text-violet-900 font-semibold cursor-pointer hover:text-red-500">
+            Xem tất cả công việc <ArrowRightIcon className="ml-4 w-10 h-10" />
+          </p>
+        </div>
+
         <div className="grid xl:grid-cols-4 grid-cols-2 gap-12 mt-16">
           <FeaturedJobGuestCard
             logo={

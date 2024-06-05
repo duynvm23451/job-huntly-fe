@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import HomeGuestHeader from "./section/HomeGuestHeader";
+import FooterGuest from "./section/FooterGuest";
 
 const GuestLayout = () => {
   return (
@@ -8,6 +9,7 @@ const GuestLayout = () => {
       <main>
         <Outlet />
       </main>
+      <FooterGuest />
     </div>
   );
 };

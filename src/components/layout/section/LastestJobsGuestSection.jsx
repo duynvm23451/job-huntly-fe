@@ -1,13 +1,19 @@
 import LastestJobGuestCard from "../../disposable/LastestJobGuestCard";
 import Content from "../../shared/Content";
+import ArrowRightIcon from "../../icons/ArrowRightIcon";
 
 const LastestJobsGuestSection = () => {
   return (
     <section className="py-24 bg-custom-neutral">
       <Content>
-        <h1 className="text-5xl font-bold">
-          Công việc <span className="text-custom-blue">mới nhất</span>
-        </h1>
+        <div className="flex justify-between items-center">
+          <h1 className="text-5xl font-bold">
+            Công việc <span className="text-custom-blue">mới nhất</span>
+          </h1>
+          <p className="flex items-center text-2xl text-violet-900 font-semibold cursor-pointer hover:text-red-500">
+            Xem tất cả công việc <ArrowRightIcon className="ml-4 w-10 h-10" />
+          </p>
+        </div>
         <div className="mt-20 grid lg:grid-cols-2 gap-x-11 gap-y-8">
           <LastestJobGuestCard
             logo={

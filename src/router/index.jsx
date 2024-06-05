@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import GuestLayout from "../components/layout/GuestLayout";
 import HomeGuest from "../pages/HomeGuest";
+import FindJobsGuest from "../pages/FindJobsGuest";
 
 const router = createBrowserRouter([
   {
@@ -10,6 +11,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomeGuest />,
+      },
+      {
+        path: "find-jobs",
+        element: <FindJobsGuest />,
       },
     ],
   },

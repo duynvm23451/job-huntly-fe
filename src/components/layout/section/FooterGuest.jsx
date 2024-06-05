@@ -1,0 +1,75 @@
+import Content from "../../shared/Content";
+import logo from "../../../assets/logo-white.svg";
+import RectangleInput from "../../shared/RectangleInput";
+import RectangleButton from "../../shared/RectangleButton";
+import FacebookIcon from "../../icons/FacebookIcon";
+import InstagramIcon from "../../icons/InstagramIcon";
+import ThreadsIcon from "../../icons/ThreadsIcon";
+import LinkedinIcon from "../../icons/LinkedinIcon";
+import XIcon from "../../icons/XIcon";
+
+const FooterGuest = () => {
+  return (
+    <footer className="bg-custom-black pt-24 pb-12">
+      <Content>
+        <div className={"grid grid-cols-3 gap-20"}>
+          <div>
+            <img src={logo} alt="logo" className="w-52 pb-6" />
+            <p className="text-2xl leading-10 text-custom-neutral-2">
+              Nền tảng tuyệt vời dành cho các nhà tuyển dụng muốn tìm ứng viên
+              tài năng. Ứng viên tìm được công việc dễ dàng hơn.
+            </p>
+          </div>
+          <div className="flex justify-between text-xl font-medium text-custom-neutral-2">
+            <ul>
+              <li className="text-2xl font-semibold mb-6 text-white">About</li>
+              <li className="mt-4">Công ty</li>
+              <li className="mt-4">Giá cả</li>
+              <li className="mt-4">Điều khoản</li>
+              <li className="mt-4">Nhà đầu tư</li>
+              <li className="mt-4">Chính sách quyền riêng tư</li>
+            </ul>
+            <ul>
+              <li className="text-2xl font-semibold mb-6 text-white">
+                Resources
+              </li>
+              <li className="mt-4">Trợ giúp và hỗ trợ</li>
+              <li className="mt-4">Hướng dẫn</li>
+              <li className="mt-4">Bản cập nhật</li>
+              <li className="mt-4">Liên hệ với chúng tôi</li>
+            </ul>
+          </div>
+          <div>
+            <p className="text-2xl font-semibold mb-6 text-white">
+              Nhận thông báo công việc
+            </p>
+            <p className="text-xl text-custom-neutral-2">
+              Những tin tức, bài viết mới nhất sẽ được gửi đến bạn hàng tuần
+            </p>
+            <div className="flex mt-8">
+              <RectangleInput type="email" text="Địa chỉ email" />
+              <RectangleButton className={"ml-4 min-w-48"}>
+                Xác nhận
+              </RectangleButton>
+            </div>
+          </div>
+        </div>
+        <div className="border-t-2 pt-4 mt-20 border-gray-500 flex justify-between">
+          <p className="text-2xl text-custom-neutral-2 font-semibold">
+            ©2024 Developed by <span className="text-white">Andou Duy</span> -
+            Phenikaa University
+          </p>
+          <div className="fill-custom-neutral-2 flex items-center">
+            <FacebookIcon className="w-10 h-10 mr-4 cursor-pointer" />
+            <InstagramIcon className="w-10 h-10 mr-4 cursor-pointer" />
+            <ThreadsIcon className="w-12 h-12 mr-4 cursor-pointer" />
+            <LinkedinIcon className="w-10 h-10 mr-4 cursor-pointer" />
+            <XIcon className="w-10 h-10" />
+          </div>
+        </div>
+      </Content>
+    </footer>
+  );
+};
+
+export default FooterGuest;
