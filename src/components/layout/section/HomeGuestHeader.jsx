@@ -5,7 +5,7 @@ import RectangleButton from "../../shared/RectangleButton";
 
 const HomeGuestHeader = () => {
   return (
-    <header className="fixed top-0 right-0 left-0 bg-white z-20">
+    <header className="fixed top-0 right-0 left-0 bg-white z-30">
       <Content className={"pt-6 flex"}>
         <Link to={"/"} className="mt-2">
           <img src={logo} alt="logo" className="w-52" />

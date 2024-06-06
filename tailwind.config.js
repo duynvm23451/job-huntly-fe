@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import plugin from "tailwindcss/plugin";
+
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -26,5 +28,16 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // eslint-disable-next-line no-undef
+    require("@tailwindcss/forms"),
+    plugin(function ({ addVariant }) {
+      addVariant("progress-unfilled", ["&::-webkit-progress-bar", "&"]);
+      addVariant("progress-filled", [
+        "&::-webkit-progress-value",
+        "&::-moz-progress-bar",
+        "&",
+      ]);
+    }),
+  ],
 };
