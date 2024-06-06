@@ -6,7 +6,7 @@ import LocationIcon from "../../icons/LocationIcon";
 import SearchInput from "../../shared/SearchInput";
 import undertext from "../../../assets/undertext.png";
 
-const FindJobsHeroGuestSection = () => {
+const FindJobsCompaniesHeroGuestSection = ({ highlightText, description }) => {
   return (
     <section className="bg-custom-gray h-fit pt-48 pb-20 relative overflow-hidden">
       <img
@@ -24,7 +24,7 @@ const FindJobsHeroGuestSection = () => {
           <p className="text-7xl font-extrabold text-gray-800 pb-20">
             Tìm{" "}
             <span className="text-custom-blue relative">
-              công việc{" "}
+              {highlightText}{" "}
               <img
                 src={undertext}
                 alt="undertext"
@@ -33,10 +33,7 @@ const FindJobsHeroGuestSection = () => {
             </span>
             trong mơ
           </p>
-          <p className="text-3xl text-gray-500">
-            Tìm sự nghiệp tiếp theo của bạn tại các công ty như HubSpot, Nike và
-            Dropbox
-          </p>
+          <p className="text-3xl text-gray-500">{description}</p>
         </div>
         <form className="flex lg:flex-row lg:items-center flex-col bg-white px-8 pt-8 pb-10 shadow-custom z-20 mt-16 relative w-full">
           <SearchInput
@@ -62,4 +59,4 @@ const FindJobsHeroGuestSection = () => {
   );
 };
 
-export default FindJobsHeroGuestSection;
+export default FindJobsCompaniesHeroGuestSection;
