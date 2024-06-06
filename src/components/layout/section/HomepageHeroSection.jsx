@@ -9,10 +9,10 @@ import LocationIcon from "../../icons/LocationIcon";
 const HomepageHeroSection = () => {
   return (
     <section className="bg-custom-gray h-fit">
-      <Content className={"relative py-44"}>
+      <Content className={"relative pt-52 pb-36"}>
         <HomepageHero />
         <div className="text-7xl font-extrabold text-gray-800">
-          Khám phá{" "}
+          Khám phá
           <p className="mt-6 mb-3">
             hơn <span className="text-custom-blue">5000+</span>
             <img src={undertext} alt="undertext" className="w-[520px] mt-4" />
@@ -24,11 +24,15 @@ const HomepageHeroSection = () => {
           nghiệp mới và đam mê mới.
         </p>
         <form className="flex lg:flex-row flex-col bg-white px-8 pt-6 pb-8 shadow-custom z-20 mt-12 lg:w-fit w-full relative">
-          <SearchInput text="Tiêu đề hoặc từ khóa" icon={<SearchIcon />} />
+          <SearchInput
+            className="w-96"
+            text="Tiêu đề hoặc từ khóa"
+            icon={<SearchIcon />}
+          />
           <SearchInput
             text="Địa điểm"
             icon={<LocationIcon />}
-            className={"lg:mx-8"}
+            className={"lg:mx-8 w-96"}
           />
           <RectangleButton type={"violet"}>Tìm kiếm</RectangleButton>
         </form>

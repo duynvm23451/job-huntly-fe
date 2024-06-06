@@ -9,7 +9,7 @@ const SearchInput = ({
     <div className={`flex items-center ${className}`}>
       {icon && <span>{icon}</span>}
       <input
-        className={`ml-2 pt-2 pb-3 border-b-2 lg:w-72 w-full border-gray-300 focus:border-custom-blue outline-0 text-xl`}
+        className={`ml-2 pt-2 pb-3 border-b-2 w-full border-gray-300 focus:border-custom-blue outline-0 text-xl`}
         type={type}
         placeholder={text}
         {...props}
