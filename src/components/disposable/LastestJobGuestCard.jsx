@@ -10,12 +10,12 @@ const LastestJobGuestCard = ({
 }) => {
   return (
     <div className="flex bg-white px-8 py-6">
-      <img src={logo} alt="logo" className="w-28 mr-4" />
+      <img src={logo} alt="logo" className="w-20 h-20 mr-4" />
       <div>
-        <h1 className="text-3xl font-semibold">{title}</h1>
-        <div className="flex items-center text-2xl text-gray-400 mt-2 ">
+        <h1 className="text-2xl font-semibold">{title}</h1>
+        <div className="flex items-center text-xl text-gray-400 mt-2 ">
           <p>{company}</p>
-          <p className="text-3xl">・</p>
+          <p className="text-xl">・</p>
           <p>{location}</p>
         </div>
         <div className="flex items-center mt-2 ">
@@ -25,7 +25,7 @@ const LastestJobGuestCard = ({
           >
             {type}
           </SmallCategoryCard>
-          <span className="w-0.5 h-11 mr-3 bg-gray-200 mt-2" />
+          <span className="w-0.5 h-8 mr-3 bg-gray-200 mt-2" />
           {categories.map((el) => (
             <SmallCategoryCard
               textColor={"text-white"}

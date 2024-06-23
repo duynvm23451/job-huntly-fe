@@ -10,22 +10,22 @@ const FeaturedJobGuestCard = ({
   categories,
 }) => {
   return (
-    <div className="flex flex-col p-8 border-2 border-gray-300  cursor-pointer">
+    <div className="flex flex-col p-6 border-1 border-custom-neutral-2  cursor-pointer">
       <div className="flex justify-between">
-        <img src={logo} alt="logo" />
-        <p className="text-custom-violet text-2xl px-3 py-1.5 border-2 border-custom-violet w-fit h-fit">
+        <img src={logo} alt="logo" className="w-12 h-12" />
+        <p className="text-custom-violet text-lg px-2.5 py-1 pb-1.5 border-1 border-custom-violet w-fit h-fit">
           {type}
         </p>
       </div>
-      <h2 className="text-2xl font-semibold mt-4">{title}</h2>
-      <div className="flex items-center text-2xl text-gray-400 mt-2">
+      <h2 className="text-xl font-semibold mt-6">{title}</h2>
+      <div className="flex items-center text-lg text-gray-400 mt-2">
         <p>{company}</p>
-        <p className="text-3xl">・</p>
+        <p className="text-lg">・</p>
         <p>{location}</p>
       </div>
-      <p className="text-2xl text-gray-500 mt-8">{`${description.substring(
+      <p className="text-lg text-gray-500 mt-8">{`${description.substring(
         0,
-        60
+        50
       )}${description.length > 60 && "..."}`}</p>
       <div className="flex flex-wrap mt-4">
         {categories.map((el) => (

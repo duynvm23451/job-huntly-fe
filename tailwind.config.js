@@ -8,6 +8,7 @@ export default {
       borderWidth: {
         6: "6px",
         3: "3px",
+        1: "1px",
       },
       backgroundColor: {
         "custom-gray": "#f8f8fd",
