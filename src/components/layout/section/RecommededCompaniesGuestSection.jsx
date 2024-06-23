@@ -1,5 +1,5 @@
-import CompanyCard from "../../disposable/CompanyCard";
-import Content from "../../shared/Content";
+import CompanyCard from "@/components/disposable/CompanyCard";
+import Content from "@/components/shared/Content";
 
 const RecommededCompaniesGuestSection = () => {
   return (

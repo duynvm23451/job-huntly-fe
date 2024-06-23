@@ -14,6 +14,7 @@ export default {
       },
       colors: {
         "custom-violet": "#4640de",
+        "custom-violet-2": "#0000EE",
         "custom-blue": "#4ba2fc",
         "custom-neutral": "#f8f8fd",
         "custom-black": "#202430",
@@ -24,7 +25,7 @@ export default {
         "for-banner": "inset 3rem 0 0 transparent",
       },
       maxWidth: {
-        106: "106rem",
+        106: "85rem",
       },
     },
   },

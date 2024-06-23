@@ -1,5 +1,5 @@
-import ArrowDownIcon from "../icons/ArrowDownIcon";
-import ArrowUpIcon from "../icons/ArrowUpIcon";
+import ArrowDownIcon from "@/components/icons/ArrowDownIcon";
+import ArrowUpIcon from "@/components/icons/ArrowUpIcon";
 
 const SideBarDropDown = ({ items, title, isShowed, onClick, name }) => {
   return (

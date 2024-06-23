@@ -1,4 +1,4 @@
-import SmallCategoryCard from "../shared/SmallCategoryCard";
+import SmallCategoryCard from "@/components/shared/SmallCategoryCard";
 
 const LastestJobGuestCard = ({
   logo,

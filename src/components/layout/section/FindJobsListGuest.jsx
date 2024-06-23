@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Content from "../../shared/Content";
-import SideBarDropDown from "../../shared/SideBarDropDown";
-import JobsListItemCard from "../../disposable/JobsListItemCard";
-import Pagination from "../../shared/Pagination";
+import Content from "@/components/shared/Content";
+import SideBarDropDown from "@/components/shared/SideBarDropDown";
+import JobsListItemCard from "@/components/disposable/JobsListItemCard";
+import Pagination from "@/components/shared/Pagination";
 
 const typeList = ["Full Time", "Part Time", "Remote", "Contact"];
 const categoriesList = [

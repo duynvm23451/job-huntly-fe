@@ -1,4 +1,4 @@
-import SmallCategoryCard from "../shared/SmallCategoryCard";
+import SmallCategoryCard from "@/components/shared/SmallCategoryCard";
 
 const CompanyCard = ({ logo, title, jobNumber, description, categories }) => {
   return (
@@ -6,7 +6,9 @@ const CompanyCard = ({ logo, title, jobNumber, description, categories }) => {
       <div className="flex justify-between ">
         <div>
           <img src={logo} alt="logo" className="w-24" />
-          <h2 className="text-4xl font-bold mt-2 text-violet-900">{title}</h2>
+          <h2 className="text-4xl font-bold mt-2 text-custom-violet-2">
+            {title}
+          </h2>
         </div>
         <span className="bg-violet-100 h-fit px-4 pt-1.5 pb-2 text-2xl text-custom-violet rounded-sm">
           {jobNumber} vị trí

@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import HomeGuestHeader from "./section/HomeGuestHeader";
-import FooterGuest from "./section/FooterGuest";
+import HomeGuestHeader from "@/components/layout/section/HomeGuestHeader";
+import FooterGuest from "@/components/layout/section/FooterGuest";
 
 const GuestLayout = () => {
   return (

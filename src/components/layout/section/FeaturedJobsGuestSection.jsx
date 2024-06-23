@@ -1,6 +1,6 @@
-import FeaturedJobGuestCard from "../../disposable/FeaturedJobGuestCard";
-import ArrowRightIcon from "../../icons/ArrowRightIcon";
-import Content from "../../shared/Content";
+import FeaturedJobGuestCard from "@/components/disposable/FeaturedJobGuestCard";
+import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
+import Content from "@/components/shared/Content";
 
 const FeaturedJobsGuestSection = () => {
   return (

@@ -1,5 +1,5 @@
-import FindJobsCompaniesHeroGuestSection from "../components/layout/section/FindJobsCompaniesHeroGuestSection";
-import FindJobsListGuest from "../components/layout/section/FindJobsListGuest";
+import FindJobsCompaniesHeroGuestSection from "@/components/layout/section/FindJobsCompaniesHeroGuestSection";
+import FindJobsListGuest from "@/components/layout/section/FindJobsListGuest";
 
 const FindJobsGuest = () => {
   return (
