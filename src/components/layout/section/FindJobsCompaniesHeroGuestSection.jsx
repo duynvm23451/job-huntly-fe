@@ -1,10 +1,10 @@
-import Content from "../../shared/Content";
-import graphic from "../../../assets/pattern-2.svg";
-import RectangleButton from "../../shared/RectangleButton";
-import SearchIcon from "../../icons/SearchIcon";
-import LocationIcon from "../../icons/LocationIcon";
-import SearchInput from "../../shared/SearchInput";
-import undertext from "../../../assets/undertext.png";
+import Content from "@/components/shared/Content";
+import graphic from "@/assets/pattern-2.svg";
+import RectangleButton from "@/components/shared/RectangleButton";
+import SearchIcon from "@/components/icons/SearchIcon";
+import LocationIcon from "@/components/icons/LocationIcon";
+import SearchInput from "@/components/shared/SearchInput";
+import undertext from "@/assets/undertext.png";
 
 const FindJobsCompaniesHeroGuestSection = ({ highlightText, description }) => {
   return (
@@ -12,14 +12,14 @@ const FindJobsCompaniesHeroGuestSection = ({ highlightText, description }) => {
       <img
         src={graphic}
         alt="graphic"
-        className="absolute -bottom-40 left-2/3 w-[1280px]"
+        className="absolute -bottom-40 left-2/3 w-[1280px] z-10"
       />
       <img
         src={graphic}
         alt="graphic"
-        className="absolute -bottom-2/3 -left-1/4 w-[1280px]"
+        className="absolute -bottom-2/3 -left-1/4 w-[1280px] z-10"
       />
-      <Content>
+      <Content className={"relative z-20"}>
         <div className=" text-center">
           <p className="text-7xl font-extrabold text-gray-800 pb-20">
             Tìm{" "}
@@ -33,7 +33,7 @@ const FindJobsCompaniesHeroGuestSection = ({ highlightText, description }) => {
             </span>
             trong mơ
           </p>
-          <p className="text-3xl text-gray-500">{description}</p>
+          <p className="text-2xl text-gray-500">{description}</p>
         </div>
         <form className="flex lg:flex-row lg:items-center flex-col bg-white px-8 pt-8 pb-10 shadow-custom z-20 mt-16 relative w-full">
           <SearchInput
@@ -51,7 +51,7 @@ const FindJobsCompaniesHeroGuestSection = ({ highlightText, description }) => {
             Tìm kiếm
           </RectangleButton>
         </form>
-        <p className="text-2xl mt-8 text-gray-600">
+        <p className="text-xl mt-8 text-gray-600">
           Phổ biến: UI Designer, UX Researcher, Android, Admin
         </p>
       </Content>

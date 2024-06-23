@@ -1,12 +1,12 @@
-import Content from "../../shared/Content";
-import logo from "../../../assets/logo-white.svg";
-import RectangleInput from "../../shared/RectangleInput";
-import RectangleButton from "../../shared/RectangleButton";
-import FacebookIcon from "../../icons/FacebookIcon";
-import InstagramIcon from "../../icons/InstagramIcon";
-import ThreadsIcon from "../../icons/ThreadsIcon";
-import LinkedinIcon from "../../icons/LinkedinIcon";
-import XIcon from "../../icons/XIcon";
+import Content from "@/components/shared/Content";
+import logo from "@/assets/logo-white.svg";
+import RectangleInput from "@/components/shared/RectangleInput";
+import RectangleButton from "@/components/shared/RectangleButton";
+import FacebookIcon from "@/components/icons/FacebookIcon";
+import InstagramIcon from "@/components/icons/InstagramIcon";
+import ThreadsIcon from "@/components/icons/ThreadsIcon";
+import LinkedinIcon from "@/components/icons/LinkedinIcon";
+import XIcon from "@/components/icons/XIcon";
 
 const FooterGuest = () => {
   return (

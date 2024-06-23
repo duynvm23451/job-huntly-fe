@@ -1,4 +1,4 @@
-import ArrowRightIcon from "../icons/ArrowRightIcon";
+import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 
 const CategoryCard = ({ icon, text, availableNumber, ...props }) => {
   let Icon = icon;

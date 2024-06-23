@@ -1,5 +1,5 @@
-import ArrowLeftIcon from "../icons/ArrowLeftIcon";
-import ArrowRight2Icon from "../icons/ArrowRight2Icon";
+import ArrowLeftIcon from "@/components/icons/ArrowLeftIcon";
+import ArrowRight2Icon from "@/components/icons/ArrowRight2Icon";
 
 const pageNumbers = [1, 2, 3, 4, 5];
 const Pagination = () => {

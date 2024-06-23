@@ -1,5 +1,5 @@
-import SmallCategoryCard from "../shared/SmallCategoryCard";
-import RectangleButton from "../shared/RectangleButton";
+import SmallCategoryCard from "@/components/shared/SmallCategoryCard";
+import RectangleButton from "@/components/shared/RectangleButton";
 const JobsListItemCard = ({
   logo,
   title,

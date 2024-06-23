@@ -1,6 +1,6 @@
-import BannerGuestSection from "../components/layout/section/BannerGuestSection";
-import FindJobsCompaniesHeroGuestSection from "../components/layout/section/FindJobsCompaniesHeroGuestSection";
-import RecommededCompaniesGuestSection from "../components/layout/section/RecommededCompaniesGuestSection";
+import BannerGuestSection from "@/components/layout/section/BannerGuestSection";
+import FindJobsCompaniesHeroGuestSection from "@/components/layout/section/FindJobsCompaniesHeroGuestSection";
+import RecommededCompaniesGuestSection from "@/components/layout/section/RecommededCompaniesGuestSection";
 
 const CompaniesGuest = () => {
   return (
