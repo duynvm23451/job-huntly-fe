@@ -41,8 +41,8 @@ const FindJobsListGuest = () => {
   };
   return (
     <section>
-      <Content className={"pt-24 pb-12 flex"}>
-        <aside className="w-2/5">
+      <Content className={"pt-24 pb-12 grid grid-cols-12"}>
+        <aside className="col-span-3">
           <SideBarDropDown
             name="type"
             isShowed={isShowed}
@@ -72,15 +72,15 @@ const FindJobsListGuest = () => {
             onClick={handleClick}
           />
         </aside>
-        <div className="w-full">
+        <div className="w-full col-span-9">
           <div className="flex justify-between items-center">
             <div className="mb-12">
-              <h1 className="text-4xl font-bold">Tất cả công việc</h1>
-              <p className="text-2xl text-gray-500 mt-2">Hiển thị 73 kết quả</p>
+              <h1 className="text-3xl font-bold">Tất cả công việc</h1>
+              <p className="text-xl text-gray-500 mt-2">Hiển thị 73 kết quả</p>
             </div>
             <div className="flex items-center">
-              <p className="text-2xl text-gray-500">Sắp xếp theo: </p>
-              <select className="border-none mt-0.5">
+              <p className="text-lg text-gray-500">Sắp xếp theo: </p>
+              <select class="border-transparent focus:border-transparent focus:ring-0">
                 <option>Ngày đăng gần nhất</option>
                 <option>Lựa chọn 2</option>
                 <option>Lựa chọn 3</option>

@@ -12,6 +12,7 @@ import FinanceIcon from "@/components/icons/FinanceIcon";
 import EngineeringIcon from "@/components/icons/EngineeringIcon";
 import BusinessIcon from "@/components/icons/BusinessIcon";
 import HumanResourceIcon from "@/components/icons/HumanResourceIcon";
+import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 
 const categoryList = [
   {
@@ -60,7 +61,9 @@ const CategoryGuestSection = () => {
   return (
     <section className="mt-20">
       <Content>
-        <p className="text-3xl mb-4 font-medium">Các công ty đứng đầu</p>
+        <p className="text-xl mb-4 font-medium text-gray-600">
+          Các công ty đứng đầu
+        </p>
         <div className="flex justify-between">
           <img
             src={boschLogo}
@@ -79,10 +82,17 @@ const CategoryGuestSection = () => {
             className="w-1/5 object-contain"
           />
         </div>
-        <p className="text-5xl font-bold text-gray-800 mt-8">
-          Khám phá theo <span className="text-custom-blue">lĩnh vực</span>
-        </p>
-        <div className="grid lg:grid-cols-4 grid-cols-3 gap-12 mt-16">
+        <div className="flex justify-between items-center  mt-16">
+          <h1 className="text-5xl font-bold text-gray-800">
+            Khám phá theo <span className="text-custom-blue">lĩnh vực</span>
+          </h1>
+          <p className="flex items-center text-xl text-violet-900 font-semibold cursor-pointer hover:text-red-500">
+            Xem tất cả công việc{" "}
+            <ArrowRightIcon className="ml-3 mt-1 w-7 h-7" />
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-4 grid-cols-3 gap-8 mt-16">
           {categoryList.map((el) => (
             <CategoryCard
               key={el.text}

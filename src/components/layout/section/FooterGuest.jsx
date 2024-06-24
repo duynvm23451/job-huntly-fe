@@ -12,25 +12,25 @@ const FooterGuest = () => {
   return (
     <footer className="bg-custom-black pt-24 pb-12">
       <Content>
-        <div className={"grid grid-cols-3 gap-20"}>
-          <div>
-            <img src={logo} alt="logo" className="w-52 pb-6" />
-            <p className="text-2xl leading-10 text-custom-neutral-2">
+        <div className={"grid grid-cols-12 gap-12"}>
+          <div className="col-span-4">
+            <img src={logo} alt="logo" className="w-40 pb-6" />
+            <p className="text-lg text-custom-neutral-2">
               Nền tảng tuyệt vời dành cho các nhà tuyển dụng muốn tìm ứng viên
               tài năng. Ứng viên tìm được công việc dễ dàng hơn.
             </p>
           </div>
-          <div className="flex justify-between text-xl font-medium text-custom-neutral-2">
+          <div className="flex justify-between font-medium text-custom-neutral-2 col-span-3">
             <ul>
-              <li className="text-2xl font-semibold mb-6 text-white">About</li>
+              <li className="text-xl font-semibold mb-6 text-white">About</li>
               <li className="mt-4">Công ty</li>
               <li className="mt-4">Giá cả</li>
               <li className="mt-4">Điều khoản</li>
               <li className="mt-4">Nhà đầu tư</li>
               <li className="mt-4">Chính sách quyền riêng tư</li>
             </ul>
-            <ul>
-              <li className="text-2xl font-semibold mb-6 text-white">
+            <ul className="ml-4">
+              <li className="text-xl font-semibold mb-6 text-white">
                 Resources
               </li>
               <li className="mt-4">Trợ giúp và hỗ trợ</li>
@@ -39,32 +39,32 @@ const FooterGuest = () => {
               <li className="mt-4">Liên hệ với chúng tôi</li>
             </ul>
           </div>
-          <div>
-            <p className="text-2xl font-semibold mb-6 text-white">
+          <div className="col-span-5">
+            <p className="text-xl font-semibold mb-6 text-white">
               Nhận thông báo công việc
             </p>
-            <p className="text-xl text-custom-neutral-2">
+            <p className="text-lg text-custom-neutral-2">
               Những tin tức, bài viết mới nhất sẽ được gửi đến bạn hàng tuần
             </p>
             <div className="flex mt-8">
               <RectangleInput type="email" text="Địa chỉ email" />
-              <RectangleButton className={"ml-4 min-w-48"}>
+              <RectangleButton className={"ml-4 min-w-40"}>
                 Xác nhận
               </RectangleButton>
             </div>
           </div>
         </div>
         <div className="border-t-2 pt-4 mt-20 border-gray-500 flex justify-between">
-          <p className="text-2xl text-custom-neutral-2 font-semibold">
+          <p className="text-xl text-custom-neutral-2 font-semibold">
             ©2024 Developed by <span className="text-white">Andou Duy</span> -
             Phenikaa University
           </p>
           <div className="fill-custom-neutral-2 flex items-center">
-            <FacebookIcon className="w-10 h-10 mr-4 cursor-pointer" />
-            <InstagramIcon className="w-10 h-10 mr-4 cursor-pointer" />
-            <ThreadsIcon className="w-12 h-12 mr-4 cursor-pointer" />
-            <LinkedinIcon className="w-10 h-10 mr-4 cursor-pointer" />
-            <XIcon className="w-10 h-10" />
+            <FacebookIcon className="w-8 h-8 mr-4 cursor-pointer" />
+            <InstagramIcon className="w-8 h-8 mr-4 cursor-pointer" />
+            <ThreadsIcon className="w-9 h-9 mr-4 cursor-pointer" />
+            <LinkedinIcon className="w-8 h-8 mr-4 cursor-pointer" />
+            <XIcon className="w-8 h-8" />
           </div>
         </div>
       </Content>
