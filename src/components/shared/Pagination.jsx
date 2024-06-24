@@ -6,24 +6,24 @@ const Pagination = () => {
   return (
     <ul className="flex items-center">
       <li>
-        <ArrowLeftIcon className="w-8 h-8 mr-4 cursor-pointer" />
+        <ArrowLeftIcon className="w-4 h-4 mr-4 cursor-pointer" />
       </li>
       {pageNumbers.map((el) => (
         <li
-          className="w-16 h-16 flex justify-center items-center rounded-xl text-gray-500 hover:text-white cursor-pointer hover:bg-custom-violet"
+          className="w-12 h-12 flex justify-center items-center rounded-xl text-gray-500 hover:text-white cursor-pointer hover:bg-custom-violet"
           key={el}
         >
-          <span className="text-2xl">{el}</span>
+          <span>{el}</span>
         </li>
       ))}
-      <li className="w-16 h-16 flex justify-center items-center rounded-xl text-gray-500 hover:text-white cursor-pointer hover:bg-custom-violet">
+      <li className="w-12 h-12 flex justify-center items-center rounded-xl text-gray-500 hover:text-white cursor-pointer hover:bg-custom-violet">
         <span className="text-2xl">...</span>
       </li>
-      <li className="w-16 h-16 flex justify-center items-center rounded-xl text-gray-500 hover:text-white cursor-pointer hover:bg-custom-violet">
-        <span className="text-2xl">10</span>
+      <li className="w-12 h-12 flex justify-center items-center rounded-xl text-gray-500 hover:text-white cursor-pointer hover:bg-custom-violet">
+        <span>10</span>
       </li>
       <li>
-        <ArrowRight2Icon className="w-8 h-8 ml-4 cursor-pointer" />
+        <ArrowRight2Icon className="w-4 h-4 ml-4 cursor-pointer" />
       </li>
     </ul>
   );
