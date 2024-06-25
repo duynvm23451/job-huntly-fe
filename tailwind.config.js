@@ -28,6 +28,9 @@ export default {
       maxWidth: {
         106: "85rem",
       },
+      screens: {
+        "3xl": "1800px",
+      },
     },
   },
   plugins: [
