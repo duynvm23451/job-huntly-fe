@@ -3,6 +3,8 @@ import Content from "@/components/shared/Content";
 import SideBarDropDown from "@/components/shared/SideBarDropDown";
 import JobsListItemCard from "@/components/disposable/JobsListItemCard";
 import Pagination from "@/components/shared/Pagination";
+import useGetData from "@/hooks/useGetData";
+import { getJobs } from "@/utils/http";
 
 const typeList = ["Full Time", "Part Time", "Remote", "Contact"];
 const categoriesList = [
@@ -33,6 +35,10 @@ const FindJobsListGuest = () => {
     level: false,
     salaryRange: false,
   });
+  const searchParams = useState("");
+
+  const { isLoading, error, data } = useGetData(getJobs, searchParams);
+
   const handleClick = (name) => {
     setIsShowed((preValue) => ({
       ...preValue,
@@ -87,6 +93,18 @@ const FindJobsListGuest = () => {
               </select>
             </div>
           </div>
+          {/* {data.content.map((job) => (
+            <JobsListItemCard
+              logo={
+                "https://assets-global.website-files.com/6480217dd2b60074b15929c5/64816750618c99bec18c8cb8_Revolut%20Logo.svg"
+              }
+              title={job.title}
+              type={job.type}
+              company={"Revolut"}
+              location={"Madrid, Span"}
+              categories={["Marketing", "Design"]}
+            />
+          ))} */}
           <JobsListItemCard
             logo={
               "https://assets-global.website-files.com/6480217dd2b60074b15929c5/64816750618c99bec18c8cb8_Revolut%20Logo.svg"

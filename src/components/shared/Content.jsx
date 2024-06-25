@@ -1,6 +1,6 @@
 const Content = ({ className, children, ...props }) => {
   return (
-    <div className={`max-w-106 px-20 mx-auto ${className}`} {...props}>
+    <div className={`3xl:w-3/4 w-11/12 px-28 mx-auto ${className}`} {...props}>
       {children}
     </div>
   );
