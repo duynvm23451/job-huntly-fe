@@ -9,9 +9,16 @@ const useGetData = (getFunction, searchParams) => {
     const getData = async () => {
       setIsLoading(true);
       try {
-        const data = await getFunction(searchParams);
-        console.log(data);
-        setData(data.data);
+        const page = searchParams.get("page") ?? 1;
+        const size = searchParams.get("size") ?? 1;
+        const searchObject = {
+          page,
+          size,
+        };
+        console.log(searchObject);
+        const response = await getFunction(searchObject);
+        console.log(response.data);
+        setData(response.data);
       } catch (error) {
         setError({ message: error.message } || "Không thể lấy dữ liệu");
       }
@@ -19,7 +26,7 @@ const useGetData = (getFunction, searchParams) => {
     };
 
     getData();
-  }, []);
+  }, [searchParams]);
 
   return {
     isLoading,
