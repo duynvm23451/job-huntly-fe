@@ -2,7 +2,6 @@ import axios from "axios";
 
 export const getJobs = async (searchObject) => {
   try {
-    console.log(searchObject);
     const response = await axios.get(
       import.meta.env.VITE_API +
         `jobs?page=${searchObject.page}&size=${searchObject.size}`

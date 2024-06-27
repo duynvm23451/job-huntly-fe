@@ -1,5 +1,4 @@
 const renderPaginationItems = (pageNumber, total) => {
-  console.log(pageNumber);
   if (total <= 5) {
     return {
       isLeft: true,
