@@ -6,7 +6,18 @@ import LocationIcon from "@/components/icons/LocationIcon";
 import SearchInput from "@/components/shared/SearchInput";
 import undertext from "@/assets/undertext.png";
 
-const FindJobsCompaniesHeroGuestSection = ({ highlightText, description }) => {
+const FindJobsCompaniesHeroGuestSection = ({
+  highlightText,
+  description,
+  formSubmitHanlder,
+}) => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const fd = new FormData(event.target);
+    const data = Object.fromEntries(fd.entries());
+    formSubmitHanlder(data);
+  };
   return (
     <section className="bg-custom-gray h-fit pt-48 pb-20 relative overflow-hidden">
       <img
@@ -35,17 +46,22 @@ const FindJobsCompaniesHeroGuestSection = ({ highlightText, description }) => {
           </p>
           <p className="text-2xl text-gray-500">{description}</p>
         </div>
-        <form className="flex lg:flex-row lg:items-center flex-col bg-white px-8 pt-8 pb-10 shadow-custom z-20 mt-16 relative w-full">
+        <form
+          onSubmit={handleSubmit}
+          className="flex lg:flex-row lg:items-center flex-col bg-white px-8 pt-8 pb-10 shadow-custom z-20 mt-16 relative w-full"
+        >
           <SearchInput
             className={"w-full"}
             text="Tiêu đề hoặc từ khóa"
             icon={<SearchIcon />}
+            name="name"
           />
           <div className="w-0.5 h-12 bg-gray-300 ml-10 max-lg:invisible " />
           <SearchInput
             text="Địa điểm"
             icon={<LocationIcon />}
             className={"lg:mx-8 w-full"}
+            name="location"
           />
           <RectangleButton className={"w-80"} type={"violet"}>
             Tìm kiếm

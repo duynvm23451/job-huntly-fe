@@ -29,56 +29,57 @@ const levelList = [
   "Director",
 ];
 
-const salaryRangeList = ["$700 - $1000", "$1000 - $1500", "Trên $2000"];
+const salaryRangeList = [
+  {
+    min: 700,
+    max: 1000,
+  },
+  {
+    min: 1000,
+    max: 1500,
+  },
+  {
+    min: 1500,
+    max: null,
+  },
+];
 
-const FindJobsListGuest = () => {
-  const [isShowed, setIsShowed] = useState({
-    type: false,
-    categories: false,
-    level: false,
-    salaryRange: false,
-  });
+const FindJobsListGuest = ({ changeHanlder, searchObject }) => {
   let [searchParams, setSearchParams] = useSearchParams();
-  // const [searchParams, setSearchParams] = useState("");
 
-  const { isLoading, error, data } = useGetData(getJobs, searchParams);
-  const handleClick = (name) => {
-    setIsShowed((preValue) => ({
-      ...preValue,
-      [name]: !preValue[name],
-    }));
-  };
+  const { isLoading, error, data } = useGetData(
+    getJobs,
+    searchParams,
+    searchObject
+  );
   return (
     <section>
       <Content className={"pt-24 pb-12 grid grid-cols-12"}>
         <aside className="col-span-3">
           <SideBarDropDown
             name="type"
-            isShowed={isShowed}
             items={categoriesList}
             title={"Loại hình tuyển dụng"}
-            onClick={handleClick}
+            changeHanlder={changeHanlder}
           />
           <SideBarDropDown
             name="categories"
-            isShowed={isShowed}
             items={typeList}
             title={"Lĩnh vực"}
-            onClick={handleClick}
+            changeHanlder={changeHanlder}
           />
           <SideBarDropDown
             name="level"
-            isShowed={isShowed}
             items={levelList}
             title={"Cấp bậc"}
-            onClick={handleClick}
+            changeHanlder={changeHanlder}
           />
           <SideBarDropDown
+            type="radio"
             name="salaryRange"
-            isShowed={isShowed}
             items={salaryRangeList}
             title={"Mức lương"}
-            onClick={handleClick}
+            changeHanlder={changeHanlder}
           />
         </aside>
         <div className="w-full col-span-9">
@@ -115,7 +116,7 @@ const FindJobsListGuest = () => {
             <div className="w-full flex justify-center mt-12">
               <Pagination
                 pagination={renderPaginationItems(
-                  data.number == 0 ? 1 : data.number,
+                  data.number + 1,
                   data.totalPages
                 )}
               />
