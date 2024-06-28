@@ -5,3 +5,18 @@ export const convertJobType = (input) => {
   const result = joinString.charAt(0).toUpperCase() + joinString.slice(1);
   return result;
 };
+
+export const cleanQueryParams = (params) => {
+  const cleanedParams = {};
+  Object.keys(params).forEach((key) => {
+    const value = params[key];
+    if (key == "salaryRange") {
+      cleanedParams["minSalary"] = value[0];
+      cleanedParams["maxSalary"] = value[1];
+    }
+    if (value !== "" && key !== "salaryRange") {
+      cleanedParams[key] = value;
+    }
+  });
+  return cleanedParams;
+};

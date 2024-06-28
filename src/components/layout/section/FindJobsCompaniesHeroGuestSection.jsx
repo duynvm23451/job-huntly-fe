@@ -54,7 +54,7 @@ const FindJobsCompaniesHeroGuestSection = ({
             className={"w-full"}
             text="Tiêu đề hoặc từ khóa"
             icon={<SearchIcon />}
-            name="name"
+            name="title"
           />
           <div className="w-0.5 h-12 bg-gray-300 ml-10 max-lg:invisible " />
           <SearchInput

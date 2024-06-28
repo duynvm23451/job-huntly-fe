@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Content from "@/components/shared/Content";
 import SideBarDropDown from "@/components/shared/SideBarDropDown";
 import JobsListItemCard from "@/components/disposable/JobsListItemCard";
@@ -45,31 +45,36 @@ const salaryRangeList = [
 ];
 
 const FindJobsListGuest = ({ changeHanlder, searchObject }) => {
-  let [searchParams, setSearchParams] = useSearchParams();
-
-  const { isLoading, error, data } = useGetData(
-    getJobs,
-    searchParams,
-    searchObject
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = searchParams.get("page") ?? 1;
+  const size = searchParams.get("size") ?? 1;
+  const queryParams = useMemo(
+    () => ({
+      ...searchObject,
+      page,
+      size,
+    }),
+    [searchObject, page, size]
   );
+  const { isLoading, error, data } = useGetData(getJobs, queryParams);
   return (
     <section>
       <Content className={"pt-24 pb-12 grid grid-cols-12"}>
         <aside className="col-span-3">
           <SideBarDropDown
-            name="type"
-            items={categoriesList}
+            name="types"
+            items={typeList}
             title={"Loại hình tuyển dụng"}
             changeHanlder={changeHanlder}
           />
           <SideBarDropDown
             name="categories"
-            items={typeList}
+            items={categoriesList}
             title={"Lĩnh vực"}
             changeHanlder={changeHanlder}
           />
           <SideBarDropDown
-            name="level"
+            name="levels"
             items={levelList}
             title={"Cấp bậc"}
             changeHanlder={changeHanlder}
