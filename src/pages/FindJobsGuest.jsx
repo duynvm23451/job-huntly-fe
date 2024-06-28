@@ -1,13 +1,15 @@
 import FindJobsCompaniesHeroGuestSection from "@/components/layout/section/FindJobsCompaniesHeroGuestSection";
 import FindJobsListGuest from "@/components/layout/section/FindJobsListGuest";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const FindJobsGuest = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [searchObject, setSearchObject] = useState({
-    name: "",
+    title: "",
     location: "",
     types: [],
-    industries: [],
+    categories: [],
     levels: [],
     salaryRange: [],
   });
@@ -21,6 +23,7 @@ const FindJobsGuest = () => {
         }));
       }
     });
+    setSearchParams({});
   };
 
   const handleChange = (name, value) => {
@@ -28,6 +31,7 @@ const FindJobsGuest = () => {
       ...preValue,
       [name]: value,
     }));
+    setSearchParams({});
   };
 
   return (
