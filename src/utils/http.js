@@ -13,3 +13,12 @@ export const getJobs = async (queryParams) => {
     throw new Error(response.error);
   }
 };
+
+export const getCompanies = async (queryParams) => {
+  try {
+    const response = await axios.get(import.meta.env.VITE_API + "companies");
+    return response.data;
+  } catch (error) {
+    throw new Error(response.error);
+  }
+};

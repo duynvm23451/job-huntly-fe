@@ -1,5 +1,5 @@
 import FindJobsCompaniesHeroGuestSection from "@/components/layout/section/FindJobsCompaniesHeroGuestSection";
-import FindJobsListGuest from "@/components/layout/section/FindJobsListGuest";
+import FindJobsListGuest from "@/components/layout/section/jobs/FindJobsListGuest";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 

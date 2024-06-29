@@ -1,8 +1,8 @@
-import BannerGuestSection from "@/components/layout/section/BannerGuestSection";
-import CategoryGuestSection from "@/components/layout/section/CategoryGuestSection";
-import FeaturedJobsGuestSection from "@/components/layout/section/FeaturedJobsGuestSection";
-import HomepageHeroSection from "@/components/layout/section/HomepageHeroSection";
-import LastestJobsGuestSection from "@/components/layout/section/LastestJobsGuestSection";
+import BannerGuestSection from "@/components/layout/section/home/BannerGuestSection";
+import CategoryGuestSection from "@/components/layout/section/home/CategoryGuestSection";
+import FeaturedJobsGuestSection from "@/components/layout/section/home/FeaturedJobsGuestSection";
+import HomepageHeroSection from "@/components/layout/section/home/HomepageHeroSection";
+import LastestJobsGuestSection from "@/components/layout/section/home/LastestJobsGuestSection";
 
 const HomeGuest = () => {
   return (
