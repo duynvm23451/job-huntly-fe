@@ -1,16 +1,48 @@
-import BannerGuestSection from "@/components/layout/section/BannerGuestSection";
+import CompaniesListResult from "@/components/layout/section/CompaniesListResult";
 import FindJobsCompaniesHeroGuestSection from "@/components/layout/section/FindJobsCompaniesHeroGuestSection";
-import RecommededCompaniesGuestSection from "@/components/layout/section/RecommededCompaniesGuestSection";
-
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 const CompaniesGuest = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchObject, setSearchObject] = useState({
+    name: "",
+    location: "",
+    industries: [],
+    employeesRange: [],
+  });
+
+  const handleFormSubmit = (formValue) => {
+    Object.keys(formValue).forEach((key) => {
+      if (formValue[key] !== "") {
+        setSearchObject((preValue) => ({
+          ...preValue,
+          [key]: formValue[key],
+        }));
+      }
+    });
+    setSearchParams({});
+  };
+
+  const handleChange = (name, value) => {
+    setSearchObject((preValue) => ({
+      ...preValue,
+      [name]: value,
+    }));
+    setSearchParams({});
+  };
+
   return (
     <div className="pb-12">
       <FindJobsCompaniesHeroGuestSection
         highlightText={"công ty"}
         description={"Tìm công ty trong mơ mà bạn muốn được làm việc"}
+        isCompaniesTab={true}
+        formSubmitHanlder={handleFormSubmit}
       />
-      <RecommededCompaniesGuestSection />
-      <BannerGuestSection />
+      <CompaniesListResult
+        changeHanlder={handleChange}
+        searchObject={searchObject}
+      />
     </div>
   );
 };
