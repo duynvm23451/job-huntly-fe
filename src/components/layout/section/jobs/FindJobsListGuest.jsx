@@ -120,6 +120,7 @@ const FindJobsListGuest = ({ changeHanlder, searchObject }) => {
           {!error && data && (
             <div className="w-full flex justify-center mt-12">
               <Pagination
+                navigatePath="/find-jobs"
                 pagination={renderPaginationItems(
                   data.number + 1,
                   data.totalPages

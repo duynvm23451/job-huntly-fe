@@ -2,11 +2,11 @@ import ArrowLeftIcon from "@/components/icons/ArrowLeftIcon";
 import ArrowRight2Icon from "@/components/icons/ArrowRight2Icon";
 import { createSearchParams, useNavigate } from "react-router-dom";
 
-const Pagination = ({ pagination }) => {
+const Pagination = ({ pagination, navigatePath }) => {
   const navigate = useNavigate();
   const changePage = (pageNumber) => {
     navigate({
-      pathname: "/find-jobs",
+      pathname: navigatePath,
       search: createSearchParams({ page: pageNumber }).toString(),
     });
   };

@@ -1,9 +1,9 @@
 import axios from "axios";
 import qs from "qs";
-import { cleanQueryParams } from "./hepler";
+import { cleanQueryParamsJobs, cleanQueryParamsCompanies } from "./hepler";
 export const getJobs = async (queryParams) => {
   try {
-    const cleanedParams = cleanQueryParams(queryParams);
+    const cleanedParams = cleanQueryParamsJobs(queryParams);
     const response = await axios.get(import.meta.env.VITE_API + "jobs", {
       params: cleanedParams,
       paramsSerializer: (params) => qs.stringify(params),
@@ -16,7 +16,11 @@ export const getJobs = async (queryParams) => {
 
 export const getCompanies = async (queryParams) => {
   try {
-    const response = await axios.get(import.meta.env.VITE_API + "companies");
+    const cleanedParams = cleanQueryParamsCompanies(queryParams);
+    const response = await axios.get(import.meta.env.VITE_API + "companies", {
+      params: cleanedParams,
+      paramsSerializer: (params) => qs.stringify(params),
+    });
     return response.data;
   } catch (error) {
     throw new Error(response.error);
