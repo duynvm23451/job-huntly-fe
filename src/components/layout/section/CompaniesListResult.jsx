@@ -6,7 +6,7 @@ import useGetData from "@/hooks/useGetData";
 import { getCompanies } from "@/utils/http";
 import renderPaginationItems from "@/utils/pagination";
 import React, { useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 const industries = [
   "Quảng cáo",
@@ -101,7 +101,11 @@ const CompaniesListResult = ({ changeHanlder, searchObject }) => {
               data &&
               data.content.map((company) => (
                 // logo, title, jobNumber, description, categories
-                <div className="col-span-6" key={company.id}>
+                <Link
+                  to={"/companies/" + company.id}
+                  className="col-span-6"
+                  key={company.id}
+                >
                   <CompanyCard
                     logo={
                       "https://img.freepik.com/free-vector/golden-blue-diamond-shape-logo-business-template_23-2148707648.jpg"
@@ -113,7 +117,7 @@ const CompaniesListResult = ({ changeHanlder, searchObject }) => {
                       (industry) => industry.name
                     )}
                   />
-                </div>
+                </Link>
               ))}
             {!error && data && (
               <div className="w-full flex justify-center col-span-12 mt-12">
