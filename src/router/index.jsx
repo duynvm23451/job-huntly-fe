@@ -3,6 +3,8 @@ import GuestLayout from "../components/layout/GuestLayout";
 import HomeGuest from "../pages/HomeGuest";
 import FindJobsGuest from "../pages/FindJobsGuest";
 import CompaniesGuest from "../pages/CompaniesGuest";
+import JobDetail from "@/pages/JobDetail";
+import CompanyDetail from "@/pages/CompanyDetail";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
       {
         path: "companies",
         element: <CompaniesGuest />,
+      },
+      {
+        path: "find-jobs/:jobId",
+        element: <JobDetail />,
+      },
+      {
+        path: "companies/:companyId",
+        element: <CompanyDetail />,
       },
     ],
   },

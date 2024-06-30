@@ -26,3 +26,25 @@ export const getCompanies = async (queryParams) => {
     throw new Error(response.error);
   }
 };
+
+export const getJobDetail = async (queryParams) => {
+  try {
+    const id = queryParams.id;
+    const response = await axios.get(import.meta.env.VITE_API + "jobs/" + id);
+    return response.data;
+  } catch (error) {
+    throw new Error(response.error);
+  }
+};
+
+export const getComapnyDetail = async (queryParams) => {
+  try {
+    const id = queryParams.id;
+    const response = await axios.get(
+      import.meta.env.VITE_API + "companies/" + id
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(response.error);
+  }
+};
