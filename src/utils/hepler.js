@@ -6,7 +6,7 @@ export const convertJobType = (input) => {
   return result;
 };
 
-export const cleanQueryParams = (params) => {
+export const cleanQueryParamsJobs = (params) => {
   const cleanedParams = {};
   Object.keys(params).forEach((key) => {
     const value = params[key];
@@ -15,6 +15,21 @@ export const cleanQueryParams = (params) => {
       cleanedParams["maxSalary"] = value[1];
     }
     if (value !== "" && key !== "salaryRange") {
+      cleanedParams[key] = value;
+    }
+  });
+  return cleanedParams;
+};
+
+export const cleanQueryParamsCompanies = (params) => {
+  const cleanedParams = {};
+  Object.keys(params).forEach((key) => {
+    const value = params[key];
+    if (key == "employeesRange") {
+      cleanedParams["minEmployees"] = value[0];
+      cleanedParams["maxEmployees"] = value[1];
+    }
+    if (value !== "" && key !== "employeesRange") {
       cleanedParams[key] = value;
     }
   });

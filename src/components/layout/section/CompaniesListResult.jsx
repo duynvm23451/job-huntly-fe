@@ -1,8 +1,10 @@
 import CompanyCard from "@/components/disposable/CompanyCard";
 import Content from "@/components/shared/Content";
+import Pagination from "@/components/shared/Pagination";
 import SideBarDropDown from "@/components/shared/SideBarDropDown";
 import useGetData from "@/hooks/useGetData";
 import { getCompanies } from "@/utils/http";
+import renderPaginationItems from "@/utils/pagination";
 import React, { useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 
@@ -49,7 +51,7 @@ const employeesRangeList = [
 const CompaniesListResult = ({ changeHanlder, searchObject }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") ?? 1;
-  const size = searchParams.get("size") ?? 1;
+  const size = searchParams.get("size") ?? 2;
 
   const queryParams = useMemo(
     () => ({
@@ -59,6 +61,7 @@ const CompaniesListResult = ({ changeHanlder, searchObject }) => {
     }),
     [searchObject, page, size]
   );
+  console.log(queryParams);
   const { isLoading, error, data } = useGetData(getCompanies, queryParams);
   return (
     <section>
@@ -98,13 +101,13 @@ const CompaniesListResult = ({ changeHanlder, searchObject }) => {
               data &&
               data.content.map((company) => (
                 // logo, title, jobNumber, description, categories
-                <div className="col-span-6">
+                <div className="col-span-6" key={company.id}>
                   <CompanyCard
                     logo={
                       "https://img.freepik.com/free-vector/golden-blue-diamond-shape-logo-business-template_23-2148707648.jpg"
                     }
                     title={company.name}
-                    jobNumber={8}
+                    jobNumber={company.availableJobs}
                     description={company.description}
                     categories={company.industries.map(
                       (industry) => industry.name
@@ -112,6 +115,17 @@ const CompaniesListResult = ({ changeHanlder, searchObject }) => {
                   />
                 </div>
               ))}
+            {!error && data && (
+              <div className="w-full flex justify-center col-span-12 mt-12">
+                <Pagination
+                  navigatePath="/companies"
+                  pagination={renderPaginationItems(
+                    data.number + 1,
+                    data.totalPages
+                  )}
+                />
+              </div>
+            )}
           </div>
         </div>
       </Content>

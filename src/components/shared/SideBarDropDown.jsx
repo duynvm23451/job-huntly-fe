@@ -34,6 +34,7 @@ const SideBarDropDown = ({
   useEffect(() => {
     changeHanlder(name, inputValues[name]);
   }, [inputValues]);
+
   return (
     <div className="mb-6">
       <div
@@ -56,9 +57,9 @@ const SideBarDropDown = ({
                   type == "checkbox" ? "rounded-md " : "rounded-full"
                 } border-slate-300 mr-4`}
                 type={type}
-                id={el}
+                id={index}
                 name={name}
-                value={name == "salaryRange" ? JSON.stringify(el) : el}
+                value={type == "radio" ? JSON.stringify(el) : el}
                 onChange={handleInputChange}
                 checked={
                   type === "checkbox"
@@ -67,11 +68,11 @@ const SideBarDropDown = ({
                       inputValues[name][1] == el.max
                 }
               />
-              <label className="text-lg text-gray-600" htmlFor={el}>
-                {name == "salaryRange"
-                  ? el.max == undefined
-                    ? `Trên $${el.min}`
-                    : `$${el.min}-${el.max}`
+              <label className="text-lg text-gray-600" htmlFor={index}>
+                {type == "radio"
+                  ? el.max == null
+                    ? `Trên ${el.min}`
+                    : `${el.min}-${el.max}`
                   : el}
               </label>
               <br />
