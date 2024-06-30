@@ -1,3 +1,4 @@
+import Content from "@/components/shared/Content";
 import useGetData from "@/hooks/useGetData";
 import { getComapnyDetail } from "@/utils/http";
 import React, { useMemo } from "react";
@@ -15,7 +16,11 @@ const CompanyDetail = () => {
   if (isLoading) {
     return <p>Loading...</p>;
   }
-  return <div>CompanyDetail</div>;
+  return (
+    <section>
+      <Content>Company detail page</Content>
+    </section>
+  );
 };
 
 export default CompanyDetail;

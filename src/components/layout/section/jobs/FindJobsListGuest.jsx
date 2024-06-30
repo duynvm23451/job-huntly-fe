@@ -7,7 +7,7 @@ import useGetData from "@/hooks/useGetData";
 import { getJobs } from "@/utils/http";
 import { convertJobType } from "@/utils/hepler";
 import renderPaginationItems from "@/utils/pagination";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 const typeList = ["Full Time", "Part Time", "Remote", "Contact"];
 const categoriesList = [
@@ -105,17 +105,19 @@ const FindJobsListGuest = ({ changeHanlder, searchObject }) => {
           {!error &&
             data &&
             data.content.map((job) => (
-              <JobsListItemCard
-                key={job.id}
-                logo={
-                  "https://assets-global.website-files.com/6480217dd2b60074b15929c5/64816750618c99bec18c8cb8_Revolut%20Logo.svg"
-                }
-                title={job.title}
-                type={convertJobType(job.type)}
-                company={job.company.name}
-                location={job.company.location}
-                categories={job.categories}
-              />
+              <Link to={"/find-jobs/" + job.id}>
+                <JobsListItemCard
+                  key={job.id}
+                  logo={
+                    "https://assets-global.website-files.com/6480217dd2b60074b15929c5/64816750618c99bec18c8cb8_Revolut%20Logo.svg"
+                  }
+                  title={job.title}
+                  type={convertJobType(job.type)}
+                  company={job.company.name}
+                  location={job.company.location}
+                  categories={job.categories}
+                />
+              </Link>
             ))}
           {!error && data && (
             <div className="w-full flex justify-center mt-12">
