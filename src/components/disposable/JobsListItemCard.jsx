@@ -43,7 +43,6 @@ const JobsListItemCard = ({
       <div className="flex flex-col col-span-3 w-fit">
         <RectangleButton>Ứng tuyển</RectangleButton>
         <progress
-          id="file"
           value="5"
           max="10"
           className="w-full mt-2.5 h-2 progress-unfilled:bg-custom-neutral-2 progress-filled:bg-[#68cbad]"

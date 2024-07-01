@@ -105,9 +105,8 @@ const FindJobsListGuest = ({ changeHanlder, searchObject }) => {
           {!error &&
             data &&
             data.content.map((job) => (
-              <Link to={"/find-jobs/" + job.id}>
+              <Link to={"/find-jobs/" + job.id} key={job.id}>
                 <JobsListItemCard
-                  key={job.id}
                   logo={
                     "https://assets-global.website-files.com/6480217dd2b60074b15929c5/64816750618c99bec18c8cb8_Revolut%20Logo.svg"
                   }
