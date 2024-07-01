@@ -1,3 +1,4 @@
+import JobDetailContentSection from "@/components/layout/section/job-detail/JobDetailContentSection";
 import JobDetailTitleSection from "@/components/layout/section/job-detail/JobDetailTitleSection";
 import Content from "@/components/shared/Content";
 import useGetData from "@/hooks/useGetData";
@@ -24,6 +25,7 @@ const JobDetail = () => {
   return (
     <>
       <JobDetailTitleSection job={data} />
+      <JobDetailContentSection job={data} />
     </>
   );
 };

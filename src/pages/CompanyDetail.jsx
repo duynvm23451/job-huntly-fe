@@ -1,3 +1,5 @@
+import { CompanyDetailTitleSection } from "@/components/layout/section/company-detail/CompanyDetailTitleSection";
+import Content from "@/components/shared/Content";
 import useGetData from "@/hooks/useGetData";
 import { getComapnyDetail } from "@/utils/http";
 import React, { useMemo } from "react";
@@ -15,7 +17,14 @@ const CompanyDetail = () => {
   if (isLoading) {
     return <p>Loading...</p>;
   }
-  return <div>CompanyDetail</div>;
+  if (!data) {
+    return <p>No company data found</p>;
+  }
+  return (
+    <>
+      <CompanyDetailTitleSection company={data} />
+    </>
+  );
 };
 
 export default CompanyDetail;
