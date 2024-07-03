@@ -7,6 +7,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const CompanyDetailTitleSection = ({ company }) => {
+  const industryNames = company.industries.map((industry) => industry.name);
+  const joinedIndustryNames = industryNames.join(" & ");
   return (
     <section className="bg-custom-neutral">
       <Content className={"pt-32 pb-12"}>
@@ -37,18 +39,14 @@ export const CompanyDetailTitleSection = ({ company }) => {
                 <CompanyIcon className="w-10 h-10 p-2 rounded-full bg-white" />
                 <div className="ml-3">
                   <p>Thành lập</p>
-                  <p className="text-custom-violet font-semibold">
-                    {company.dateFounded}
-                  </p>
+                  <p className="font-semibold">{company.dateFounded}</p>
                 </div>
               </div>
               <div className="flex justify-start">
                 <PeopleIcon className="w-10 h-10 p-2 rounded-full bg-white" />
                 <div className="ml-3">
                   <p>Quy mô</p>
-                  <p className="text-custom-violet font-semibold">
-                    {company.employees} nhân viên
-                  </p>
+                  <p className="font-semibold">{company.employees} nhân viên</p>
                 </div>
               </div>
 
@@ -56,7 +54,7 @@ export const CompanyDetailTitleSection = ({ company }) => {
                 <LocationIcon className="w-10 h-10 p-2 rounded-full bg-white" />
                 <div className="ml-3">
                   <p>Địa chỉ</p>
-                  <p className="text-custom-violet font-semibold max-w-xs">
+                  <p className="font-semibold max-w-xs">
                     Số 14, đường số 7, KĐT Him Lam, phường Tân Hưng, Quận 7, Hồ
                     Chí Minh / Tòa nhà Time Tower, Số 35 Lê Văn Lương, quận
                     Thanh Xuân, Hà Nội
@@ -67,8 +65,8 @@ export const CompanyDetailTitleSection = ({ company }) => {
                 <IndustryIcon className="w-10 h-10 p-2 rounded-full bg-white" />
                 <div className="ml-3">
                   <p>Ngành nghề</p>
-                  <p className="text-custom-violet font-semibold max-w-xs">
-                    {company.industries[0].name}
+                  <p className="font-semibold max-w-xs">
+                    {joinedIndustryNames}
                   </p>
                 </div>
               </div>

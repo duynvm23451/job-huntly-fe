@@ -14,7 +14,11 @@ const CompanyCard = ({ logo, title, jobNumber, description, categories }) => {
           {jobNumber} vị trí
         </span>
       </div>
-      <p className="text-xl mt-4 text-gray-600">{description}</p>
+      <p className="text-xl mt-4 text-gray-600">
+        {description.length > 80
+          ? description.slice(0, 80) + "..."
+          : description}
+      </p>
       <div className="flex flex-wrap mt-4">
         {categories.map((el) => (
           <SmallCategoryCard
