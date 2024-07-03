@@ -48,3 +48,18 @@ export const getComapnyDetail = async (queryParams) => {
     throw new Error(response.error);
   }
 };
+
+export const getJobsByCompany = async (queryParams) => {
+  try {
+    const id = queryParams.id;
+    const response = await axios.get(
+      import.meta.env.VITE_API + "jobs/company/" + id,
+      {
+        params: queryParams,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(response.error);
+  }
+};
