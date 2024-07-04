@@ -1,4 +1,4 @@
-import HomepageHero from "@/components/HomepageHero";
+import HomepageHero from "@/components/layout/section/home/HomepageHero";
 import Content from "@/components/shared/Content";
 import undertext from "@/assets/undertext.png";
 import RectangleButton from "@/components/shared/RectangleButton";
