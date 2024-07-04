@@ -1,4 +1,4 @@
-import CompaniesListResult from "@/components/layout/section/CompaniesListResult";
+import CompaniesListResult from "@/components/layout/section/companies/CompaniesListResult";
 import FindJobsCompaniesHeroGuestSection from "@/components/layout/section/FindJobsCompaniesHeroGuestSection";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";

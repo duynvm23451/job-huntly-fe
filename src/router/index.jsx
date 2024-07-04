@@ -5,6 +5,9 @@ import FindJobsGuest from "../pages/FindJobsGuest";
 import CompaniesGuest from "../pages/CompaniesGuest";
 import JobDetail from "@/pages/JobDetail";
 import CompanyDetail from "@/pages/CompanyDetail";
+import AuthLayout from "@/components/layout/AuthLayout";
+import SignUp from "@/pages/SignUp";
+import Login from "@/pages/Login";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +33,20 @@ const router = createBrowserRouter([
       {
         path: "companies/:companyId",
         element: <CompanyDetail />,
+      },
+      {
+        path: "auth",
+        element: <AuthLayout />,
+        children: [
+          {
+            path: "signup",
+            element: <SignUp />,
+          },
+          {
+            path: "login",
+            element: <Login />,
+          },
+        ],
       },
     ],
   },
