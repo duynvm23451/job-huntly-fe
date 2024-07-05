@@ -3,7 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 
 const AuthLayout = () => {
   return (
-    <div className="pt-32 bg-custom-neutral">
+    <div className="bg-custom-neutral">
       <Outlet />
     </div>
   );
