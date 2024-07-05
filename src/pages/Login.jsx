@@ -1,11 +1,12 @@
 import GoogleIcon from "@/components/icons/GoogleIcon";
+import RectangleButton from "@/components/shared/RectangleButton";
 import React, { useState } from "react";
 
 const Login = () => {
   const [tab, setTab] = useState("employee");
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center pt-20 h-screen">
       <ul className="flex mb-8">
         <li
           className={`text-xl font-medium text-custom-violet px-3 py-1.5 rounded-sm cursor-pointer ${
@@ -38,7 +39,21 @@ const Login = () => {
         <span>Hoặc đăng nhập bằng email</span>
         <div className="w-20 h-0.5 bg-custom-neutral-2 mb-2" />
       </p>
-      <form></form>
+      <form className="w-1/4">
+        <label className="text-lg font-medium">Email</label>
+        <input
+          className="w-full block mt-2 mb-4"
+          placeholder="Nhập tài khoản email"
+          type="email"
+        />
+        <label className="text-lg font-medium">Mật khẩu</label>
+        <input
+          className="w-full block mt-2 mb-8"
+          placeholder="Nhập tài khoản email"
+          type="password"
+        />
+        <RectangleButton className={"w-full"}>Đăng nhập</RectangleButton>
+      </form>
     </div>
   );
 };

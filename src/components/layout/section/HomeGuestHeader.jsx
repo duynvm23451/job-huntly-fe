@@ -35,9 +35,13 @@ const HomeGuestHeader = () => {
           </ul>
         </menu>
         <div className="ml-auto flex">
-          <RectangleButton type={"white"}>Đăng nhập</RectangleButton>
+          <Link to={"auth/login"}>
+            <RectangleButton type={"white"}>Đăng nhập</RectangleButton>
+          </Link>
           <div className="w-0.5 bg-gray-200 mx-4 mb-4" />
-          <RectangleButton type={"violet"}>Đăng ký</RectangleButton>
+          <Link to={"auth/signup"}>
+            <RectangleButton type={"violet"}>Đăng ký</RectangleButton>
+          </Link>
         </div>
       </Content>
     </header>
