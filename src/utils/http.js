@@ -63,3 +63,14 @@ export const getJobsByCompany = async (queryParams) => {
     throw new Error(response.error);
   }
 };
+
+export const postAuthCode = async (authCode) => {
+  try {
+    const response = await axios.post(
+      import.meta.env.VITE_API + "outbound/authentication?code=" + authCode
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(response.error);
+  }
+};
