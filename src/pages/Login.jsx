@@ -1,10 +1,20 @@
 import GoogleIcon from "@/components/icons/GoogleIcon";
 import RectangleButton from "@/components/shared/RectangleButton";
+import { OAuth2ConfigGoogle } from "@/configurations/configuration";
 import React, { useState } from "react";
 
 const Login = () => {
   const [tab, setTab] = useState("employee");
+  const handleClick = () => {
+    const callbackUrl = OAuth2ConfigGoogle.redirectUri;
+    const authUrl = OAuth2ConfigGoogle.authUri;
+    const googleClientId = OAuth2ConfigGoogle.clientId;
 
+    const targetUrl = `${authUrl}?redirect_uri=${encodeURIComponent(
+      callbackUrl
+    )}&response_type=code&client_id=${googleClientId}&scope=openid%20email%20profile`;
+    window.location.href = targetUrl;
+  };
   return (
     <div className="flex flex-col justify-center items-center pt-20 h-screen">
       <ul className="flex mb-8">
@@ -30,15 +40,18 @@ const Login = () => {
         <span className="text-blue-600">đăng nhập</span>
       </p>
       <p className="text-lg">để tiếp cận hàng ngàn việc làm</p>
-      <button className="text-lg font-bold text-custom-violet flex justify-center items-center w-1/4 pb-1.5 pt-2 mt-8 border-1 border-custom-neutral-2">
+      <button
+        onClick={handleClick}
+        className="text-lg font-bold text-custom-violet flex justify-center items-center w-1/4 pb-1.5 pt-2 mt-8 border-1 border-custom-neutral-2"
+      >
         <GoogleIcon className="w-8 h-8 mr-4" />
         Đăng nhập với Google
       </button>
-      <p className="flex items-end justify-between w-1/4 my-4">
+      <div className="flex items-end justify-between w-1/4 my-4">
         <div className="w-20 h-0.5 bg-custom-neutral-2 mb-2" />
         <span>Hoặc đăng nhập bằng email</span>
         <div className="w-20 h-0.5 bg-custom-neutral-2 mb-2" />
-      </p>
+      </div>
       <form className="w-1/4">
         <label className="text-lg font-medium">Email</label>
         <input

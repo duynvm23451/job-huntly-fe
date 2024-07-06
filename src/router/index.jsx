@@ -8,6 +8,7 @@ import CompanyDetail from "@/pages/CompanyDetail";
 import AuthLayout from "@/components/layout/AuthLayout";
 import SignUp from "@/pages/SignUp";
 import Login from "@/pages/Login";
+import Authenticate from "@/pages/Authenticate";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
             element: <Login />,
           },
         ],
+      },
+      {
+        path: "oauth2/login/google",
+        element: <Authenticate />,
       },
     ],
   },
