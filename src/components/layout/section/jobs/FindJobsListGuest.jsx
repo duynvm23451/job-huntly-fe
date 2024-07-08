@@ -105,7 +105,7 @@ const FindJobsListGuest = ({ changeHanlder, searchObject }) => {
           {!error &&
             data &&
             data.content.map((job) => (
-              <Link to={"/find-jobs/" + job.id} key={job.id}>
+              <Link to={"/jobs/" + job.id} key={job.id}>
                 <JobsListItemCard
                   logo={
                     "https://assets-global.website-files.com/6480217dd2b60074b15929c5/64816750618c99bec18c8cb8_Revolut%20Logo.svg"
@@ -121,7 +121,7 @@ const FindJobsListGuest = ({ changeHanlder, searchObject }) => {
           {!error && data && (
             <div className="w-full flex justify-center mt-12">
               <Pagination
-                navigatePath="/find-jobs"
+                navigatePath="/jobs"
                 pagination={renderPaginationItems(
                   data.number + 1,
                   data.totalPages

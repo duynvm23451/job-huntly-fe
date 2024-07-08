@@ -10,7 +10,7 @@ export const getJobs = async (queryParams) => {
     });
     return response.data;
   } catch (error) {
-    throw new Error(response.error);
+    throw new Error(error.message);
   }
 };
 
@@ -23,7 +23,7 @@ export const getCompanies = async (queryParams) => {
     });
     return response.data;
   } catch (error) {
-    throw new Error(response.error);
+    throw new Error(error.message);
   }
 };
 
@@ -33,7 +33,7 @@ export const getJobDetail = async (queryParams) => {
     const response = await axios.get(import.meta.env.VITE_API + "jobs/" + id);
     return response.data;
   } catch (error) {
-    throw new Error(response.error);
+    throw new Error(error.message);
   }
 };
 
@@ -45,7 +45,7 @@ export const getComapnyDetail = async (queryParams) => {
     );
     return response.data;
   } catch (error) {
-    throw new Error(response.error);
+    throw new Error(error.message);
   }
 };
 
@@ -60,17 +60,21 @@ export const getJobsByCompany = async (queryParams) => {
     );
     return response.data;
   } catch (error) {
-    throw new Error(response.error);
+    throw new Error(error.message);
   }
 };
 
-export const postAuthCode = async (authCode) => {
+export const postAuthCode = async (queryParams) => {
   try {
     const response = await axios.post(
-      import.meta.env.VITE_API + "outbound/authentication?code=" + authCode
+      import.meta.env.VITE_API + "auth/outbound/authentication",
+      null,
+      {
+        params: queryParams,
+      }
     );
     return response.data;
   } catch (error) {
-    throw new Error(response.error);
+    throw new Error(error.message);
   }
 };

@@ -3,7 +3,7 @@ import logo from "@/assets/logo.svg";
 import Content from "@/components/shared/Content";
 import RectangleButton from "@/components/shared/RectangleButton";
 
-const HomeGuestHeader = () => {
+const GuestHeader = () => {
   return (
     <header className="fixed top-0 right-0 left-0 bg-white z-30 shadow-md">
       <Content className={"pt-4 flex"}>
@@ -13,7 +13,7 @@ const HomeGuestHeader = () => {
         <menu className="ml-16 mt-4 h-fit">
           <ul className="flex text-lg font-semibold text-gray-600">
             <NavLink
-              to={"/find-jobs"}
+              to={"/jobs"}
               className={({ isActive }) =>
                 isActive
                   ? "pb-6 border-b-6 text-custom-violet border-custom-violet"
@@ -48,4 +48,4 @@ const HomeGuestHeader = () => {
   );
 };
 
-export default HomeGuestHeader;
+export default GuestHeader;

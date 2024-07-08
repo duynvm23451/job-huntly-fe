@@ -1,10 +1,11 @@
 import GoogleIcon from "@/components/icons/GoogleIcon";
 import RectangleButton from "@/components/shared/RectangleButton";
 import { OAuth2ConfigGoogle } from "@/configurations/configuration";
+import { EMPLOYEE, RECRUITER, roleActions } from "@/store/role-slice";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
-  const [tab, setTab] = useState("employee");
   const handleClick = () => {
     const callbackUrl = OAuth2ConfigGoogle.redirectUri;
     const authUrl = OAuth2ConfigGoogle.authUri;
@@ -16,25 +17,7 @@ const Login = () => {
     window.location.href = targetUrl;
   };
   return (
-    <div className="flex flex-col justify-center items-center pt-20 h-screen">
-      <ul className="flex mb-8">
-        <li
-          className={`text-xl font-medium text-custom-violet px-3 py-1.5 rounded-sm cursor-pointer ${
-            tab == "employee" && "bg-[#e9ebfd]"
-          }`}
-          onClick={() => setTab("employee")}
-        >
-          Ứng viên
-        </li>
-        <li
-          className={`text-xl font-medium text-custom-violet px-3 py-1.5 rounded-sm cursor-pointer ${
-            tab == "company" && "bg-[#e9ebfd]"
-          }`}
-          onClick={() => setTab("company")}
-        >
-          Công ty
-        </li>
-      </ul>
+    <>
       <p className="text-lg font-semibold">
         <span className="text-blue-600">Tạo tài khoản mới</span> hoặc{" "}
         <span className="text-blue-600">đăng nhập</span>
@@ -67,7 +50,7 @@ const Login = () => {
         />
         <RectangleButton className={"w-full"}>Đăng nhập</RectangleButton>
       </form>
-    </div>
+    </>
   );
 };
 
