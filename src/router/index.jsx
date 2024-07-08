@@ -1,34 +1,39 @@
 import { createBrowserRouter } from "react-router-dom";
-import GuestLayout from "../components/layout/GuestLayout";
-import HomeGuest from "../pages/HomeGuest";
-import FindJobsGuest from "../pages/FindJobsGuest";
-import CompaniesGuest from "../pages/CompaniesGuest";
-import JobDetail from "@/pages/JobDetail";
-import CompanyDetail from "@/pages/CompanyDetail";
+import RootLayout from "../components/layout/RootLayout";
+import FindJobsGuest from "../pages/guest/FindJobsGuest";
+import CompaniesGuest from "../pages/guest/CompaniesGuest";
+import JobDetail from "@/pages/guest/JobDetail";
+import CompanyDetail from "@/pages/guest/CompanyDetail";
 import AuthLayout from "@/components/layout/AuthLayout";
 import SignUp from "@/pages/SignUp";
 import Login from "@/pages/Login";
 import Authenticate from "@/pages/Authenticate";
+import { tokenLoader } from "@/services/authenitcationService";
+import Home from "@/pages/Home";
+import CompaniesList from "@/pages/CompaniesList";
+import JobsList from "@/pages/JobsList";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <GuestLayout />,
+    element: <RootLayout />,
+    id: "root",
+    loader: tokenLoader,
     children: [
       {
         index: true,
-        element: <HomeGuest />,
+        element: <Home />,
       },
       {
-        path: "find-jobs",
-        element: <FindJobsGuest />,
+        path: "jobs",
+        element: <JobsList />,
       },
       {
         path: "companies",
-        element: <CompaniesGuest />,
+        element: <CompaniesList />,
       },
       {
-        path: "find-jobs/:jobId",
+        path: "jobs/:jobId",
         element: <JobDetail />,
       },
       {
