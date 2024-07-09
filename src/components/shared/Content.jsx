@@ -1,6 +1,12 @@
+import { useRouteLoaderData } from "react-router-dom";
+
 const Content = ({ className, children, ...props }) => {
+  const token = useRouteLoaderData("root");
   return (
-    <div className={`3xl:w-3/4 w-11/12 px-28 mx-auto ${className}`} {...props}>
+    <div
+      className={`3xl:w-3/4 ${!token && "w-11/12"} px-28 mx-auto ${className}`}
+      {...props}
+    >
       {children}
     </div>
   );

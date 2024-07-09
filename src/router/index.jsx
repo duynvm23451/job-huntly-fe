@@ -12,6 +12,7 @@ import { tokenLoader } from "@/services/authenitcationService";
 import Home from "@/pages/Home";
 import CompaniesList from "@/pages/CompaniesList";
 import JobsList from "@/pages/JobsList";
+import VerifyEmail from "@/pages/VerifyEmail";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: "oauth2/login/google",
         element: <Authenticate />,
+      },
+      {
+        path: "register/verifyEmail",
+        element: <VerifyEmail />,
       },
     ],
   },

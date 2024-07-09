@@ -26,11 +26,11 @@ const CompanyDetailContentSection = ({ company }) => {
     <section className="bg-white py-16">
       <Content>
         <div className="grid grid-cols-12 h-fit">
-          <div className="col-span-8 h-full">
+          <div className="xl:col-span-8 col-span-7 h-full">
             <h1 className="text-3xl font-semibold mb-3">Mô tả</h1>
             <p>{company.description}</p>
           </div>
-          <div className="col-span-4 ml-16 h-full break-words">
+          <div className="xl:col-span-4 col-span-5 ml-16 h-full break-words">
             <h1 className="text-2xl font-semibold">
               Chia sẻ công ty với bạn bè
             </h1>

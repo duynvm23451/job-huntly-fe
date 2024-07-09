@@ -25,9 +25,7 @@ const Authenticate = () => {
   }, []);
 
   return (
-    <div className="h-screen bg-custom-neutral-2 relative z-40">
-      Authenticate
-    </div>
+    <div className="h-screen bg-custom-neutral relative z-40">Authenticate</div>
   );
 };
 
