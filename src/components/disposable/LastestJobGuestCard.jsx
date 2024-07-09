@@ -9,7 +9,7 @@ const LastestJobGuestCard = ({
   categories,
 }) => {
   return (
-    <div className="grid grid-cols-7 bg-white px-8 py-6">
+    <div className="grid grid-cols-7 bg-white px-8 py-4">
       <img src={logo} alt="logo" className="w-18 h-18 col-span-1" />
       <div className="col-span-6">
         <h1 className="text-xl font-semibold">{title}</h1>
@@ -18,7 +18,7 @@ const LastestJobGuestCard = ({
           <p className="text-xl">・</p>
           <p>{location}</p>
         </div>
-        <div className="flex items-center mt-2 ">
+        <div className="flex items-center mt-2">
           <SmallCategoryCard
             textColor={"text-green-600"}
             bgColor={"bg-green-100"}

@@ -78,3 +78,38 @@ export const postAuthCode = async (queryParams) => {
     throw new Error(error.message);
   }
 };
+
+export const login = async (formData) => {
+  try {
+    const reponse = await axios.post(
+      import.meta.env.VITE_API + "auth/login",
+      formData
+    );
+    return reponse.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const signup = async (formData) => {
+  try {
+    const response = await axios.post(
+      import.meta.env.VITE_API + "auth/register",
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const verifyEmail = async (token) => {
+  try {
+    const response = await axios.put(
+      import.meta.env.VITE_API + "auth/verifyEmail?token=" + token
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

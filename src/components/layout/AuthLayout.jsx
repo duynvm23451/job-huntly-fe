@@ -7,7 +7,7 @@ const AuthLayout = () => {
   const dispatch = useDispatch();
   const roleTab = useSelector((state) => state.role.role);
   return (
-    <div className="bg-custom-neutral flex flex-col justify-center items-center pt-18 h-screen">
+    <div className="bg-custom-neutral flex flex-col justify-center items-center pt-20 h-screen">
       <ul className="flex mb-8">
         <li
           className={`text-xl font-medium text-custom-violet px-3 py-1.5 rounded-sm cursor-pointer ${
