@@ -2,13 +2,20 @@ import GoogleIcon from "@/components/icons/GoogleIcon";
 import RectangleButton from "@/components/shared/RectangleButton";
 import { OAuth2ConfigGoogle } from "@/configurations/configuration";
 import { setToken } from "@/services/localStorageService";
-import { EMPLOYEE, RECRUITER, roleActions } from "@/store/role-slice";
 import { login } from "@/utils/http";
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useNavigate, useRouteLoaderData } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const token = useRouteLoaderData("root");
+  useEffect(() => {
+    if (token) {
+      console.log("duy");
+      navigate("/");
+    }
+  }, []);
+
   const handleClick = () => {
     const callbackUrl = OAuth2ConfigGoogle.redirectUri;
     const authUrl = OAuth2ConfigGoogle.authUri;
@@ -32,11 +39,17 @@ const Login = () => {
   return (
     <>
       <p className="text-lg font-semibold">
-        <Link to={"/auth/signup"} className="text-blue-600 cursor-pointer">
+        <Link
+          to={"/auth/signup"}
+          className="text-blue-600 hover:text-custom-violet cursor-pointer"
+        >
           Tạo tài khoản mới
         </Link>{" "}
         hoặc{" "}
-        <Link to={"/auth/login"} className="text-blue-600 cursor-pointer">
+        <Link
+          to={"/auth/login"}
+          className="text-blue-600 hover:text-custom-violet cursor-pointer"
+        >
           đăng nhập
         </Link>
       </p>
@@ -70,6 +83,14 @@ const Login = () => {
         />
         <RectangleButton className={"w-full"}>Đăng nhập</RectangleButton>
       </form>
+      <div className="w-1/4 flex justify-end mt-4">
+        <Link
+          to={"/forgot-password"}
+          className="text-lg font-semibold text-blue-600 hover:text-custom-violet"
+        >
+          Quên mật khẩu ?
+        </Link>
+      </div>
     </>
   );
 };

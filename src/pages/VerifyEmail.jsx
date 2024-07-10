@@ -47,7 +47,7 @@ const VerifyEmail = () => {
               type="email"
               name="email"
             />
-            <RectangleButton className={"w-full"}>Đăng nhập</RectangleButton>
+            <RectangleButton className={"w-full"}>Xác nhận</RectangleButton>
           </form>
         </div>
       )}
