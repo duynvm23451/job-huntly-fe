@@ -113,3 +113,26 @@ export const verifyEmail = async (token) => {
     throw new Error(error.message);
   }
 };
+
+export const forgotPassword = async (email) => {
+  try {
+    const resposne = await axios.get(
+      import.meta.env.VITE_API + "auth/forgotPassword?email=" + email
+    );
+    return resposne.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const resetPassword = async (token, data) => {
+  try {
+    const reponse = await axios.put(
+      import.meta.env.VITE_API + "auth/resetPassword?token=" + token,
+      data
+    );
+    return reponse.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

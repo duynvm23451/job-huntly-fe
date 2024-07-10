@@ -1,10 +1,18 @@
 import RectangleButton from "@/components/shared/RectangleButton";
 import { signup } from "@/utils/http";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useRouteLoaderData } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const token = useRouteLoaderData("root");
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, []);
+
   const role = useSelector((state) => state.role.role);
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,11 +27,17 @@ const SignUp = () => {
   return (
     <>
       <p className="text-lg font-semibold">
-        <Link to={"/auth/login"} className="text-blue-600 cursor-pointer">
+        <Link
+          to={"/auth/login"}
+          className="text-blue-600 cursor-pointer hover:text-custom-violet"
+        >
           Tạo tài khoản mới
         </Link>{" "}
         hoặc{" "}
-        <Link to={"/auth/signup"} className="text-blue-600 cursor-pointer">
+        <Link
+          to={"/auth/signup"}
+          className="text-blue-600 cursor-pointer hover:text-custom-violet"
+        >
           đăng nhập
         </Link>
       </p>

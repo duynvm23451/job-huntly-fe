@@ -13,6 +13,8 @@ import Home from "@/pages/Home";
 import CompaniesList from "@/pages/CompaniesList";
 import JobsList from "@/pages/JobsList";
 import VerifyEmail from "@/pages/VerifyEmail";
+import ForgotPassword from "@/pages/ForgotPassword";
+import ResetPassword from "@/pages/ResetPassword";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +64,14 @@ const router = createBrowserRouter([
       {
         path: "register/verifyEmail",
         element: <VerifyEmail />,
+      },
+      {
+        path: "forgot-password",
+        element: <ForgotPassword />,
+      },
+      {
+        path: "reset-password",
+        element: <ResetPassword />,
       },
     ],
   },
