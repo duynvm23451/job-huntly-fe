@@ -9,7 +9,6 @@ const roleSlice = createSlice({
   reducers: {
     changeRole(state, action) {
       const newRole = action.payload;
-      console.log(newRole);
       state.role = newRole;
     },
   },

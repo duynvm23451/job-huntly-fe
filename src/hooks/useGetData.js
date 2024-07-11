@@ -12,7 +12,7 @@ const useGetData = (getFunction, queryParams) => {
         const response = await getFunction(queryParams);
         setData(response.data);
       } catch (error) {
-        setError({ message: error.message } || "Không thể lấy dữ liệu");
+        setError(error.response.data);
       }
       setIsLoading(false);
     };

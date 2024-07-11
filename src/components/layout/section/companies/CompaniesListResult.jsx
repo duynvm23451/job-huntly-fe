@@ -1,4 +1,5 @@
 import CompanyCard from "@/components/disposable/CompanyCard";
+import WarningIcon from "@/components/icons/WarningIcon";
 import Content from "@/components/shared/Content";
 import Pagination from "@/components/shared/Pagination";
 import SideBarDropDown from "@/components/shared/SideBarDropDown";
@@ -61,7 +62,6 @@ const CompaniesListResult = ({ changeHanlder, searchObject }) => {
     }),
     [searchObject, page, size]
   );
-  console.log(queryParams);
   const { isLoading, error, data } = useGetData(getCompanies, queryParams);
   return (
     <section>
@@ -129,6 +129,12 @@ const CompaniesListResult = ({ changeHanlder, searchObject }) => {
                   )}
                 />
               </div>
+            )}
+            {error && (
+              <p className="col-span-12 flex flex-col justify-center items-center p-8 text-xl font-medium text-red-500">
+                <WarningIcon className="w-20 h-20 mb-4 text-center" />
+                {error.message}
+              </p>
             )}
           </div>
         </div>

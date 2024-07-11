@@ -5,7 +5,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const JobDetailTitleSection = ({ job }) => {
-  console.log(job);
   return (
     <section className="bg-custom-neutral">
       <Content className={"pt-32 pb-20"}>

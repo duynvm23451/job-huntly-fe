@@ -15,12 +15,14 @@ import JobsList from "@/pages/JobsList";
 import VerifyEmail from "@/pages/VerifyEmail";
 import ForgotPassword from "@/pages/ForgotPassword";
 import ResetPassword from "@/pages/ResetPassword";
+import Error from "@/pages/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
     id: "root",
+    errorElement: <Error />,
     loader: tokenLoader,
     children: [
       {

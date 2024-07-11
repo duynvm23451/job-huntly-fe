@@ -1,3 +1,4 @@
+import WarningIcon from "@/components/icons/WarningIcon";
 import CompanyDetailContentSection from "@/components/layout/section/company-detail/CompanyDetailContentSection";
 import CompanyDetailJobsSection from "@/components/layout/section/company-detail/CompanyDetailJobsSection";
 import { CompanyDetailTitleSection } from "@/components/layout/section/company-detail/CompanyDetailTitleSection";
@@ -18,6 +19,14 @@ const CompanyDetail = () => {
   const { isLoading, error, data } = useGetData(getComapnyDetail, queryParams);
   if (isLoading) {
     return <p>Loading...</p>;
+  }
+  if (error) {
+    return (
+      <div className="h-screen bg-custom-neutral flex flex-col justify-center items-center text-xl font-medium text-red-500">
+        <WarningIcon className="w-20 h-20 mb-4 text-center" />
+        {error.message}
+      </div>
+    );
   }
   if (!data) {
     return <p>No company data found</p>;
