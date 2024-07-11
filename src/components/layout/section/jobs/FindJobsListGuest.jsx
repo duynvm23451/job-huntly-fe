@@ -8,6 +8,8 @@ import { getJobs } from "@/utils/http";
 import { convertJobType } from "@/utils/hepler";
 import renderPaginationItems from "@/utils/pagination";
 import { Link, useSearchParams } from "react-router-dom";
+import { Warning } from "postcss";
+import WarningIcon from "@/components/icons/WarningIcon";
 
 const typeList = ["Full Time", "Part Time", "Remote", "Contact"];
 const categoriesList = [
@@ -128,6 +130,12 @@ const FindJobsListGuest = ({ changeHanlder, searchObject }) => {
                 )}
               />
             </div>
+          )}
+          {error && (
+            <p className="flex flex-col justify-center items-center p-8 text-xl font-medium text-red-500">
+              <WarningIcon className="w-20 h-20 mb-4 text-center" />
+              {error.message}
+            </p>
           )}
         </div>
       </Content>

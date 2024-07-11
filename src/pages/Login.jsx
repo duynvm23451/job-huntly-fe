@@ -11,7 +11,6 @@ const Login = () => {
   const token = useRouteLoaderData("root");
   useEffect(() => {
     if (token) {
-      console.log("duy");
       navigate("/");
     }
   }, []);
