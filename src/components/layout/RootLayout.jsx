@@ -1,4 +1,4 @@
-import { Outlet, useNavigate, useRouteLoaderData } from "react-router-dom";
+import { Outlet, useRouteLoaderData } from "react-router-dom";
 import GuestHeader from "@/components/layout/header/GuestHeader";
 import FooterGuest from "@/components/layout/section/FooterGuest";
 import AuthedNav from "@/components/layout/header/AuthedNav";

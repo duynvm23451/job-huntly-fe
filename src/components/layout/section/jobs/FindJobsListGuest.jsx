@@ -8,7 +8,6 @@ import { getJobs } from "@/utils/http";
 import { convertJobType } from "@/utils/hepler";
 import renderPaginationItems from "@/utils/pagination";
 import { Link, useSearchParams } from "react-router-dom";
-import { Warning } from "postcss";
 import WarningIcon from "@/components/icons/WarningIcon";
 
 const typeList = ["Full Time", "Part Time", "Remote", "Contact"];

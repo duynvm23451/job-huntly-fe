@@ -1,7 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "../components/layout/RootLayout";
-import FindJobsGuest from "../pages/guest/FindJobsGuest";
-import CompaniesGuest from "../pages/guest/CompaniesGuest";
 import JobDetail from "@/pages/guest/JobDetail";
 import CompanyDetail from "@/pages/guest/CompanyDetail";
 import AuthLayout from "@/components/layout/AuthLayout";
