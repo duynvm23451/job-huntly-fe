@@ -28,14 +28,14 @@ const SignUp = () => {
     <>
       <p className="text-lg font-semibold">
         <Link
-          to={"/auth/login"}
+          to={"/auth/signup"}
           className="text-blue-600 cursor-pointer hover:text-custom-violet"
         >
           Tạo tài khoản mới
         </Link>{" "}
         hoặc{" "}
         <Link
-          to={"/auth/signup"}
+          to={"/auth/login"}
           className="text-blue-600 cursor-pointer hover:text-custom-violet"
         >
           đăng nhập

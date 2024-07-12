@@ -1,6 +1,5 @@
 import ArrowLeftIcon from "@/components/icons/ArrowLeftIcon";
 import ArrowRight2Icon from "@/components/icons/ArrowRight2Icon";
-import { useRef } from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
 
 const Pagination = ({ pagination, navigatePath }) => {

@@ -1,7 +1,6 @@
 import ArrowDownIcon from "@/components/icons/ArrowDownIcon";
 import ArrowUpIcon from "@/components/icons/ArrowUpIcon";
 import { useEffect, useState } from "react";
-import { json } from "react-router-dom";
 
 const SideBarDropDown = ({
   items,

@@ -1,8 +1,8 @@
 import { setToken } from "@/services/localStorageService";
 import { postAuthCode } from "@/utils/http";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { redirect, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Authenticate = () => {
   const navigate = useNavigate();

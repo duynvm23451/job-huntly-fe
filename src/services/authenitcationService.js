@@ -1,4 +1,4 @@
-import { redirect, useNavigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import { getToken, removeToken } from "./localStorageService";
 
 export const logOut = () => {
