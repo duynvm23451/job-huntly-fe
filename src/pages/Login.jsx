@@ -3,12 +3,15 @@ import RectangleButton from "@/components/shared/RectangleButton";
 import { OAuth2ConfigGoogle } from "@/configurations/configuration";
 import { setToken } from "@/services/localStorageService";
 import { login } from "@/utils/http";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useRouteLoaderData } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
   const token = useRouteLoaderData("root");
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     if (token) {
       navigate("/");
@@ -31,12 +34,23 @@ const Login = () => {
 
     const fd = new FormData(event.target);
     const formData = Object.fromEntries(fd.entries());
-    const data = await login(formData);
-    setToken(data.data.token);
-    window.location.href = "/";
+    setIsLoading(true)
+    try {
+      const data = await login(formData);
+      setToken(data.data.token);
+      toast.success(data.message)
+      window.location.href = "/";
+    } catch (error) {
+      const errorData = error.response.data;
+      toast.error(errorData.message, {
+        position: "bottom-right"
+      })
+    }
+    setIsLoading(false)
   };
   return (
     <>
+      <ToastContainer/>
       <p className="text-lg font-semibold">
         <Link
           to={"/auth/signup"}
@@ -80,7 +94,7 @@ const Login = () => {
           type="password"
           name="password"
         />
-        <RectangleButton className={"w-full"}>Đăng nhập</RectangleButton>
+        <RectangleButton className={"w-full"} disabled={isLoading}>{isLoading ? "Loading..." : "Đăng nhập"}</RectangleButton>
       </form>
       <div className="w-1/4 flex justify-end mt-4">
         <Link

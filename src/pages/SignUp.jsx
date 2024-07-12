@@ -1,12 +1,16 @@
 import RectangleButton from "@/components/shared/RectangleButton";
 import { signup } from "@/utils/http";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate, useRouteLoaderData } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const token = useRouteLoaderData("root");
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     if (token) {
       navigate("/");
@@ -20,12 +24,37 @@ const SignUp = () => {
     const fd = new FormData(event.target);
     const formData = Object.fromEntries(fd.entries());
     formData.role = role;
+    for (const [key, value] of Object.entries(formData)) {
+      if (value === "") {
+        formData[key] = null;
+      }
+    }
+    setIsLoading(true)
+    try {
+      const responseData = await signup(formData);
+      toast.success(responseData.message, {
+        position: "bottom-right"
+      })
+    } catch (error) {
+      const dataError = error.response.data;
+      if (dataError.code == 417) {
+        const toastHtml = Object.entries(dataError.data).map(([key, value]) => `<p>- ${key}: ${value}</p>`).join('')
+        const toastMessage = <div dangerouslySetInnerHTML={{__html: toastHtml}}/>
+        toast.error(toastMessage, {
+          position: "bottom-right"
+        })
+      } else {
+        toast.error(dataError.message, {
+          position: "bottom-right"
+        })
+      }
+    }
+    setIsLoading(false)
 
-    const responseData = await signup(formData);
-    console.log(responseData);
   };
   return (
     <>
+      <ToastContainer/>
       <p className="text-lg font-semibold">
         <Link
           to={"/auth/signup"}
@@ -72,7 +101,7 @@ const SignUp = () => {
           name="passwordConfirmation"
         />
 
-        <RectangleButton className={"w-full"}>Đăng ký</RectangleButton>
+        <RectangleButton className={"w-full"} disabled={isLoading}>{isLoading ? "Loading..." : "Đăng ký"}</RectangleButton>
       </form>
     </>
   );

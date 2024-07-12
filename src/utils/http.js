@@ -92,3 +92,10 @@ export const resetPassword = async (token, data) => {
   );
   return reponse.data;
 };
+
+export const resendVerifyEmail = async (email) => {
+  const response = await axios.get(
+    import.meta.env.VITE_API + "auth/resendRegisterToken?email=" + email
+  );
+  return response.data
+}
