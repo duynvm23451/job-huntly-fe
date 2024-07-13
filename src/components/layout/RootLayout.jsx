@@ -9,7 +9,7 @@ const RootLayout = () => {
     <div className="h-screen">
       {!token && <GuestHeader />}
       {token && <AuthedNav />}
-      <main>
+      <main className={`${token && "ml-64"}`}>
         <Outlet />
       </main>
       {!token && <FooterGuest />}
