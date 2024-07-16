@@ -97,5 +97,12 @@ export const resendVerifyEmail = async (email) => {
   const response = await axios.get(
     import.meta.env.VITE_API + "auth/resendRegisterToken?email=" + email
   );
-  return response.data
-}
+  return response.data;
+};
+
+export const getMyInfo = async (token) => {
+  const response = await axios.get(import.meta.env.VITE_API + "getMyInfo", {
+    headers: { Authorization: "Bearer " + token },
+  });
+  return response.data;
+};

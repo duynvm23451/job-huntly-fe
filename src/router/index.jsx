@@ -14,6 +14,10 @@ import VerifyEmail from "@/pages/VerifyEmail";
 import ForgotPassword from "@/pages/ForgotPassword";
 import ResetPassword from "@/pages/ResetPassword";
 import Error from "@/pages/Error";
+import Messages from "@/pages/Messages";
+import Applications from "@/pages/Applications";
+import Profile from "@/pages/employee/Profile";
+import Setting from "@/pages/Setting";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +76,22 @@ const router = createBrowserRouter([
       {
         path: "reset-password",
         element: <ResetPassword />,
+      },
+      {
+        path: "messages",
+        element: <Messages />,
+      },
+      {
+        path: "applications",
+        element: <Applications />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+      {
+        path: "setting",
+        element: <Setting />,
       },
     ],
   },
