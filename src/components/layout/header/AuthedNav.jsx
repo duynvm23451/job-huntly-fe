@@ -1,6 +1,11 @@
 import { logOut } from "@/services/authenitcationService";
-import React from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import {
+  Link,
+  NavLink,
+  useLocation,
+  useRouteLoaderData,
+} from "react-router-dom";
 import logo from "@/assets/logo.svg";
 import HomeIcon from "@/components/icons/HomeIcon";
 import MessageIcon from "@/components/icons/MessageIcon";
@@ -9,9 +14,30 @@ import SearchIcon2 from "@/components/icons/SearchIcon2";
 import CompanyIcon2 from "@/components/icons/CompanyIcon2";
 import PersonIcon from "@/components/icons/PersonIcon";
 import SettingIcon from "@/components/icons/SettingIcon";
+import { useDispatch, useSelector } from "react-redux";
+import { getMyInfo } from "@/utils/http";
+import { userActions } from "@/store/user-slice";
+import defaultAvatar from "@/assets/image/default-avatar.png";
 
 const AuthedNav = () => {
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
+  const token = useRouteLoaderData("root");
+
+  useEffect(() => {
+    if (token) {
+      const fetchData = async () => {
+        const response = await getMyInfo(token);
+        if (response.data) {
+          dispatch(userActions.updateUser(response.data));
+        }
+      };
+      fetchData();
+    }
+  }, [token, dispatch]);
+
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  console.log(loggedInUser);
   const handleClick = () => {
     logOut();
   };
@@ -26,8 +52,10 @@ const AuthedNav = () => {
             <NavLink
               to={"/"}
               className={({ isActive }) =>
-                `flex items-center text-lg font-medium mt-2 ${
-                  isActive ? "text-custom-violet" : "text-gray-600"
+                `flex items-center text-lg font-medium p-2 ${
+                  isActive
+                    ? "text-custom-violet bg-violet-100"
+                    : "text-gray-600"
                 }`
               }
             >
@@ -37,8 +65,10 @@ const AuthedNav = () => {
             <NavLink
               to={"/messages"}
               className={({ isActive }) =>
-                `flex items-center text-lg font-medium mt-4 ${
-                  isActive ? "text-custom-violet" : "text-gray-600"
+                `flex items-center text-lg font-medium p-2 mt-1 ${
+                  isActive
+                    ? "text-custom-violet bg-violet-100"
+                    : "text-gray-600"
                 }`
               }
             >
@@ -51,8 +81,10 @@ const AuthedNav = () => {
             <NavLink
               to={"/applications"}
               className={({ isActive }) =>
-                `flex items-center text-lg font-medium mt-4 ${
-                  isActive ? "text-custom-violet" : "text-gray-600"
+                `flex items-center text-lg font-medium p-2 mt-1 ${
+                  isActive
+                    ? "text-custom-violet bg-violet-100"
+                    : "text-gray-600"
                 }`
               }
             >
@@ -65,8 +97,10 @@ const AuthedNav = () => {
             <NavLink
               to={"/jobs"}
               className={({ isActive }) =>
-                `flex items-center text-lg font-medium mt-4 ${
-                  isActive ? "text-custom-violet" : "text-gray-600"
+                `flex items-center text-lg font-medium p-2 mt-1 ${
+                  isActive
+                    ? "text-custom-violet bg-violet-100"
+                    : "text-gray-600"
                 }`
               }
             >
@@ -79,8 +113,10 @@ const AuthedNav = () => {
             <NavLink
               to={"/companies"}
               className={({ isActive }) =>
-                `flex items-center text-lg font-medium mt-4 ${
-                  isActive ? "text-custom-violet" : "text-gray-600"
+                `flex items-center text-lg font-medium p-2 mt-1 ${
+                  isActive
+                    ? "text-custom-violet bg-violet-100"
+                    : "text-gray-600"
                 }`
               }
             >
@@ -93,8 +129,10 @@ const AuthedNav = () => {
             <NavLink
               to={"/profile"}
               className={({ isActive }) =>
-                `flex items-center text-lg font-medium mt-4 ${
-                  isActive ? "text-custom-violet" : "text-gray-600"
+                `flex items-center text-lg font-medium p-2 mt-1 ${
+                  isActive
+                    ? "text-custom-violet bg-violet-100"
+                    : "text-gray-600"
                 }`
               }
             >
@@ -108,8 +146,8 @@ const AuthedNav = () => {
           <NavLink
             to={"/setting"}
             className={({ isActive }) =>
-              `flex items-center text-lg font-medium mt-6 ${
-                isActive ? "text-custom-violet" : "text-gray-600"
+              `flex items-center text-lg font-medium mt-4 p-2 ${
+                isActive ? "text-custom-violet bg-violet-100" : "text-gray-600"
               }`
             }
           >
@@ -120,11 +158,37 @@ const AuthedNav = () => {
             Cài đặt
           </NavLink>
         </div>
-        <div>
-          <button className="border-2 p-4" onClick={handleClick}>
-            logout
-          </button>
-        </div>
+        {loggedInUser && (
+          <div>
+            <div className="flex mb-2 items-center">
+              {!loggedInUser.avatarFileName && (
+                <img
+                  src={defaultAvatar}
+                  alt="default avatar"
+                  className="w-10 h-10 mr-4 rounded-full"
+                />
+              )}
+              {loggedInUser.avatarFileName && (
+                <img
+                  src={loggedInUser.avatarFileName}
+                  alt="avatar"
+                  className="w-10 h-10 mr-4 rounded-full"
+                />
+              )}
+              <button
+                className="border-2 rounded-md p-3 pt-1.5 pb-2 border-custom-violet"
+                onClick={handleClick}
+              >
+                Đăng xuất
+              </button>
+            </div>
+
+            <div className="flex flex-col">
+              <strong>{loggedInUser.fullName}</strong>
+              <span>{loggedInUser.email}</span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
