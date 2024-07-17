@@ -106,3 +106,13 @@ export const getMyInfo = async (token) => {
   });
   return response.data;
 };
+
+export const countApplications = async (token, userId) => {
+  const response = await axios.get(
+    import.meta.env.VITE_API + "applications/count/" + userId,
+    {
+      headers: { Authorization: "Bearer " + token },
+    }
+  );
+  return response.data;
+};
