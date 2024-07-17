@@ -175,12 +175,6 @@ const AuthedNav = () => {
                   className="w-10 h-10 mr-4 rounded-full"
                 />
               )}
-              <button
-                className="border-2 rounded-md p-3 pt-1.5 pb-2 border-custom-violet"
-                onClick={handleClick}
-              >
-                Đăng xuất
-              </button>
             </div>
 
             <div className="flex flex-col">
