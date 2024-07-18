@@ -1,3 +1,4 @@
+import JobsAppliedStatus from "@/components/disposable/JobsAppliedStatus";
 import BackgroundInterviewingIcon from "@/components/icons/BackgroundInterviewingIcon";
 import BackgroundTotalIcon from "@/components/icons/BackgroundTotalIcon";
 import { logOut } from "@/services/authenitcationService";
@@ -30,7 +31,7 @@ const DashBoard = () => {
       };
       count();
     }
-  }, [token]);
+  }, [token, loggedInUser]);
   return (
     <div>
       <ToastContainer />
@@ -46,22 +47,24 @@ const DashBoard = () => {
 
       {loggedInUser && (
         <div className="px-6 py-4 border-t-1 border-custom-neutral-2">
-          <h2 className="text-lg">Xin chào, {loggedInUser.fullName}</h2>
-          <p>
+          <h2 className="text-lg font-semibold mb-1">
+            Xin chào, {loggedInUser.fullName}
+          </h2>
+          <p className="mb-6">
             Đây là nơi bạn có thể cập nhật được trạng thái mới nhất về đơn ứng
             tuyển của mình
           </p>
-          <div className="grid grid-cols-12 space-x-6">
-            {countResult && (
+          {countResult && (
+            <div className="grid grid-cols-12 space-x-6">
               <div className="col-span-3">
-                <div className="border-1 border-custom-neutral-2 p-4 relative">
+                <div className="border-1 border-custom-neutral-2 p-4 relative rounded-lg">
                   <h2 className="text-lg font-semibold ">
                     Tổng số công việc đã ứng tuyển
                   </h2>
                   <p className="text-5xl mt-4 ml-8">{countResult.total}</p>
                   <BackgroundTotalIcon className="absolute bottom-0 right-4" />
                 </div>
-                <div className="border-1 border-custom-neutral-2 p-4 mt-4 relative">
+                <div className="border-1 border-custom-neutral-2 p-4 mt-4 rounded-lg relative">
                   <h2 className="text-lg font-semibold ">
                     Đang trong quá trình phỏng vấn
                   </h2>
@@ -71,8 +74,14 @@ const DashBoard = () => {
                   <BackgroundInterviewingIcon className="absolute bottom-0 right-4" />
                 </div>
               </div>
-            )}
-          </div>
+              <div className="col-span-5">
+                <JobsAppliedStatus
+                  total={countResult.total}
+                  interviewing={countResult.interviewing}
+                />
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
