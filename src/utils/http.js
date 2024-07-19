@@ -116,3 +116,14 @@ export const countApplications = async (token, userId) => {
   );
   return response.data;
 };
+
+export const getLatestInterviewingApplications = async (token) => {
+  const response = await axios.get(
+    import.meta.env.VITE_API +
+      "applications/latest/interviewing?sort=interviewTime,desc&size=2&page=1",
+    {
+      headers: { Authorization: "Bearer " + token },
+    }
+  );
+  return response.data;
+};

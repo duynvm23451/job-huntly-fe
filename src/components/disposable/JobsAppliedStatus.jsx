@@ -32,7 +32,7 @@ const JobsAppliedStatus = ({ total, interviewing }) => {
   };
 
   return (
-    <div className="w-fit border border-gray-200 rounded-lg p-4">
+    <div className="w-full border border-gray-200 rounded-lg p-4">
       <h3 className="text-lg mb-6 font-semibold">Trạng thái đơn ứng tuyển</h3>
       <div className="flex">
         <div
