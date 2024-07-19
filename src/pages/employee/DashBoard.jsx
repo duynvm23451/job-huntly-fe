@@ -2,7 +2,11 @@ import JobsAppliedStatus from "@/components/disposable/JobsAppliedStatus";
 import BackgroundInterviewingIcon from "@/components/icons/BackgroundInterviewingIcon";
 import BackgroundTotalIcon from "@/components/icons/BackgroundTotalIcon";
 import { logOut } from "@/services/authenitcationService";
-import { countApplications } from "@/utils/http";
+import { formatTimestampToDate } from "@/utils/hepler";
+import {
+  countApplications,
+  getLatestInterviewingApplications,
+} from "@/utils/http";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRouteLoaderData } from "react-router-dom";
@@ -13,6 +17,7 @@ const DashBoard = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const token = useRouteLoaderData("root");
   const [countResult, setCountResult] = useState(null);
+  const [upcomingInterviewJobs, setUpComingInterviewJobs] = useState(null);
   const handleClick = () => {
     logOut();
   };
@@ -32,6 +37,22 @@ const DashBoard = () => {
       count();
     }
   }, [token, loggedInUser]);
+
+  useEffect(() => {
+    const fetchLatestInterviewingJobs = async () => {
+      try {
+        const response = await getLatestInterviewingApplications(token);
+        setUpComingInterviewJobs(response.data.content);
+      } catch (error) {
+        const errorData = error.response.data;
+        toast.error(errorData.message, {
+          position: "bottom-right",
+        });
+      }
+    };
+
+    fetchLatestInterviewingJobs();
+  }, [token]);
   return (
     <div>
       <ToastContainer />
@@ -74,11 +95,43 @@ const DashBoard = () => {
                   <BackgroundInterviewingIcon className="absolute bottom-0 right-4" />
                 </div>
               </div>
-              <div className="col-span-5">
+              <div className="col-span-4">
                 <JobsAppliedStatus
                   total={countResult.total}
                   interviewing={countResult.interviewing}
                 />
+              </div>
+              <div className="col-span-5 border-1 border-custom-neutral-2 rounded-lg">
+                <p className="text-lg font-semibold p-4 border-b-1 border-custom-neutral-2">
+                  Buổi phỏng vấn sắp diễn ra
+                </p>
+                {upcomingInterviewJobs && (
+                  <ul className="p-2">
+                    {upcomingInterviewJobs.map((el) => (
+                      <li
+                        key={el.id}
+                        className="px-2 py-1 my-1 flex items-center"
+                      >
+                        <p className="text-lg text-gray-500 h-full font-semibold w-36">
+                          {formatTimestampToDate(el.interviewTime)}
+                        </p>
+                        <div className="flex items-start p-3 w-full bg-violet-100 rounded-md">
+                          <img
+                            src="https://www.mintformations.co.uk/blog/wp-content/uploads/2020/05/shutterstock_583717939.jpg"
+                            alt="logo comapny"
+                            className="w-14 h-14 object-cover rounded-full mr-4"
+                          />
+                          <div className="">
+                            <p className="mb-1 text-lg font-semibold">
+                              {el.job.company.name}
+                            </p>
+                            <p>{el.job.title}</p>
+                          </div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
           )}
