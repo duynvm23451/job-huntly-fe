@@ -37,7 +37,6 @@ const AuthedNav = () => {
   }, [token, dispatch]);
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  console.log(loggedInUser);
   const handleClick = () => {
     logOut();
   };
