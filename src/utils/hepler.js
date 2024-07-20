@@ -39,3 +39,12 @@ export const cleanQueryParamsCompanies = (params) => {
 export const formatTimestampToDate = (timestamp) => {
   return new Date(timestamp).toISOString().split("T")[0];
 };
+
+export const formatTimestampToTime = (timestamp) => {
+  const date = new Date(timestamp);
+  return date.toLocaleTimeString("vi-VN", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
+};

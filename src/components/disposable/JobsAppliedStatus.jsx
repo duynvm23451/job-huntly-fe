@@ -9,7 +9,6 @@ Chart.register(ArcElement, Tooltip, Legend);
 const JobsAppliedStatus = ({ total, interviewing }) => {
   const interviewingPercent = ((interviewing / total) * 100).toFixed(2);
   const remainPercent = (100 - interviewingPercent).toFixed(2);
-  console.log(interviewingPercent, remainPercent);
 
   const data = {
     labels: ["Đang phỏng vấn", "Trạng thái khác"],
@@ -60,7 +59,7 @@ const JobsAppliedStatus = ({ total, interviewing }) => {
       </div>
 
       <Link
-        href="/applications"
+        to="/applications"
         className="mt-6 inline-block text-lg font-semibold text-custom-violet"
       >
         Xem tất cả đơn ứng tuyển →

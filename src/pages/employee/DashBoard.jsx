@@ -1,8 +1,9 @@
 import JobsAppliedStatus from "@/components/disposable/JobsAppliedStatus";
 import BackgroundInterviewingIcon from "@/components/icons/BackgroundInterviewingIcon";
 import BackgroundTotalIcon from "@/components/icons/BackgroundTotalIcon";
+import DashboardRecentApplicationsSection from "@/components/layout/section/home/DashboardRecentApplicationsSection";
 import { logOut } from "@/services/authenitcationService";
-import { formatTimestampToDate } from "@/utils/hepler";
+import { formatTimestampToDate, formatTimestampToTime } from "@/utils/hepler";
 import {
   countApplications,
   getLatestInterviewingApplications,
@@ -110,12 +111,15 @@ const DashBoard = () => {
                     {upcomingInterviewJobs.map((el) => (
                       <li
                         key={el.id}
-                        className="px-2 py-1 my-1 flex items-center"
+                        className="px-2 py-1 my-1 flex items-center "
                       >
                         <p className="text-lg text-gray-500 h-full font-semibold w-36">
-                          {formatTimestampToDate(el.interviewTime)}
+                          <span className="block">
+                            {formatTimestampToDate(el.interviewTime)}
+                          </span>
+                          <span>{formatTimestampToTime(el.interviewTime)}</span>
                         </p>
-                        <div className="flex items-start p-3 w-full bg-violet-100 rounded-md">
+                        <div className="flex items-start p-3 w-full bg-violet-50 rounded-md">
                           <img
                             src="https://www.mintformations.co.uk/blog/wp-content/uploads/2020/05/shutterstock_583717939.jpg"
                             alt="logo comapny"
@@ -135,6 +139,7 @@ const DashBoard = () => {
               </div>
             </div>
           )}
+          <DashboardRecentApplicationsSection />
         </div>
       )}
     </div>

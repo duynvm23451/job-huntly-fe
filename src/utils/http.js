@@ -127,3 +127,11 @@ export const getLatestInterviewingApplications = async (token) => {
   );
   return response.data;
 };
+
+export const getApplications = async (queryParams, token) => {
+  const response = await axios.get(import.meta.env.VITE_API + "applications", {
+    params: queryParams,
+    headers: { Authorization: "Bearer " + token },
+  });
+  return response.data;
+};
