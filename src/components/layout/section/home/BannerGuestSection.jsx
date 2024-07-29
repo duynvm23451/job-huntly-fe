@@ -1,8 +1,13 @@
 import RectangleButton from "@/components/shared/RectangleButton";
 import webDemo from "@/assets/image/web-demo.png";
 import Content from "@/components/shared/Content";
+import { useNavigate, useRouteLoaderData } from "react-router-dom";
 
 const BannerGuestSection = () => {
+  const navigate = useNavigate();
+  const redirectRegister = () => {
+    navigate("/auth/signup");
+  };
   return (
     <section className="my-12 mt-36">
       <Content>
@@ -14,7 +19,11 @@ const BannerGuestSection = () => {
             <p className="mt-14 mb-8 text-2xl text-white">
               Tiết kiện chỉ với 50.000 mỗi tháng
             </p>
-            <RectangleButton type="white" className={"mb-12"}>
+            <RectangleButton
+              type="white"
+              className={"mb-12"}
+              onClick={redirectRegister}
+            >
               Đăng kí miễn phí
             </RectangleButton>
           </div>

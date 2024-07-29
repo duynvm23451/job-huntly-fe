@@ -18,6 +18,8 @@ import Messages from "@/pages/Messages";
 import Applications from "@/pages/Applications";
 import Profile from "@/pages/employee/Profile";
 import Setting from "@/pages/Setting";
+import Test from "@/pages/Test";
+import ChatArea from "@/components/disposable/ChatArea";
 
 const router = createBrowserRouter([
   {
@@ -80,6 +82,12 @@ const router = createBrowserRouter([
       {
         path: "messages",
         element: <Messages />,
+        children: [
+          {
+            path: ":chatRoomId",
+            element: <ChatArea />,
+          },
+        ],
       },
       {
         path: "applications",
@@ -92,6 +100,10 @@ const router = createBrowserRouter([
       {
         path: "setting",
         element: <Setting />,
+      },
+      {
+        path: "test",
+        element: <Test />,
       },
     ],
   },

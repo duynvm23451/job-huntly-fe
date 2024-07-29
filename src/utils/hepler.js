@@ -36,6 +36,16 @@ export const cleanQueryParamsCompanies = (params) => {
   return cleanedParams;
 };
 
+export const cleanedParamsApplications = (params) => {
+  const cleanedParams = {};
+  Object.keys(params).forEach((key) => {
+    const value = params[key];
+    if (value !== "") {
+      cleanedParams[key] = value;
+    }
+  });
+  return cleanedParams;
+};
 export const formatTimestampToDate = (timestamp) => {
   return new Date(timestamp).toISOString().split("T")[0];
 };
@@ -47,4 +57,38 @@ export const formatTimestampToTime = (timestamp) => {
     minute: "2-digit",
     second: "2-digit",
   });
+};
+
+export const convertToReadableApplicationStatus = (status) => {
+  if (status === "IN_REVIEW") {
+    return "Đang xem xét";
+  }
+  if (status === "INTERVIEWING") {
+    return "Đang phỏng vấn";
+  }
+  if (status === "HIRED") {
+    return "Được tuyển";
+  }
+  if (status === "CANCELLED") {
+    return "Bị loại";
+  }
+  return status;
+};
+
+export const formatTimeDifference = (timestamp) => {
+  const inputTime = new Date(timestamp);
+  const currentTime = new Date();
+
+  const timeDifference = currentTime - inputTime;
+
+  const seconds = Math.floor(timeDifference / 1000);
+  if (seconds < 60) {
+    return `${seconds} giây trước`;
+  } else if (seconds < 3600) {
+    return `${Math.floor(seconds / 60)} phút trước`;
+  } else if (seconds < 86400) {
+    return `${Math.floor(seconds / 3600)} tiếng trước`;
+  } else {
+    return `${Math.floor(seconds / 86400)} ngày trước`;
+  }
 };

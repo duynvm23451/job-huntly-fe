@@ -1,16 +1,25 @@
 import SmallCategoryCard from "@/components/shared/SmallCategoryCard";
 import RectangleButton from "@/components/shared/RectangleButton";
+import { Link, useNavigate, useRouteLoaderData } from "react-router-dom";
 const JobsListItemCard = ({
   logo,
+  id,
   title,
   type,
   company,
   location,
   categories,
 }) => {
+  const token = useRouteLoaderData("root");
+  const navigate = useNavigate();
+  const applyHandle = () => {
+    if (!token) {
+      navigate("/auth/login");
+    }
+  };
   return (
     <div className="grid grid-cols-12 px-6 py-6 mb-6 w-11/12 border-1 border-custom-neutral-2">
-      <div className="grid grid-cols-7 col-span-9">
+      <Link to={"/jobs/" + id} className="grid grid-cols-7 col-span-9">
         <img src={logo} alt="logo" className="w-18 col-span-1" />
         <div className="col-span-6">
           <h1 className="text-xl font-semibold">{title}</h1>
@@ -38,10 +47,10 @@ const JobsListItemCard = ({
             ))}
           </div>
         </div>
-      </div>
+      </Link>
 
       <div className="flex flex-col col-span-3 w-fit">
-        <RectangleButton>Ứng tuyển</RectangleButton>
+        <RectangleButton onClick={applyHandle}>Ứng tuyển</RectangleButton>
         <progress
           value="5"
           max="10"

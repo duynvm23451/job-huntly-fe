@@ -1,6 +1,10 @@
 import axios from "axios";
 import qs from "qs";
-import { cleanQueryParamsJobs, cleanQueryParamsCompanies } from "./hepler";
+import {
+  cleanQueryParamsJobs,
+  cleanQueryParamsCompanies,
+  cleanedParamsApplications,
+} from "./hepler";
 export const getJobs = async (queryParams) => {
   const cleanedParams = cleanQueryParamsJobs(queryParams);
   const response = await axios.get(import.meta.env.VITE_API + "jobs", {
@@ -129,9 +133,44 @@ export const getLatestInterviewingApplications = async (token) => {
 };
 
 export const getApplications = async (queryParams, token) => {
+  const cleanedParams = cleanedParamsApplications(queryParams);
   const response = await axios.get(import.meta.env.VITE_API + "applications", {
+    params: cleanedParams,
+    headers: { Authorization: "Bearer " + token },
+  });
+  return response.data;
+};
+
+export const getConfiguration = async () => {
+  const response = await axios.get(import.meta.env.VITE_API + "config");
+  return response.data;
+};
+
+export const getChatRooms = async (queryParams, token) => {
+  const response = await axios.get(import.meta.env.VITE_API + "chatRooms", {
     params: queryParams,
     headers: { Authorization: "Bearer " + token },
   });
+  return response.data;
+};
+
+export const getMessagesList = async (queryParams) => {
+  const response = await axios.get(
+    import.meta.env.VITE_API + "messages/" + queryParams.id,
+    {
+      params: queryParams,
+      headers: { Authorization: "Bearer " + queryParams.token },
+    }
+  );
+  return response.data;
+};
+
+export const getChatRoomById = async (queryParams) => {
+  const response = await axios.get(
+    import.meta.env.VITE_API + "chatRooms/" + queryParams.id,
+    {
+      headers: { Authorization: "Bearer " + queryParams.token },
+    }
+  );
   return response.data;
 };
