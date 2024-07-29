@@ -2,9 +2,16 @@ import Content from "@/components/shared/Content";
 import RectangleButton from "@/components/shared/RectangleButton";
 import { convertJobType } from "@/utils/hepler";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useRouteLoaderData } from "react-router-dom";
 
 const JobDetailTitleSection = ({ job }) => {
+  const token = useRouteLoaderData("root");
+  const navigate = useNavigate();
+  const applyHandle = () => {
+    if (!token) {
+      navigate("/auth/login");
+    }
+  };
   return (
     <section className="bg-custom-neutral">
       <Content className={"pt-32 pb-20"}>
@@ -32,7 +39,7 @@ const JobDetailTitleSection = ({ job }) => {
           </div>
           <div className="flex h-fit">
             <div className="bg-custom-neutral-2 w-0.5 mr-6" />
-            <RectangleButton>Ứng tuyển</RectangleButton>
+            <RectangleButton onClick={applyHandle}>Ứng tuyển</RectangleButton>
           </div>
         </div>
       </Content>

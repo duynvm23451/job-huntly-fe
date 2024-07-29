@@ -26,7 +26,6 @@ const DashboardRecentApplicationsSection = () => {
     };
     fetchApplications();
   }, [queryParams]);
-  console.log(data);
   return (
     <div className="mt-4 border-1 border-custom-neutral-2 rounded-lg">
       <div className="p-4 border-b-1 border-custom-neutral-2">
