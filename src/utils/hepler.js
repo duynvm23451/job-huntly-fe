@@ -92,3 +92,27 @@ export const formatTimeDifference = (timestamp) => {
     return `${Math.floor(seconds / 86400)} ngày trước`;
   }
 };
+
+export const areMessagesWithinTwoMinutes = (msg1, msg2) => {
+  const time1 = new Date(msg1.createdAt).getTime();
+  const time2 = new Date(msg2.createdAt).getTime();
+  const difference = Math.abs(time2 - time1);
+  return difference <= 2 * 60 * 1000; // 2 minutes in milliseconds
+};
+
+export const groupMessages = (dataMessages) => {
+  return dataMessages.reduce((groups, message) => {
+    const lastGroup = groups[groups.length - 1];
+
+    if (
+      lastGroup &&
+      areMessagesWithinTwoMinutes(lastGroup[lastGroup.length - 1], message)
+    ) {
+      lastGroup.push(message);
+    } else {
+      groups.push([message]);
+    }
+
+    return groups;
+  }, []);
+};

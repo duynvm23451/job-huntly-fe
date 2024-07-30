@@ -48,8 +48,8 @@ const Messages = () => {
           Trở về dashboard
         </button>
       </div>
-      <div className="pl-6 border-t-1 border-custom-neutral-2 flex">
-        <nav className="w-fit h-screen pt-4 pr-6 border-r-1 border-custom-neutral-2">
+      <div className="pl-6 border-t-1 border-custom-neutral-2 flex relative">
+        <nav className="w-fit h-screen pt-4 pr-6 border-r-1 border-custom-neutral-2 sticky top-0">
           <div className="relative">
             <input
               className="pl-10 border-custom-neutral-2 focus:outline-none focus:border-none focus:ring-1 focus:ring-custom-neutral-2"
@@ -59,6 +59,7 @@ const Messages = () => {
           </div>
           <ul className="mt-4">
             {chatRooms.length !== 0 &&
+              chatRooms &&
               chatRooms.map((el) => (
                 <Link
                   to={el.id}

@@ -156,7 +156,10 @@ export const getChatRooms = async (queryParams, token) => {
 
 export const getMessagesList = async (queryParams) => {
   const response = await axios.get(
-    import.meta.env.VITE_API + "messages/" + queryParams.id,
+    import.meta.env.VITE_API +
+      "messages/" +
+      queryParams.id +
+      "?sort=createdAt,desc",
     {
       params: queryParams,
       headers: { Authorization: "Bearer " + queryParams.token },

@@ -39,9 +39,9 @@ const Test = () => {
   const sendMessage = () => {
     if (client) {
       const messagePayload = JSON.stringify({
-        destinationId: 1,
+        destinationId: chat,
         message,
-        loggedInUserId: 28,
+        loggedInUserId: loggedInUserId.id,
       });
       client.send("/app/chat", {}, messagePayload);
       setMessage("");
