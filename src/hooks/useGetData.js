@@ -1,29 +1,34 @@
-import { useEffect, useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 const useGetData = (getFunction, queryParams) => {
-  const [isLoading, setIsLoading] = useState();
-  const [error, setError] = useState();
-  const [data, setData] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState(null);
 
+  // Function to fetch data
+  const fetchData = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const response = await getFunction(queryParams);
+      setData(response.data);
+      setError(null);
+    } catch (error) {
+      setData(null);
+      setError(error.response ? error.response.data : error.message);
+    }
+    setIsLoading(false);
+  }, [getFunction, queryParams]);
+
+  // Initial data fetch
   useEffect(() => {
-    const getData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await getFunction(queryParams);
-        setData(response.data);
-      } catch (error) {
-        setError(error.response.data);
-      }
-      setIsLoading(false);
-    };
-
-    getData();
-  }, [queryParams]);
+    fetchData();
+  }, [fetchData]);
 
   return {
     isLoading,
     error,
     data,
+    refetch: fetchData, // Expose refetch function
   };
 };
 
