@@ -12,14 +12,16 @@ import Stomp from "stompjs";
 import SockJS from "sockjs-client";
 import { formatTimeDifference, groupMessages } from "@/utils/hepler";
 import defaultAvatar from "@/assets/image/default-avatar.png";
-import { current } from "@reduxjs/toolkit";
 
 const ChatArea = ({ chatRoomId }) => {
   const token = useRouteLoaderData("root");
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
   const clientRef = useRef(null);
+  const chatRoomRef = useRef(null);
+  const messagesRef = useRef(null);
 
   const connectWebSocket = () => {
     const socket = new SockJS("http://localhost:8080/ws");
@@ -33,23 +35,24 @@ const ChatArea = ({ chatRoomId }) => {
       stompClient.subscribe("/topic/messages", (message) => {
         const response = JSON.parse(message.body);
         if (response.code === 200) {
-          refetchMessages(); // Trigger data refetch
+          setMessages((prevMessages) => {
+            // Check if the message already exists in the list
+            const messageExists = prevMessages.some(
+              (msg) => msg.id === response.data.id
+            );
+            // If the message doesn't exist, add it to the list
+            if (!messageExists) {
+              return [response.data, ...prevMessages];
+            }
+            // If the message exists, return the previous state unchanged
+            return prevMessages;
+          });
         }
       });
 
       clientRef.current = stompClient;
     });
   };
-
-  useEffect(() => {
-    connectWebSocket();
-
-    return () => {
-      if (clientRef.current) {
-        clientRef.current.disconnect();
-      }
-    };
-  }, []);
 
   const sendMessage = (content) => {
     if (clientRef.current) {
@@ -70,10 +73,10 @@ const ChatArea = ({ chatRoomId }) => {
     () => ({
       id,
       token,
-      page: 1,
-      size: 40,
+      page,
+      size: 20,
     }),
-    [id, token]
+    [id, page, token]
   );
 
   const {
@@ -82,25 +85,13 @@ const ChatArea = ({ chatRoomId }) => {
     data: dataChatRoom,
   } = useGetData(getChatRoomById, queryParams);
 
-  const {
-    isLoading: isLoadingMessages,
-    error: errorMessages,
-    data: dataMessages,
-    refetch: refetchMessages,
-  } = useGetData(getMessagesList, queryParams);
-
-  if (errorMessages || errorChatRom) {
-    let error = errorMessages || errorChatRom;
-    const errorMessage = error?.message || "An unknown error occurred.";
+  if (errorChatRom) {
     return (
       <div className="h-screen bg-custom-neutral flex flex-col justify-center items-center text-xl font-medium text-red-500">
         <WarningIcon className="w-20 h-20 mb-4 text-center" />
-        {errorMessage}
+        {errorChatRom.message}
       </div>
     );
-  }
-  if (isLoadingChatRoom || isLoadingMessages) {
-    return <div>Loading...</div>;
   }
 
   const handleChange = (event) => {
@@ -114,8 +105,63 @@ const ChatArea = ({ chatRoomId }) => {
     }
   };
 
+  const fetchData = async () => {
+    try {
+      const response = await getMessagesList(queryParams);
+
+      if (response.data.last) {
+        setHasMoreMessages(false);
+      }
+      setMessages((prevMessages) => {
+        const newMessages = response.data.content.filter(
+          (newMessage) => !prevMessages.some((msg) => msg.id === newMessage.id)
+        );
+        return [...prevMessages, ...newMessages];
+      });
+      setPage((prePage) => prePage + 1);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    chatRoomRef.current?.scrollIntoView({ behavior: "smooth" });
+    fetchData();
+  }, [message]);
+
+  useEffect(() => {
+    connectWebSocket();
+    return () => {
+      if (clientRef.current) {
+        clientRef.current.disconnect();
+      }
+    };
+  }, []);
+
+  const onIntersection = (entries) => {
+    const firstEntry = entries[0];
+    if (firstEntry.isIntersecting && hasMoreMessages) {
+      fetchData();
+    }
+  };
+
+  const loadRef = useRef(null);
+  useEffect(() => {
+    const observer = new IntersectionObserver(onIntersection);
+    if (loadRef.current) {
+      observer.observe(loadRef.current);
+    }
+
+    return () => {
+      if (loadRef.current) {
+        observer.unobserve(loadRef.current);
+      }
+      observer.disconnect();
+    };
+  }, [messages, hasMoreMessages]);
+
   return (
-    <div className="w-full relative bg-violet-50">
+    <div className="w-full min-h-screen relative bg-violet-50">
       {dataChatRoom && (
         <div className="px-4 py-3 sticky top-0 border-b-1 bg-white border-custom-neutral-2 flex items-center justify-between">
           <div className="flex items-center">
@@ -137,24 +183,43 @@ const ChatArea = ({ chatRoomId }) => {
           </div>
         </div>
       )}
-      <div className="flex flex-col justify-end pb-28 px-4 chat-container">
+      <div className="flex flex-col justify-end pb-28 px-4">
+        {hasMoreMessages && (
+          <p ref={loadRef} className="text-center">
+            Tải thêm
+          </p>
+        )}
         <ul className="flex flex-col-reverse">
-          {dataMessages &&
-            groupMessages(dataMessages.content).map((group, index) => (
+          {messages.length != 0 &&
+            groupMessages(messages).map((group, index) => (
               <li key={index} className="my-2">
                 <p className="text-gray-400 text-sm font-semibold text-center mb-4">
                   {formatTimeDifference(group[0].createdAt)}
                 </p>
-                <div className="flex">
+                <div
+                  className={`flex ${
+                    loggedInUser.id == group[0].user.id && "flex-row-reverse"
+                  } `}
+                >
                   <img
                     src={defaultAvatar}
                     alt="avatar"
                     className="w-10 h-10 rounded-full"
                   />
-                  <div className="ml-4 flex flex-col-reverse ">
+                  <div
+                    className={`flex flex-col-reverse ${
+                      loggedInUser.id == group[0].user.id
+                        ? "items-end mr-4"
+                        : "ml-4"
+                    }`}
+                  >
                     {group.map((el) => (
                       <div
-                        className="my-2 bg-violet-300 p-2 min-w-20 rounded-lg"
+                        className={`my-2 ${
+                          loggedInUser.id == group[0].user.id
+                            ? "bg-violet-300"
+                            : "bg-white"
+                        } p-2 min-w-20 w-fit rounded-lg`}
                         key={el.id}
                       >
                         {el.content}
@@ -176,6 +241,7 @@ const ChatArea = ({ chatRoomId }) => {
         />
         <RectangleButton onClick={handleClick}>Gửi</RectangleButton>
       </div>
+      <div ref={chatRoomRef} />
     </div>
   );
 };
