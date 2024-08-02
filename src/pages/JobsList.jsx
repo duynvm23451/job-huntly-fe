@@ -6,8 +6,7 @@ const JobsList = () => {
   const token = useRouteLoaderData("root");
   return (
     <>
-      {!token && <FindJobsGuest />}
-      {token && <p>Authed Jobs Page</p>}
+      <FindJobsGuest />
     </>
   );
 };

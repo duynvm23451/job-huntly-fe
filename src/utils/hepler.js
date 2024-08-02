@@ -106,7 +106,8 @@ export const groupMessages = (dataMessages) => {
 
     if (
       lastGroup &&
-      areMessagesWithinTwoMinutes(lastGroup[lastGroup.length - 1], message)
+      areMessagesWithinTwoMinutes(lastGroup[lastGroup.length - 1], message) &&
+      lastGroup[lastGroup.length - 1].user.id === message.user.id
     ) {
       lastGroup.push(message);
     } else {
