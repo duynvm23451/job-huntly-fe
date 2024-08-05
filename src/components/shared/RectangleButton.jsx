@@ -1,7 +1,7 @@
 const RectangleButton = ({ type, children, className, ...props }) => {
   let style = "";
   if (type == "outline") {
-    style = "";
+    style = `text-lg font-semibold px-8 pt-2.5 pb-3 text-custom-violet bg-white border-1 border-custom-violet h-fit ${className}`;
   } else if (type == "white") {
     style = `text-lg font-semibold px-8 pt-4 pb-5 text-custom-violet bg-white border-none h-fit ${className}`;
   } else {
