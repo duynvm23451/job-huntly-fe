@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import coverImage from "@/assets/image/cover.jpg";
 import defaultImage from "@/assets/image/default-avatar.png";
 import MailIcon from "@/components/icons/MailIcon";
@@ -12,6 +12,12 @@ import { Viewer, Worker } from "@react-pdf-viewer/core";
 // Import the styles
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import DateOfBirthIcon from "@/components/icons/DateOfBirthIcon";
+import PhoneIcon from "@/components/icons/PhoneIcon";
+import PersonIcon from "@/components/icons/PersonIcon";
+import InstagramIcon from "@/components/icons/InstagramIcon";
+import XIcon from "@/components/icons/XIcon";
+import LinkedinIcon from "@/components/icons/LinkedinIcon";
+import FacebookIcon from "@/components/icons/FacebookIcon";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -80,15 +86,67 @@ const Profile = () => {
             </p>
           </div>
           <div className="mt-6 border-1 border-custom-neutral-2 h-full py-8 px-6">
+            <h1 className="text-xl font-semibold mb-8">Hồ sơ ứng tuyển</h1>
             <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
               <Viewer fileUrl={testPdf} />
             </Worker>
           </div>
           <div className="h-8"></div>
         </div>
-        <div className="h-screen bg-green-400 col-span-4">
-          <div className="w-full bg-white border-1 border-custom-neutral-2 h-48">
-            <DateOfBirthIcon />
+        <div className="h-screen col-span-4">
+          <div className="w-full px-6 py-4 bg-white border-1 border-custom-neutral-2">
+            <h1 className="text-xl font-semibold mb-4">Thông tin bổ sung</h1>
+            <div className="flex mt-2">
+              <DateOfBirthIcon className="w-6 h-6 mr-2 mt-0.5" />
+              <p className="flex flex-col">
+                <span className="text-lg">Ngày sinh</span>
+                <span className="text-gray-600">17/11/2001</span>
+              </p>
+            </div>
+            <div className="flex mt-4">
+              <PhoneIcon className="w-6 h-6 mr-2 mt-0.5" />
+              <p className="flex flex-col">
+                <span className="text-lg">Số điện thoại</span>
+                <span className="text-gray-600">+ 0987654321</span>
+              </p>
+            </div>
+            <div className="flex mt-4">
+              <PersonIcon className="w-6 h-6 mr-2 mt-0.5" />
+              <p className="flex flex-col">
+                <span className="text-lg">Giới tính</span>
+                <span className="text-gray-600">+ 0987654321</span>
+              </p>
+            </div>
+          </div>
+          <div className="w-full px-6 py-4 bg-white border-1 border-custom-neutral-2 mt-6">
+            <h1 className="text-xl font-semibold mb-4">Mạng xã hội</h1>
+            <div className="flex mt-2">
+              <FacebookIcon className="w-6 h-6 mr-2 mt-0.5" />
+              <p className="flex flex-col">
+                <span className="text-lg">Facebook</span>
+                <span className="text-custom-violet-2 font-medium">
+                  https://www.facebook.com/
+                </span>
+              </p>
+            </div>
+            <div className="flex mt-4">
+              <XIcon className="w-6 h-6 mr-2 mt-0.5" />
+              <p className="flex flex-col">
+                <span className="text-lg">X</span>
+                <span className="text-custom-violet-2 font-medium">
+                  https://x.com/
+                </span>
+              </p>
+            </div>
+            <div className="flex mt-4">
+              <LinkedinIcon className="w-6 h-6 mr-2 mt-0.5" />
+              <p className="flex flex-col">
+                <span className="text-lg">Linkedin</span>
+                <span className="text-custom-violet-2 font-medium">
+                  https://www.linkedin.com/
+                </span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
