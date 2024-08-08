@@ -44,7 +44,7 @@ const DashboardRecentApplicationsSection = () => {
           ))}
         </ul>
       )}
-      {!data && (
+      {(!data || data.length == 0) && (
         <p className="flex flex-col justify-center items-center p-8 text-xl font-medium text-red-500">
           <WarningIcon className="w-20 h-20 mb-4 text-center" />
           Không tìm thấy công việc nào đã ứng tuyển
