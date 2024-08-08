@@ -44,14 +44,14 @@ const JobsAppliedStatus = ({ total, interviewing }) => {
           <div className="flex items-center justify-center mb-2">
             <div className="w-3 h-3 bg-custom-violet rounded-sm mr-4"></div>
             <div className="flex flex-col">
-              <strong>{interviewingPercent} %</strong>
+              <strong>{interviewing == 0 ? 0 : interviewingPercent} %</strong>
               <span>Đang phỏng vấn</span>
             </div>
           </div>
           <div className="flex items-center justify-center">
             <div className="w-3 h-3 bg-[#E6E8FD] rounded-sm mr-4"></div>
             <div className="flex flex-col">
-              <strong>{remainPercent} %</strong>
+              <strong>{total == 0 ? 0 : remainPercent} %</strong>
               <span>Trạng thái khác</span>
             </div>
           </div>

@@ -14,7 +14,7 @@ import { useRouteLoaderData } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const DashBoard = () => {
+const EmployeeDashBoard = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const token = useRouteLoaderData("root");
   const [countResult, setCountResult] = useState(null);
@@ -91,7 +91,7 @@ const DashBoard = () => {
                     Đang trong quá trình phỏng vấn
                   </h2>
                   <p className="text-5xl mt-4 ml-8">
-                    {countResult.interviewing}
+                    {countResult.interviewing ? countResult.interviewing : 0}
                   </p>
                   <BackgroundInterviewingIcon className="absolute bottom-0 right-4" />
                 </div>
@@ -99,7 +99,9 @@ const DashBoard = () => {
               <div className="col-span-4">
                 <JobsAppliedStatus
                   total={countResult.total}
-                  interviewing={countResult.interviewing}
+                  interviewing={
+                    countResult.interviewing ? countResult.interviewing : 0
+                  }
                 />
               </div>
               <div className="col-span-5 border-1 border-custom-neutral-2 rounded-lg">
@@ -146,4 +148,4 @@ const DashBoard = () => {
   );
 };
 
-export default DashBoard;
+export default EmployeeDashBoard;

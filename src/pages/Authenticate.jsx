@@ -17,7 +17,7 @@ const Authenticate = () => {
     if (code) {
       const authGoogle = async () => {
         const data = await postAuthCode(queryParams);
-        setToken(data.data.access_token);
+        setToken(data.data.token);
         navigate("/");
       };
       authGoogle();

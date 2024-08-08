@@ -37,9 +37,6 @@ const AuthedNav = () => {
   }, [token, dispatch]);
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const handleClick = () => {
-    logOut();
-  };
   return (
     <div>
       <div className="px-6 py-6 flex flex-col justify-between absolute left-0 top-0 bottom-0 w-64 bg-custom-gray border-r-1 border-x-custom-neutral-2 shadow-xl">
