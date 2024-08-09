@@ -20,6 +20,8 @@ import Profile from "@/pages/employee/Profile";
 import Setting from "@/pages/Setting";
 import Test from "@/pages/Test";
 import ChatArea from "@/components/disposable/ChatArea";
+import EditCompany from "@/pages/recuiter/EditCompany";
+import JobsListRecruiter from "@/pages/recuiter/JobsListRecruiter";
 
 const router = createBrowserRouter([
   {
@@ -104,6 +106,14 @@ const router = createBrowserRouter([
       {
         path: "test",
         element: <Test />,
+      },
+      {
+        path: "edit-company",
+        element: <EditCompany />,
+      },
+      {
+        path: "jobs-list",
+        element: <JobsListRecruiter />,
       },
     ],
   },
