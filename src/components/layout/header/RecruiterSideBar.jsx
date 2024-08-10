@@ -45,7 +45,7 @@ const RecruiterSideBar = () => {
       >
         <CompanyIcon2
           className="w-7 h-7 mr-4"
-          isActive={pathname.includes("/companies")}
+          isActive={pathname.includes("company")}
         />
         Công ty
       </NavLink>
@@ -59,7 +59,7 @@ const RecruiterSideBar = () => {
       >
         <People2Icon
           className="w-7 h-7 mr-4"
-          isActive={pathname.includes("/companies")}
+          isActive={pathname.includes("/applications")}
         />
         Ứng viên
       </NavLink>
