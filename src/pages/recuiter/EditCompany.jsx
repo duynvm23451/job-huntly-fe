@@ -2,17 +2,17 @@ import RectangleButton from "@/components/shared/RectangleButton";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import RecuiterCompanyDetail from "./RecuiterCompanyDetail";
 
 const EditCompany = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const navigate = useNavigate();
-  console.log(loggedInUser);
   const hanlderClick = () => {
     navigate("/setting");
   };
   return (
     <div>
-      {loggedInUser && loggedInUser.company && <div>Co cong ty</div>}
+      {loggedInUser && loggedInUser.company && <RecuiterCompanyDetail />}
       {loggedInUser && !loggedInUser.company && (
         <div className="h-screen w-full bg-custom-neutral flex justify-center items-center">
           <div className="p-8 rounded-lg shadow-lg border-1 bg-white text-center">
