@@ -1,10 +1,14 @@
 import ProfilePictureUpload from "@/components/disposable/ProfilePictureUpload";
+import RectangleButton from "@/components/shared/RectangleButton";
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useSelector } from "react-redux";
 
 const EditOverviewRecruiterSection = () => {
   const [value, setValue] = useState("");
+  console.log(value);
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
   return (
     <div className="col-span-12">
       <p className="mt-4 text-lg font-semibold">Thông tin cơ bản</p>
@@ -75,7 +79,7 @@ const EditOverviewRecruiterSection = () => {
           </div>
         </div>
       </div>
-      <div className="border-t-1 border-custom-neutral-2 py-4 grid grid-cols-12">
+      <div className="border-t-1 border-custom-neutral-2 pt-4 py-20 grid grid-cols-12">
         <div className="col-span-3">
           <h3 className="text-lg font-semibold">Mô tả về công ty</h3>
           <p>Tóm tắt sơ lược về công ty của bạn</p>
@@ -92,6 +96,11 @@ const EditOverviewRecruiterSection = () => {
             className="h-36"
           />
         </div>
+      </div>
+      <div className="flex justify-end pb-8 w-11/12">
+        <RectangleButton>
+          {loggedInUser && loggedInUser.company ? "Lưu thay đổi" : "Tạo mới"}
+        </RectangleButton>
       </div>
     </div>
   );

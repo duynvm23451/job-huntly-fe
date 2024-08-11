@@ -8,7 +8,7 @@ const RectangleButton = ({ type, children, className, ...props }) => {
     style = `text-lg font-semibold px-8 pt-2.5 pb-3 text-white bg-custom-violet border-none h-fit ${className}`;
   }
   return (
-    <button className={style} {...props}>
+    <button type="button" className={style} {...props}>
       {children}
     </button>
   );

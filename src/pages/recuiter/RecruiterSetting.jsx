@@ -12,9 +12,9 @@ const RecruiterSetting = () => {
     navigate("/");
   };
   const handleChangeTab = (tab) => {
-    if (loggedInUser.company) {
-      setTab(tab);
-    }
+    // if (loggedInUser.company) {
+    setTab(tab);
+    // }
   };
   const [tab, setTab] = useState("overview"); // overview & social & members
   return (
