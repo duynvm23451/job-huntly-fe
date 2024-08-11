@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useRouteLoaderData } from "react-router-dom";
 import EmployeeApplications from "./employee/EmployeeApplications";
+import RecruiterApplications from "./recuiter/RecruiterApplications";
 
 const Applications = () => {
   const token = useRouteLoaderData("root");
@@ -16,7 +17,9 @@ const Applications = () => {
       {loggedInUser && loggedInUser.role == "EMPLOYEE" && (
         <EmployeeApplications />
       )}
-      {loggedInUser && loggedInUser.role == "RECRUITER" && <div>1213</div>}
+      {loggedInUser && loggedInUser.role == "RECRUITER" && (
+        <RecruiterApplications />
+      )}
     </>
   );
 };

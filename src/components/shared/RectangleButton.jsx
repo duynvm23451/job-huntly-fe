@@ -1,4 +1,10 @@
-const RectangleButton = ({ type, children, className, ...props }) => {
+const RectangleButton = ({
+  type,
+  isTypeButton = false,
+  children,
+  className,
+  ...props
+}) => {
   let style = "";
   if (type == "outline") {
     style = `text-lg font-semibold px-8 pt-2.5 pb-3 text-custom-violet bg-white border-1 border-custom-violet h-fit ${className}`;
@@ -8,7 +14,11 @@ const RectangleButton = ({ type, children, className, ...props }) => {
     style = `text-lg font-semibold px-8 pt-2.5 pb-3 text-white bg-custom-violet border-none h-fit ${className}`;
   }
   return (
-    <button type="button" className={style} {...props}>
+    <button
+      type={isTypeButton ? "button" : "submit"}
+      className={style}
+      {...props}
+    >
       {children}
     </button>
   );

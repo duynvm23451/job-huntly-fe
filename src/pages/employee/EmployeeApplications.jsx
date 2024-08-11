@@ -161,13 +161,15 @@ const EmployeeApplications = () => {
                     />
                     <span>{el.job.company.name}</span>
                   </td>
-                  <td className="px-3 py-4 tracking-wider">{el.job.title}</td>
+                  <td className="px-3 py-4 tracking-wider max-w-48">
+                    {el.job.title}
+                  </td>
                   <td className="px-3 py-4 tracking-wider">
                     {formatTimestampToDate(el.createdAt)}
                   </td>
                   <td className="px-3 py-4 tracking-wider">
                     <span
-                      className={`py-1.5 px-3 border-1 rounded-full`}
+                      className={`py-1.5 text-sm px-3 border-1 rounded-full`}
                       style={{
                         borderColor: applicationStatus[el.status],
                         color: applicationStatus[el.status],
