@@ -51,7 +51,7 @@ const employeesRangeList = [
 
 const CompaniesListResult = ({ changeHanlder, searchObject }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const page = searchParams.get("page") ?? 1;
+  const page = searchParams.get("page") - 1 ?? 0;
   const size = searchParams.get("size") ?? 2;
 
   const queryParams = useMemo(
@@ -124,8 +124,8 @@ const CompaniesListResult = ({ changeHanlder, searchObject }) => {
                 <Pagination
                   navigatePath="/companies"
                   pagination={renderPaginationItems(
-                    data.number + 1,
-                    data.totalPages
+                    data.page.number + 1,
+                    data.page.totalPages
                   )}
                 />
               </div>

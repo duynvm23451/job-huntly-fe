@@ -177,3 +177,14 @@ export const getChatRoomById = async (queryParams) => {
   );
   return response.data;
 };
+
+export const getApplicants = async (queryParams) => {
+  const response = await axios.get(
+    import.meta.env.VITE_API + "applications/companies",
+    {
+      headers: { Authorization: "Bearer " + queryParams.token },
+      params: queryParams,
+    }
+  );
+  return response.data;
+};

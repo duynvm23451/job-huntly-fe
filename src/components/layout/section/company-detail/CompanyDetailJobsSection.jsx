@@ -11,8 +11,8 @@ import renderPaginationItems from "@/utils/pagination";
 
 const CompanyDetailJobsSection = ({ companyId }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const page = searchParams.get("page") ?? 1;
-  const size = searchParams.get("size") ?? 6;
+  const page = searchParams.get("page") - 1 ?? 0;
+  const size = searchParams.get("size") ?? 5;
   const queryParams = useMemo(
     () => ({
       id: companyId,
@@ -58,8 +58,8 @@ const CompanyDetailJobsSection = ({ companyId }) => {
             <Pagination
               navigatePath={"/companies/" + companyId}
               pagination={renderPaginationItems(
-                data.number + 1,
-                data.totalPages
+                data.page.number + 1,
+                data.page.totalPages
               )}
             />
           </div>
