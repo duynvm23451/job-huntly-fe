@@ -11,7 +11,7 @@ import { mappingColor } from "@/utils/mappingColor";
 import renderPaginationItems from "@/utils/pagination";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useRouteLoaderData, useSearchParams } from "react-router-dom";
+import { Link, useRouteLoaderData, useSearchParams } from "react-router-dom";
 
 const RecruiterApplications = () => {
   const handleClick = () => {
@@ -44,7 +44,7 @@ const RecruiterApplications = () => {
   }, [page, size]);
   console.log(applicationData);
   return (
-    <div className="col-span-12">
+    <div>
       <div className="mx-6 my-4 flex justify-between">
         <div className="flex items-center">
           <img
@@ -121,7 +121,9 @@ const RecruiterApplications = () => {
                   </td>
                   <td className="px-3 py-4 tracking-wider">
                     <div className="flex items-center justify-end relative">
-                      <SeeApplicationButton />
+                      <Link to={"/applications/" + el.id}>
+                        <SeeApplicationButton />
+                      </Link>
                       <div className="w-4"></div>
                       <ApplicationOption />
                     </div>
