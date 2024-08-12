@@ -21,7 +21,6 @@ const ChatArea = ({ chatRoomId }) => {
   const [messages, setMessages] = useState([]);
   const clientRef = useRef(null);
   const chatRoomRef = useRef(null);
-  const messagesRef = useRef(null);
 
   const connectWebSocket = () => {
     const socket = new SockJS("http://localhost:8080/ws");
@@ -68,7 +67,7 @@ const ChatArea = ({ chatRoomId }) => {
   const params = useParams();
   const id = chatRoomId || params.chatRoomId;
   const [hasMoreMessages, setHasMoreMessages] = useState(true);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const queryParams = useMemo(
     () => ({
       id,
@@ -184,11 +183,11 @@ const ChatArea = ({ chatRoomId }) => {
         </div>
       )}
       <div className="flex flex-col justify-end pb-28 px-4">
-        {hasMoreMessages && (
+        {/* {hasMoreMessages && (
           <p ref={loadRef} className="text-center">
             Tải thêm
           </p>
-        )}
+        )} */}
         <ul className="flex flex-col-reverse">
           {messages.length != 0 &&
             groupMessages(messages).map((group, index) => (

@@ -26,7 +26,7 @@ const EmployeeApplications = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [tab, setTab] = useState("");
   const [params, setParams] = useSearchParams();
-  const page = params.get("page") || 1;
+  const page = params.get("page") - 1 || 1;
   const size = params.get("size") || 5;
   const { data } = useGetData(getConfiguration);
   let applicationStatus = {};
@@ -190,8 +190,8 @@ const EmployeeApplications = () => {
             <Pagination
               navigatePath="/applications"
               pagination={renderPaginationItems(
-                applicationData.number + 1,
-                applicationData.totalPages
+                applicationData.page.number + 1,
+                applicationData.page.totalPages
               )}
             />
           </div>

@@ -22,6 +22,7 @@ import Test from "@/pages/Test";
 import ChatArea from "@/components/disposable/ChatArea";
 import EditCompany from "@/pages/recuiter/EditCompany";
 import JobsListRecruiter from "@/pages/recuiter/JobsListRecruiter";
+import ApplicationDetail from "@/pages/recuiter/ApplicationDetail";
 
 const router = createBrowserRouter([
   {
@@ -94,6 +95,10 @@ const router = createBrowserRouter([
       {
         path: "applications",
         element: <Applications />,
+      },
+      {
+        path: "applications/:applicationId",
+        element: <ApplicationDetail />,
       },
       {
         path: "profile",

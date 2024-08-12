@@ -1,13 +1,17 @@
 import ApplicationOption from "@/components/disposable/ApplicationOption";
 import SeeApplicationButton from "@/components/disposable/SeeApplicationButton";
 import SearchIcon from "@/components/icons/SearchIcon";
+import Pagination from "@/components/shared/Pagination";
 import SearchInput from "@/components/shared/SearchInput";
 import useGetData from "@/hooks/useGetData";
 import { logOut } from "@/services/authenitcationService";
 import { convertToReadableApplicationStatus } from "@/utils/hepler";
-import { getConfiguration } from "@/utils/http";
+import { getApplicants, getConfiguration } from "@/utils/http";
 import { mappingColor } from "@/utils/mappingColor";
-import React from "react";
+import renderPaginationItems from "@/utils/pagination";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link, useRouteLoaderData, useSearchParams } from "react-router-dom";
 
 const RecruiterApplications = () => {
   const handleClick = () => {
@@ -18,8 +22,29 @@ const RecruiterApplications = () => {
   if (data) {
     applicationStatus = mappingColor(data.applicationStatus);
   }
+
+  const token = useRouteLoaderData("root");
+  const [params, setParams] = useSearchParams();
+  const page = params.get("page") - 1 ?? 1;
+  const size = params.get("size") ?? 5;
+  const [applicationData, setApplicationData] = useState(null);
+  useEffect(() => {
+    const queryParams = {
+      page,
+      size,
+      token,
+    };
+    const fetchApplicants = async () => {
+      try {
+        const response = await getApplicants(queryParams);
+        setApplicationData(response.data);
+      } catch (error) {}
+    };
+    fetchApplicants();
+  }, [page, size]);
+  console.log(applicationData);
   return (
-    <div className="col-span-12">
+    <div>
       <div className="mx-6 my-4 flex justify-between">
         <div className="flex items-center">
           <img
@@ -67,64 +92,57 @@ const RecruiterApplications = () => {
               <th className="p-3 font-semibold tracking-wide text-left"></th>
             </tr>
           </thead>
-          <br />
+          <tbody>
+            <tr className="h-8"></tr>
+          </tbody>
           <tbody className="border-1 border-custom-neutral-2">
-            <tr className={`text-gray-700`}>
-              <td className="px-3 py-4 tracking-wider">Nguyễn Văn Mạnh Duy</td>
-              <td className="px-3 py-4 tracking-wider">
-                {" "}
-                <span
-                  className={`py-1.5 text-sm px-3 border-1 rounded-full`}
-                  style={{
-                    borderColor: applicationStatus["IN_REVIEW"],
-                    color: applicationStatus["IN_REVIEW"],
-                  }}
-                >
-                  {convertToReadableApplicationStatus("IN_REVIEW")}
-                </span>
-              </td>
-              <td className="px-3 py-4 tracking-wider">27-11-2020</td>
-              <td className="px-3 py-4 tracking-wider max-w-48">
-                Sale/ Nhân Viên Kinh Doanh/ Tư Vấn Xuất Khẩu Lao Động (Thu Nhập
-                Từ 20++ Triệu/ Tháng)
-              </td>
-              <td className="px-3 py-4 tracking-wider">
-                <div className="flex items-center justify-end relative">
-                  <SeeApplicationButton />
-                  <div className="w-4"></div>
-                  <ApplicationOption />
-                </div>
-              </td>
-            </tr>
-            <tr className={`text-gray-700 bg-violet-50`}>
-              <td className="px-3 py-4 tracking-wider">Nguyễn Văn Mạnh Duy</td>
-              <td className="px-3 py-4 tracking-wider">
-                {" "}
-                <span
-                  className={`py-1.5 text-sm px-3 border-1 rounded-full`}
-                  style={{
-                    borderColor: applicationStatus["INTERVIEWING"],
-                    color: applicationStatus["INTERVIEWING"],
-                  }}
-                >
-                  {convertToReadableApplicationStatus("INTERVIEWING")}
-                </span>
-              </td>
-              <td className="px-3 py-4 tracking-wider">27-11-2020</td>
-              <td className="px-3 py-4 tracking-wider max-w-48">
-                Sale/ Nhân Viên Kinh Doanh/ Tư Vấn Xuất Khẩu Lao Động (Thu Nhập
-                Từ 20++ Triệu/ Tháng)
-              </td>
-              <td className="px-3 py-4 tracking-wider">
-                <div className="flex items-center justify-end relative">
-                  <SeeApplicationButton />
-                  <div className="w-4"></div>
-                  <ApplicationOption />
-                </div>
-              </td>
-            </tr>
+            {applicationData &&
+              applicationData.content.map((el) => (
+                <tr key={el.id} className={`text-gray-700`}>
+                  <td className="px-3 py-4 tracking-wider">
+                    {el.user.fullName}
+                  </td>
+                  <td className="px-3 py-4 tracking-wider">
+                    {" "}
+                    <span
+                      className={`py-1.5 text-sm px-3 border-1 rounded-full`}
+                      style={{
+                        borderColor: applicationStatus["IN_REVIEW"],
+                        color: applicationStatus["IN_REVIEW"],
+                      }}
+                    >
+                      {convertToReadableApplicationStatus("IN_REVIEW")}
+                    </span>
+                  </td>
+                  <td className="px-3 py-4 tracking-wider">27-11-2020</td>
+                  <td className="px-3 py-4 tracking-wider max-w-48">
+                    Sale/ Nhân Viên Kinh Doanh/ Tư Vấn Xuất Khẩu Lao Động (Thu
+                    Nhập Từ 20++ Triệu/ Tháng)
+                  </td>
+                  <td className="px-3 py-4 tracking-wider">
+                    <div className="flex items-center justify-end relative">
+                      <Link to={"/applications/" + el.id}>
+                        <SeeApplicationButton />
+                      </Link>
+                      <div className="w-4"></div>
+                      <ApplicationOption />
+                    </div>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
+        {applicationData && (
+          <div className="w-full flex justify-center mt-12">
+            <Pagination
+              navigatePath="/applications"
+              pagination={renderPaginationItems(
+                applicationData.page.number + 1,
+                applicationData.page.totalPages
+              )}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

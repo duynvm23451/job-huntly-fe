@@ -47,7 +47,7 @@ const salaryRangeList = [
 
 const FindJobsListGuest = ({ changeHanlder, searchObject }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const page = searchParams.get("page") ?? 1;
+  const page = searchParams.get("page") - 1 ?? 0;
   const size = searchParams.get("size") ?? 1;
   const queryParams = useMemo(
     () => ({
@@ -58,6 +58,7 @@ const FindJobsListGuest = ({ changeHanlder, searchObject }) => {
     [searchObject, page, size]
   );
   const { isLoading, error, data } = useGetData(getJobs, queryParams);
+  console.log(data);
   return (
     <section>
       <Content className={"pt-24 pb-12 grid grid-cols-12"}>
@@ -124,8 +125,8 @@ const FindJobsListGuest = ({ changeHanlder, searchObject }) => {
               <Pagination
                 navigatePath="/jobs"
                 pagination={renderPaginationItems(
-                  data.number + 1,
-                  data.totalPages
+                  data.page.number + 1,
+                  data.page.totalPages
                 )}
               />
             </div>
