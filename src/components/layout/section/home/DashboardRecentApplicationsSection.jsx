@@ -9,7 +9,7 @@ const DashboardRecentApplicationsSection = () => {
   const token = useRouteLoaderData("root");
   const queryParams = useMemo(
     () => ({
-      page: 1,
+      page: 0,
       size: 3,
       sort: "createdAt,desc",
     }),
