@@ -124,7 +124,7 @@ export const countApplications = async (token, userId) => {
 export const getLatestInterviewingApplications = async (token) => {
   const response = await axios.get(
     import.meta.env.VITE_API +
-      "applications/latest/interviewing?sort=interviewTime,desc&size=2&page=1",
+      "applications/latest/interviewing?sort=interviewTime,desc&size=2&page=0",
     {
       headers: { Authorization: "Bearer " + token },
     }
