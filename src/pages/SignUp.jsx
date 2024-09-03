@@ -29,32 +29,35 @@ const SignUp = () => {
         formData[key] = null;
       }
     }
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       const responseData = await signup(formData);
       toast.success(responseData.message, {
-        position: "bottom-right"
-      })
+        position: "bottom-right",
+      });
     } catch (error) {
       const dataError = error.response.data;
       if (dataError.code == 417) {
-        const toastHtml = Object.entries(dataError.data).map(([key, value]) => `<p>- ${key}: ${value}</p>`).join('')
-        const toastMessage = <div dangerouslySetInnerHTML={{__html: toastHtml}}/>
+        const toastHtml = Object.entries(dataError.data)
+          .map(([key, value]) => `<p>- ${key}: ${value}</p>`)
+          .join("");
+        const toastMessage = (
+          <div dangerouslySetInnerHTML={{ __html: toastHtml }} />
+        );
         toast.error(toastMessage, {
-          position: "bottom-right"
-        })
+          position: "bottom-right",
+        });
       } else {
         toast.error(dataError.message, {
-          position: "bottom-right"
-        })
+          position: "bottom-right",
+        });
       }
     }
-    setIsLoading(false)
-
+    setIsLoading(false);
   };
   return (
     <>
-      <ToastContainer/>
+      <ToastContainer />
       <p className="text-lg font-semibold">
         <Link
           to={"/auth/signup"}
@@ -84,7 +87,7 @@ const SignUp = () => {
           className="w-full block mt-2 mb-4"
           placeholder="Nhập họ và tên"
           type="text"
-          name="username"
+          name="fullName"
         />
         <label className="text-lg font-medium">Mật khẩu</label>
         <input
@@ -101,7 +104,9 @@ const SignUp = () => {
           name="passwordConfirmation"
         />
 
-        <RectangleButton className={"w-full"} disabled={isLoading}>{isLoading ? "Loading..." : "Đăng ký"}</RectangleButton>
+        <RectangleButton className={"w-full"} disabled={isLoading}>
+          {isLoading ? "Loading..." : "Đăng ký"}
+        </RectangleButton>
       </form>
     </>
   );

@@ -1,26 +1,26 @@
 import WarningIcon from "@/components/icons/WarningIcon";
-import CompanyDetailContentSection from "@/components/layout/section/company-detail/CompanyDetailContentSection";
-import CompanyDetailJobsSection from "@/components/layout/section/company-detail/CompanyDetailJobsSection";
-import RecruiterCompanyTitleSection from "@/components/layout/section/company-detail/RecruiterCompanyTitleSection";
+import JobDetailContentSection from "@/components/layout/section/job-detail/JobDetailContentSection";
+import RecruiterJobDetailTitleSection from "@/components/layout/section/job-detail/RecruiterJobDetailTitleSection";
 import useGetData from "@/hooks/useGetData";
-import { getComapnyDetail } from "@/utils/http";
+import { getJobDetail } from "@/utils/http";
 import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const RecuiterCompanyDetail = () => {
+const EditJob = () => {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/");
   };
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const params = useParams();
   const queryParams = useMemo(
     () => ({
-      id: loggedInUser && loggedInUser.company.id,
+      id: params.jobId,
     }),
-    [loggedInUser]
+    [params]
   );
-  const { isLoading, error, data } = useGetData(getComapnyDetail, queryParams);
+  const { isLoading, error, data } = useGetData(getJobDetail, queryParams);
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -33,7 +33,7 @@ const RecuiterCompanyDetail = () => {
     );
   }
   if (!data) {
-    return <p>No company data found</p>;
+    return <p>No job data found</p>;
   }
   return (
     <>
@@ -48,7 +48,7 @@ const RecuiterCompanyDetail = () => {
           )}
 
           <h1 className="text-xl font-bold">
-            {loggedInUser?.company
+            {loggedInUser.company
               ? loggedInUser.company.name
               : "Không có công ty"}
           </h1>
@@ -60,11 +60,10 @@ const RecuiterCompanyDetail = () => {
           Trở về dashboard
         </button>
       </div>
-      <RecruiterCompanyTitleSection company={data} />
-      <CompanyDetailContentSection company={data} />
-      <CompanyDetailJobsSection companyId={data.id} />
+      <RecruiterJobDetailTitleSection job={data} />
+      <JobDetailContentSection job={data} />
     </>
   );
 };
 
-export default RecuiterCompanyDetail;
+export default EditJob;

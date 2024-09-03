@@ -20,20 +20,20 @@ const RecruiterCompanyTitleSection = ({ company }) => {
       <Content className={"pt-4 pb-12"}>
         <div className="mt-4 flex">
           <img
-            src="https://marketplace.canva.com/EAE0rNNM2Fg/1/0/1600w/canva-letter-c-trade-marketing-logo-design-template-r9VFYrbB35Y.jpg"
-            alt="company"
-            className="w-32 h-32"
+            src={company.logo}
+            alt="company log"
+            className="w-32 h-32 rounded-sm"
           />
           <div className="ml-8 w-4/5">
             <div className="flex justify-between">
               <div>
                 <h1 className="text-4xl font-bold mb-2">{company.name}</h1>
-                <Link
-                  to={company.websiteLink}
+                <a
+                  href={company.websiteLink}
                   className="text-custom-violet font-semibold"
                 >
                   {company.websiteLink}
-                </Link>
+                </a>
               </div>
               <RectangleButton type={"outline"} onClick={handleClick}>
                 Chỉnh sửa hồ sơ
@@ -60,11 +60,7 @@ const RecruiterCompanyTitleSection = ({ company }) => {
                 <LocationIcon className="w-10 h-10 p-2 rounded-full bg-white" />
                 <div className="ml-3">
                   <p>Địa chỉ</p>
-                  <p className="font-semibold max-w-xs">
-                    Số 14, đường số 7, KĐT Him Lam, phường Tân Hưng, Quận 7, Hồ
-                    Chí Minh / Tòa nhà Time Tower, Số 35 Lê Văn Lương, quận
-                    Thanh Xuân, Hà Nội
-                  </p>
+                  <p className="font-semibold max-w-xs">{company.location}</p>
                 </div>
               </div>
               <div className="flex justify-start">

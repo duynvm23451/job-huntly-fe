@@ -2,26 +2,29 @@ import Content from "@/components/shared/Content";
 import graphic from "@/assets/pattern-2.svg";
 
 import React, { useMemo, useRef } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useRouteLoaderData, useSearchParams } from "react-router-dom";
 import useGetData from "@/hooks/useGetData";
-import { getJobsByCompany } from "@/utils/http";
+import { getApplicableJobs, getJobsByCompany } from "@/utils/http";
 import LastestJobGuestCard from "@/components/disposable/LastestJobGuestCard";
 import Pagination from "@/components/shared/Pagination";
 import renderPaginationItems from "@/utils/pagination";
+import { convertToReadableJobType } from "@/utils/hepler";
 
 const CompanyDetailJobsSection = ({ companyId }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const page = searchParams.get("page") - 1 ?? 0;
-  const size = searchParams.get("size") ?? 5;
+  const page = searchParams.get("page") - 1 || 0;
+  const size = searchParams.get("size") || 5;
+  const token = useRouteLoaderData("root");
   const queryParams = useMemo(
     () => ({
-      id: companyId,
+      token,
       page,
       size,
     }),
-    [companyId, page, size]
+    [token, page, size]
   );
-  const { isLoading, error, data } = useGetData(getJobsByCompany, queryParams);
+  const { isLoading, error, data } = useGetData(getApplicableJobs, queryParams);
+  console.log(data);
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -40,15 +43,13 @@ const CompanyDetailJobsSection = ({ companyId }) => {
         <div className="grid grid-cols-2 gap-x-8 gap-y-6 mt-6">
           {data.content.map((job) => (
             <LastestJobGuestCard
-              logo={
-                "https://assets-global.website-files.com/6480217dd2b60074b15929c5/64816750618c99bec18c8cb8_Revolut%20Logo.svg"
-              }
-              title={"Email marketing"}
-              type={"Full Time"}
-              company={"Revolut"}
-              location={"Madrid, Span"}
-              categories={["Marketing", "Design"]}
-              className="col-span-1"
+              logo={job.company.logo}
+              title={job.title}
+              type={convertToReadableJobType(job.type)}
+              company={job.company.name}
+              location={job.company.location}
+              categories={job.categories}
+              className="col-span-2"
               key={job.id}
             />
           ))}

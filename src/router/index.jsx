@@ -23,6 +23,8 @@ import ChatArea from "@/components/disposable/ChatArea";
 import EditCompany from "@/pages/recuiter/EditCompany";
 import JobsListRecruiter from "@/pages/recuiter/JobsListRecruiter";
 import ApplicationDetail from "@/pages/recuiter/ApplicationDetail";
+import CreateJob from "@/pages/recuiter/CreateJob";
+import EditJob from "@/pages/recuiter/EditJob";
 
 const router = createBrowserRouter([
   {
@@ -119,6 +121,14 @@ const router = createBrowserRouter([
       {
         path: "jobs-list",
         element: <JobsListRecruiter />,
+      },
+      {
+        path: "create-job",
+        element: <CreateJob />,
+      },
+      {
+        path: "edit-job/:jobId",
+        element: <EditJob />,
       },
     ],
   },

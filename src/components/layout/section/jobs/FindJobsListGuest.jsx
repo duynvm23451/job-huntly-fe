@@ -4,31 +4,11 @@ import SideBarDropDown from "@/components/shared/SideBarDropDown";
 import JobsListItemCard from "@/components/disposable/JobsListItemCard";
 import Pagination from "@/components/shared/Pagination";
 import useGetData from "@/hooks/useGetData";
-import { getJobs } from "@/utils/http";
+import { getConfiguration, getJobs } from "@/utils/http";
 import { convertJobType } from "@/utils/hepler";
 import renderPaginationItems from "@/utils/pagination";
 import { Link, useSearchParams } from "react-router-dom";
 import WarningIcon from "@/components/icons/WarningIcon";
-
-const typeList = ["Full Time", "Part Time", "Remote", "Contact"];
-const categoriesList = [
-  "Design",
-  "Sales",
-  "Marketing",
-  "Business",
-  "Human Resource",
-  "Finance",
-  "Engineering",
-  "Technology",
-];
-const levelList = [
-  "Intern",
-  "Junior",
-  "Middle",
-  "Senior",
-  "Manager",
-  "Director",
-];
 
 const salaryRangeList = [
   {
@@ -47,8 +27,9 @@ const salaryRangeList = [
 
 const FindJobsListGuest = ({ changeHanlder, searchObject }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const page = searchParams.get("page") - 1 ?? 0;
-  const size = searchParams.get("size") ?? 1;
+  const { data: config } = useGetData(getConfiguration);
+  const page = searchParams.get("page") - 1 || 0;
+  const size = searchParams.get("size") || 1;
   const queryParams = useMemo(
     () => ({
       ...searchObject,
@@ -58,26 +39,25 @@ const FindJobsListGuest = ({ changeHanlder, searchObject }) => {
     [searchObject, page, size]
   );
   const { isLoading, error, data } = useGetData(getJobs, queryParams);
-  console.log(data);
   return (
     <section>
       <Content className={"pt-24 pb-12 grid grid-cols-12"}>
         <aside className="col-span-3">
           <SideBarDropDown
             name="types"
-            items={typeList}
+            items={config ? config.jobTypes : []}
             title={"Loại hình tuyển dụng"}
             changeHanlder={changeHanlder}
           />
           <SideBarDropDown
             name="categories"
-            items={categoriesList}
+            items={config ? config.categories : []}
             title={"Lĩnh vực"}
             changeHanlder={changeHanlder}
           />
           <SideBarDropDown
             name="levels"
-            items={levelList}
+            items={config ? config.jobLevels : []}
             title={"Cấp bậc"}
             changeHanlder={changeHanlder}
           />
@@ -107,18 +87,7 @@ const FindJobsListGuest = ({ changeHanlder, searchObject }) => {
           {!error &&
             data &&
             data.content.map((job) => (
-              <JobsListItemCard
-                logo={
-                  "https://assets-global.website-files.com/6480217dd2b60074b15929c5/64816750618c99bec18c8cb8_Revolut%20Logo.svg"
-                }
-                title={job.title}
-                type={convertJobType(job.type)}
-                company={job.company.name}
-                location={job.company.location}
-                categories={job.categories}
-                id={job.id}
-                key={job.id}
-              />
+              <JobsListItemCard job={job} key={job.id} />
             ))}
           {!error && data && (
             <div className="w-full flex justify-center mt-12">

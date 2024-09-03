@@ -155,7 +155,7 @@ const EmployeeApplications = () => {
                   </td>
                   <td className="px-3 py-4 tracking-wider flex items-center">
                     <img
-                      src="https://marketplace.canva.com/EAE0rNNM2Fg/1/0/1600w/canva-letter-c-trade-marketing-logo-design-template-r9VFYrbB35Y.jpg"
+                      src={el.job.company.logo}
                       alt="logo company"
                       className="w-10 h-10 rounded-full mr-4"
                     />

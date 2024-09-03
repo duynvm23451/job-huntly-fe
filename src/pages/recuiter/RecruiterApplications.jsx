@@ -11,22 +11,28 @@ import { mappingColor } from "@/utils/mappingColor";
 import renderPaginationItems from "@/utils/pagination";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useRouteLoaderData, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useRouteLoaderData,
+  useSearchParams,
+} from "react-router-dom";
 
 const RecruiterApplications = () => {
+  const navigate = useNavigate();
   const handleClick = () => {
-    logOut();
+    navigate("/");
   };
   let applicationStatus = {};
   const { data } = useGetData(getConfiguration);
   if (data) {
     applicationStatus = mappingColor(data.applicationStatus);
   }
-
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const token = useRouteLoaderData("root");
   const [params, setParams] = useSearchParams();
-  const page = params.get("page") - 1 ?? 1;
-  const size = params.get("size") ?? 5;
+  const page = params.get("page") - 1 || 1;
+  const size = params.get("size") || 5;
   const [applicationData, setApplicationData] = useState(null);
   useEffect(() => {
     const queryParams = {
@@ -47,23 +53,33 @@ const RecruiterApplications = () => {
     <div>
       <div className="mx-6 my-4 flex justify-between">
         <div className="flex items-center">
-          <img
-            src="https://marketplace.canva.com/EAE0rNNM2Fg/1/0/1600w/canva-letter-c-trade-marketing-logo-design-template-r9VFYrbB35Y.jpg"
-            alt="company logo"
-            className="w-12 h-12 rounded-full mr-4"
-          />
-          <h1 className="text-xl font-bold">Company JSC</h1>
+          {loggedInUser?.company && (
+            <img
+              src={loggedInUser.company.logo}
+              alt="company logo"
+              className="w-12 h-12 rounded-full mr-4"
+            />
+          )}
+
+          <h1 className="text-xl font-bold">
+            {loggedInUser?.company
+              ? loggedInUser.company.name
+              : "Không có công ty"}
+          </h1>
         </div>
         <button
           className="border-1 border-custom-neutral-2 text-custom-violet text-lg font-semibold rounded-sm px-5 pt-1.5 pb-2"
           onClick={handleClick}
         >
-          Đăng xuất
+          Trở về dashboard
         </button>
       </div>
       <div className="px-6 py-4 border-t-1 border-custom-neutral-2">
         <div className="flex justify-between">
-          <h1 className="text-2xl font-bold">Tổng số ứng viên: 19</h1>
+          <h1 className="text-2xl font-bold">
+            Tổng số ứng viên:{" "}
+            {applicationData && applicationData.page.totalElements}
+          </h1>
 
           <div className="border-1 border-custom-neutral-2 px-4 py-0.5 w-80 flex">
             <SearchIcon />

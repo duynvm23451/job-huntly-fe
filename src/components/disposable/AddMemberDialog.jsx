@@ -1,9 +1,18 @@
-import React, { forwardRef, useImperativeHandle, useRef } from "react";
+import React, {
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import RectangleButton from "../shared/RectangleButton";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouteLoaderData } from "react-router-dom";
+import { addUserToCompany } from "@/utils/http";
 
 const AddMemberDialog = forwardRef(({}, ref) => {
+  const token = useRouteLoaderData("root");
+  const [isLoading, setIsLoading] = useState(false);
   const dialog = useRef();
   useImperativeHandle(ref, () => {
     return {
@@ -12,15 +21,26 @@ const AddMemberDialog = forwardRef(({}, ref) => {
       },
     };
   });
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const fd = new FormData(event.target);
-    const data = Object.fromEntries(fd.entries());
-    console.log(data);
-    toast.error(data.email, {
-      position: "bottom-right",
-    });
+    const formData = Object.fromEntries(fd.entries());
+    formData.token = token;
+    setIsLoading(true);
+    try {
+      const data = await addUserToCompany(formData);
+      toast.success(data.message, {
+        position: "bottom-right",
+      });
+    } catch (error) {
+      console.log(error);
+      const errorData = error.response.data;
+      toast.error(errorData.message, {
+        position: "bottom-right",
+      });
+    }
+    setIsLoading(false);
   };
   return (
     <>
@@ -43,9 +63,10 @@ const AddMemberDialog = forwardRef(({}, ref) => {
             </RectangleButton>
             <button
               type="submit"
+              disabled={isLoading}
               className="text-lg font-semibold px-8 pt-2.5 pb-3 text-white bg-custom-violet border-none h-fit"
             >
-              Thêm
+              {!isLoading ? "Thêm" : "Loading..."}
             </button>
           </div>
         </form>

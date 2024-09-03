@@ -13,16 +13,17 @@ import EngineeringIcon from "@/components/icons/EngineeringIcon";
 import BusinessIcon from "@/components/icons/BusinessIcon";
 import HumanResourceIcon from "@/components/icons/HumanResourceIcon";
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
+import { Link } from "react-router-dom";
 
 const categoryList = [
   {
     icon: DesignIcon,
-    text: "Design",
+    text: "Thiết kế",
     availableNumber: 235,
   },
   {
     icon: SalesIcon,
-    text: "Sales",
+    text: "Tiếp thị",
     availableNumber: 756,
   },
   {
@@ -32,27 +33,27 @@ const categoryList = [
   },
   {
     icon: FinanceIcon,
-    text: "Finance",
+    text: "Tài chính",
     availableNumber: 140,
   },
   {
     icon: TechnologyIcon,
-    text: "Technology",
+    text: "Công nghệ",
     availableNumber: 436,
   },
   {
     icon: EngineeringIcon,
-    text: "Engineering",
+    text: "Lập trình viên",
     availableNumber: 542,
   },
   {
     icon: BusinessIcon,
-    text: "Business",
+    text: "Kinh doanh",
     availableNumber: 211,
   },
   {
     icon: HumanResourceIcon,
-    text: "HumanResource",
+    text: "Tuyển dụng",
     availableNumber: 346,
   },
 ];
@@ -94,12 +95,13 @@ const CategoryGuestSection = () => {
 
         <div className="grid lg:grid-cols-4 grid-cols-3 gap-8 mt-16">
           {categoryList.map((el) => (
-            <CategoryCard
-              key={el.text}
-              icon={el.icon}
-              text={el.text}
-              availableNumber={el.availableNumber}
-            />
+            <Link key={el.text} to={"/jobs"}>
+              <CategoryCard
+                icon={el.icon}
+                text={el.text}
+                availableNumber={el.availableNumber}
+              />
+            </Link>
           ))}
         </div>
       </Content>

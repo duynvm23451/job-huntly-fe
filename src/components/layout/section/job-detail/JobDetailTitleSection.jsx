@@ -14,7 +14,7 @@ const JobDetailTitleSection = ({ job }) => {
   };
   return (
     <section className="bg-custom-neutral">
-      <Content className={"pt-32 pb-20"}>
+      <Content className={`${token ? "pt-12" : "pt-32"} pb-20`}>
         <ul className="text-neutral-400">
           <Link to={"/"}>Trang chủ / </Link>
           <Link to={"/companies"}> Công ty /</Link>
@@ -25,11 +25,7 @@ const JobDetailTitleSection = ({ job }) => {
           </Link>
         </ul>
         <div className="flex items-center bg-white p-5 border-1 border-custom-neutral-2 shadow-md mt-8">
-          <img
-            src="https://marketplace.canva.com/EAE0rNNM2Fg/1/0/1600w/canva-letter-c-trade-marketing-logo-design-template-r9VFYrbB35Y.jpg"
-            alt="company"
-            className="w-20 h-20"
-          />
+          <img src={job.company.logo} alt="company" className="w-20 h-20" />
           <div className="flex-grow ml-6">
             <h1 className="text-3xl font-semibold">{job.title}</h1>
             <p className="text-neutral-500 mt-1">

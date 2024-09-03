@@ -1,5 +1,9 @@
 import ArrowDownIcon from "@/components/icons/ArrowDownIcon";
 import ArrowUpIcon from "@/components/icons/ArrowUpIcon";
+import {
+  convertToReadableJobLevel,
+  convertToReadableJobType,
+} from "@/utils/hepler";
 import { useEffect, useState } from "react";
 
 const SideBarDropDown = ({
@@ -72,7 +76,7 @@ const SideBarDropDown = ({
                   ? el.max == null
                     ? `Trên ${el.min}`
                     : `${el.min}-${el.max}`
-                  : el}
+                  : convertToReadableJobType(convertToReadableJobLevel(el))}
               </label>
               <br />
             </li>
