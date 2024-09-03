@@ -19,6 +19,7 @@ const ChatArea = ({ chatRoomId }) => {
 
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [messageSent, setMessageSent] = useState(false);
   const clientRef = useRef(null);
   const chatRoomRef = useRef(null);
 
@@ -35,15 +36,12 @@ const ChatArea = ({ chatRoomId }) => {
         const response = JSON.parse(message.body);
         if (response.code === 200) {
           setMessages((prevMessages) => {
-            // Check if the message already exists in the list
             const messageExists = prevMessages.some(
               (msg) => msg.id === response.data.id
             );
-            // If the message doesn't exist, add it to the list
             if (!messageExists) {
               return [response.data, ...prevMessages];
             }
-            // If the message exists, return the previous state unchanged
             return prevMessages;
           });
         }
@@ -55,11 +53,13 @@ const ChatArea = ({ chatRoomId }) => {
 
   const sendMessage = (content) => {
     if (clientRef.current) {
+      setMessage("");
       const messagePayload = JSON.stringify({
         chatRoomId: dataChatRoom.id,
         message: content,
         loggedInUserId: loggedInUser.id,
       });
+      // Send the message via the WebSocket client
       clientRef.current.send("/app/chat", {}, messagePayload);
     }
   };
@@ -97,9 +97,12 @@ const ChatArea = ({ chatRoomId }) => {
     setMessage(event.target.value);
   };
 
+  const scrollToBottom = () => {
+    chatRoomRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   const handleClick = () => {
     if (message !== "") {
-      setMessage("");
       sendMessage(message);
     }
   };
@@ -108,64 +111,39 @@ const ChatArea = ({ chatRoomId }) => {
     try {
       const response = await getMessagesList(queryParams);
 
-      if (response.data.last) {
-        setHasMoreMessages(false);
+      const newMessages = response.data.content.filter(
+        (newMessage) => !messages.some((msg) => msg.id === newMessage.id)
+      );
+
+      // Only update state if there are new messages
+      if (newMessages.length > 0) {
+        setMessages((prevMessages) => [...prevMessages, ...newMessages]);
+        scrollToBottom();
       }
-      setMessages((prevMessages) => {
-        const newMessages = response.data.content.filter(
-          (newMessage) => !prevMessages.some((msg) => msg.id === newMessage.id)
-        );
-        return [...prevMessages, ...newMessages];
-      });
-      setPage((prePage) => prePage + 1);
+      setPage((prePage) => prePage + 1); // Increment the page number for the next fetch
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    chatRoomRef.current?.scrollIntoView({ behavior: "smooth" });
     fetchData();
-  }, [message]);
+  }, [queryParams]);
 
   useEffect(() => {
     connectWebSocket();
+
     return () => {
-      if (clientRef.current) {
-        clientRef.current.disconnect();
-      }
+      clientRef.current.disconnect();
     };
   }, []);
-
-  const onIntersection = (entries) => {
-    const firstEntry = entries[0];
-    if (firstEntry.isIntersecting && hasMoreMessages) {
-      fetchData();
-    }
-  };
-
-  const loadRef = useRef(null);
-  useEffect(() => {
-    const observer = new IntersectionObserver(onIntersection);
-    if (loadRef.current) {
-      observer.observe(loadRef.current);
-    }
-
-    return () => {
-      if (loadRef.current) {
-        observer.unobserve(loadRef.current);
-      }
-      observer.disconnect();
-    };
-  }, [messages, hasMoreMessages]);
-
   return (
     <div className="w-full min-h-screen relative bg-violet-50">
       {dataChatRoom && (
         <div className="px-4 py-3 sticky top-0 border-b-1 bg-white border-custom-neutral-2 flex items-center justify-between">
           <div className="flex items-center">
             <img
-              src="https://marketplace.canva.com/EAE0rNNM2Fg/1/0/1600w/canva-letter-c-trade-marketing-logo-design-template-r9VFYrbB35Y.jpg"
+              src={dataChatRoom.company.logo}
               alt="logo"
               className="w-12 h-12 rounded-full mr-4"
             />
@@ -183,11 +161,6 @@ const ChatArea = ({ chatRoomId }) => {
         </div>
       )}
       <div className="flex flex-col justify-end pb-28 px-4">
-        {/* {hasMoreMessages && (
-          <p ref={loadRef} className="text-center">
-            Tải thêm
-          </p>
-        )} */}
         <ul className="flex flex-col-reverse">
           {messages.length != 0 &&
             groupMessages(messages).map((group, index) => (
@@ -240,7 +213,7 @@ const ChatArea = ({ chatRoomId }) => {
         />
         <RectangleButton onClick={handleClick}>Gửi</RectangleButton>
       </div>
-      <div ref={chatRoomRef} />
+      <div style={{ float: "left", clear: "both" }} ref={chatRoomRef}></div>
     </div>
   );
 };

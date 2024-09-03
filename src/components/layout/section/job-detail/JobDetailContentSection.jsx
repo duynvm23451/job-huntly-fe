@@ -5,25 +5,29 @@ import Content from "@/components/shared/Content";
 import SmallCategoryCard from "@/components/shared/SmallCategoryCard";
 import { formatTimestampToDate, convertJobType } from "@/utils/hepler";
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const JobDetailContentSection = ({ job }) => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
   return (
     <section className="bg-white pt-16 pb-24">
       <Content className={"grid grid-cols-12"}>
         <div className="col-span-8">
           <h1 className="text-2xl font-semibold mb-3">Mô tả</h1>
-          <p>{job.description}</p>
+          <p dangerouslySetInnerHTML={{ __html: job.description }} />
           <h1 className="text-2xl font-semibold mt-8 mb-4">Trách nghiệm</h1>
-          <p>{job.responsibilities}</p>
+          <p dangerouslySetInnerHTML={{ __html: job.responsibilities }} />
           <h1 className="text-2xl font-semibold mt-8 mb-4">Bạn là ai ?</h1>
-          <p>{job.preferredQualifications}</p>
+          <p
+            dangerouslySetInnerHTML={{ __html: job.preferredQualifications }}
+          />
           <h1 className="text-2xl font-semibold mt-8 mb-4">Ưu tiên nếu có</h1>
-          <p>{job.niceToHaves}</p>
+          <p dangerouslySetInnerHTML={{ __html: job.niceToHaves }} />
           <h1 className="text-2xl font-semibold mt-8 mb-4">
             Phúc lợi và lợi ích
           </h1>
-          <p>{job.perkAndBenefits}</p>
+          <p dangerouslySetInnerHTML={{ __html: job.perkAndBenefits }} />
         </div>
         <div className="col-span-4 ml-16">
           <h1 className="text-2xl font-semibold mb-6">Mô tả</h1>
@@ -83,11 +87,7 @@ const JobDetailContentSection = ({ job }) => {
           </div>
           <div className="border-t-2 mt-12 border-custom-neutral-2">
             <div className="flex mt-8">
-              <img
-                src="https://marketplace.canva.com/EAE0rNNM2Fg/1/0/1600w/canva-letter-c-trade-marketing-logo-design-template-r9VFYrbB35Y.jpg"
-                alt="company"
-                className="w-16 h-16"
-              />
+              <img src={job.company.logo} alt="company" className="w-16 h-16" />
               <div className="ml-4 flex-1 w-3/5">
                 <h2 className="text-xl font-semibold break-words">
                   {job.title}
@@ -114,7 +114,11 @@ const JobDetailContentSection = ({ job }) => {
             </p>
             <div className="flex justify-center mt-4">
               <Link
-                to={"/companies/" + job.company.id}
+                to={
+                  loggedInUser?.company?.id == job.company.id
+                    ? "/edit-company"
+                    : "/companies/" + job.company.id
+                }
                 className="flex text-custom-violet-2 font-bold"
               >
                 Xem trang công ty

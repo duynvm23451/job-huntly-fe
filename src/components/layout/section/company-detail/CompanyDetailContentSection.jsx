@@ -7,13 +7,7 @@ import React from "react";
 import ImageSlider from "./ImageSlider";
 
 const CompanyDetailContentSection = ({ company }) => {
-  const images = [
-    "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
-    "https://h5p.org/sites/default/files/h5p/content/1209180/images/file-6113d5f8845dc.jpeg",
-    "https://www.akamai.com/site/im-demo/perceptual-standard.jpg?imbypass=true",
-    "https://burst.shopifycdn.com/photos/clear-water-with-parked-boats-from-above.jpg?width=1000&format=pjpg&exif=0&iptc=0",
-  ];
-  const currentUrl = window.location.href;
+  const currentUrl = window.location.origin + "/companies/" + company.id;
   const handleCopyClick = async () => {
     try {
       await navigator.clipboard.writeText(currentUrl);
@@ -28,7 +22,7 @@ const CompanyDetailContentSection = ({ company }) => {
         <div className="grid grid-cols-12 h-fit">
           <div className="xl:col-span-8 col-span-7 h-full">
             <h1 className="text-3xl font-semibold mb-3">Mô tả</h1>
-            <p>{company.description}</p>
+            <p dangerouslySetInnerHTML={{ __html: company.description }} />
           </div>
           <div className="xl:col-span-4 col-span-5 ml-16 h-full break-words">
             <h1 className="text-2xl font-semibold">
@@ -75,10 +69,10 @@ const CompanyDetailContentSection = ({ company }) => {
             </div>
           </div>
         </div>
-        <div className="mt-8">
+        {/* <div className="mt-8">
           <h1 className="text-3xl font-semibold mb-10">Hình ảnh của công ty</h1>
           <ImageSlider images={images} />
-        </div>
+        </div> */}
       </Content>
     </section>
   );

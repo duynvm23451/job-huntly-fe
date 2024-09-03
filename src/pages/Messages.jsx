@@ -72,7 +72,7 @@ const Messages = () => {
                   }`}
                 >
                   <img
-                    src="https://marketplace.canva.com/EAE0rNNM2Fg/1/0/1600w/canva-letter-c-trade-marketing-logo-design-template-r9VFYrbB35Y.jpg"
+                    src={el.company.logo}
                     alt="avatar"
                     className="w-10 h-10 mr-4 rounded-full"
                   />

@@ -188,3 +188,100 @@ export const getApplicants = async (queryParams) => {
   );
   return response.data;
 };
+
+export const getRecruiterDashboardInfo = async (queryParams) => {
+  const response = await axios.get(
+    import.meta.env.VITE_API + "config/recruiter",
+    {
+      headers: { Authorization: "Bearer " + queryParams.token },
+    }
+  );
+  return response.data;
+};
+
+export const createUpdateCompany = async (formData) => {
+  const response = await axios.post(
+    import.meta.env.VITE_API + "companies",
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: "Bearer " + formData.get("token"),
+      },
+    }
+  );
+  return response.data;
+};
+
+export const addUserToCompany = async (queryParams) => {
+  const response = await axios.put(
+    import.meta.env.VITE_API + "companies",
+    { email: queryParams.email },
+    {
+      headers: {
+        Authorization: "Bearer " + queryParams.token,
+      },
+    }
+  );
+  return response;
+};
+
+export const getUsersInCompany = async (token) => {
+  const response = await axios.get(
+    import.meta.env.VITE_API + "companies/users",
+    {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
+  return response;
+};
+
+export const getApplicableJobs = async (queryParams) => {
+  const response = await axios.get(
+    import.meta.env.VITE_API + "companies/applicableJobs",
+    {
+      params: queryParams,
+      headers: { Authorization: "Bearer " + queryParams.token },
+    }
+  );
+  return response.data;
+};
+
+export const createJob = async (formData) => {
+  const response = await axios.post(
+    import.meta.env.VITE_API + "jobs",
+    formData,
+    {
+      headers: { Authorization: "Bearer " + formData.token },
+    }
+  );
+  return response.data;
+};
+
+export const applyJob = async (queryParams) => {
+  const response = await axios.post(
+    import.meta.env.VITE_API +
+      "jobs/" +
+      queryParams.jobId +
+      "/users/" +
+      queryParams.userId,
+    null,
+    {
+      headers: { Authorization: "Bearer " + queryParams.token },
+    }
+  );
+  return response.data;
+};
+
+export const getApplicationById = async (queryParams) => {
+  const response = await axios.get(
+    import.meta.env.VITE_API + "applications/" + queryParams.id,
+    {
+      params: queryParams,
+      headers: { Authorization: "Bearer " + queryParams.token },
+    }
+  );
+  return response.data;
+};

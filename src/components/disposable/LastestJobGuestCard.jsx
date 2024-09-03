@@ -7,10 +7,11 @@ const LastestJobGuestCard = ({
   company,
   location,
   categories,
+  className,
 }) => {
   return (
-    <div className="grid grid-cols-7 bg-white px-8 py-4">
-      <img src={logo} alt="logo" className="w-18 h-18 col-span-1" />
+    <div className={`grid grid-cols-7 bg-white px-8 py-4 ${className}`}>
+      <img src={logo} alt="logo" className="w-24 h-24 rounded-md col-span-1" />
       <div className="col-span-6">
         <h1 className="text-xl font-semibold">{title}</h1>
         <div className="flex items-center text-lg text-gray-400">

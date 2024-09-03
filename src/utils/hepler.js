@@ -75,6 +75,32 @@ export const convertToReadableApplicationStatus = (status) => {
   return status;
 };
 
+export const convertToReadableJobLevel = (jobLevel) => {
+  if (jobLevel == "DIRECTOR") {
+    return "Giám đốc";
+  }
+  if (jobLevel == "ABOVE") {
+    return "Bên trên";
+  }
+  return jobLevel[0] + jobLevel.slice(1).toLowerCase();
+};
+
+export const convertToReadableJobType = (jobType) => {
+  if (jobType.toUpperCase() == "FULL_TIME") {
+    return "Toàn thời gian";
+  }
+  if (jobType.toUpperCase() == "PART_TIME") {
+    return "Bán thời gian";
+  }
+  if (jobType.toUpperCase() == "REMOTE") {
+    return "Từ xa";
+  }
+  if (jobType.toUpperCase() == "CONTACT") {
+    return "Hợp đồng";
+  }
+  return jobType;
+};
+
 export const formatTimeDifference = (timestamp) => {
   const inputTime = new Date(timestamp);
   const currentTime = new Date();

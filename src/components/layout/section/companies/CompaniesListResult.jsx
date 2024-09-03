@@ -4,23 +4,10 @@ import Content from "@/components/shared/Content";
 import Pagination from "@/components/shared/Pagination";
 import SideBarDropDown from "@/components/shared/SideBarDropDown";
 import useGetData from "@/hooks/useGetData";
-import { getCompanies } from "@/utils/http";
+import { getCompanies, getConfiguration } from "@/utils/http";
 import renderPaginationItems from "@/utils/pagination";
 import React, { useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-
-const industries = [
-  "Quảng cáo",
-  "Marketing",
-  "Blockchain",
-  "Cloud",
-  "Công nghệ",
-  "Giáo dục",
-  "Tài chính",
-  "Thực phẩm và đồ uống",
-  "Sức khỏe",
-  "Truyền thông",
-];
 
 const employeesRangeList = [
   {
@@ -51,8 +38,9 @@ const employeesRangeList = [
 
 const CompaniesListResult = ({ changeHanlder, searchObject }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const page = searchParams.get("page") - 1 ?? 0;
-  const size = searchParams.get("size") ?? 2;
+  const page = searchParams.get("page") - 1 || 0;
+  const size = searchParams.get("size") || 2;
+  const { data: config } = useGetData(getConfiguration);
 
   const queryParams = useMemo(
     () => ({
@@ -69,7 +57,7 @@ const CompaniesListResult = ({ changeHanlder, searchObject }) => {
         <aside className="col-span-3">
           <SideBarDropDown
             name="industries"
-            items={industries}
+            items={config ? config.industries : []}
             title={"Lĩnh vực"}
             changeHanlder={changeHanlder}
           />
@@ -107,9 +95,7 @@ const CompaniesListResult = ({ changeHanlder, searchObject }) => {
                   key={company.id}
                 >
                   <CompanyCard
-                    logo={
-                      "https://img.freepik.com/free-vector/golden-blue-diamond-shape-logo-business-template_23-2148707648.jpg"
-                    }
+                    logo={company.logo}
                     title={company.name}
                     jobNumber={company.availableJobs}
                     description={company.description}

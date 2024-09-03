@@ -1,12 +1,18 @@
 import AddMemberDialog from "@/components/disposable/AddMemberDialog";
 import RectangleButton from "@/components/shared/RectangleButton";
+import useGetData from "@/hooks/useGetData";
+import { formatTimestampToDate } from "@/utils/hepler";
+import { getUsersInCompany } from "@/utils/http";
 import React, { useRef } from "react";
+import { useRouteLoaderData } from "react-router-dom";
 
 const EditMembersRecruiterSection = () => {
   const dialog = useRef();
   const handleClick = () => {
     dialog.current.open();
   };
+  const token = useRouteLoaderData("root");
+  const { data } = useGetData(getUsersInCompany, token);
   return (
     <>
       <AddMemberDialog ref={dialog} />
@@ -19,7 +25,9 @@ const EditMembersRecruiterSection = () => {
           <div className="col-span-1"></div>
           <div className="col-span-8">
             <div className="flex justify-between">
-              <h2 className="text-xl font-bold">8 thành viên</h2>
+              <h2 className="text-xl font-bold">
+                {data && data.data.length} thành viên
+              </h2>
               <RectangleButton onClick={handleClick}>
                 Thêm thành viên
               </RectangleButton>
@@ -37,24 +45,28 @@ const EditMembersRecruiterSection = () => {
                     Họ và tên
                   </th>
                   <th className="p-3 font-semibold tracking-wide text-left">
-                    Ngày vào công ty
+                    Ngày tạo tài khoản
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                <tr className={`text-gray-700`}>
-                  <td className="px-3 py-4 tracking-wider font-semibold text-blue-500">
-                    1
-                  </td>
-                  <td className="px-3 py-4 tracking-wider">
-                    duynvm1711@gmail.com
-                  </td>
-                  <td className="px-3 py-4 tracking-wider">
-                    Nguyễn Văn Mạnh Duy
-                  </td>
-                  <td className="px-3 py-4 tracking-wider">27-11-2020</td>
-                </tr>
-              </tbody>
+              {data && (
+                <tbody>
+                  {data.data.map((el) => (
+                    <tr key={el.id} className={`text-gray-700`}>
+                      <td className="px-3 py-4 tracking-wider font-semibold text-blue-500">
+                        {el.id}
+                      </td>
+                      <td className="px-3 py-4 tracking-wider">{el.email}</td>
+                      <td className="px-3 py-4 tracking-wider">
+                        {el.fullName}
+                      </td>
+                      <td className="px-3 py-4 tracking-wider">
+                        {formatTimestampToDate(el.createdAt)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              )}
             </table>
           </div>
         </div>

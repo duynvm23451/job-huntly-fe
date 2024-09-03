@@ -65,6 +65,7 @@ const EditProfileEmployeeSection = () => {
           />
         </div>
       </div>
+
       <div className="border-t-1 border-b-1 border-custom-neutral-2 py-4">
         <div className="col-span-12 border-2 border-dashed mt-2 border-custom-violet-2 rounded-lg p-4 text-center">
           <input

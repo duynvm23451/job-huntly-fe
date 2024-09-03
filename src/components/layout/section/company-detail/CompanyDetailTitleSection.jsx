@@ -21,11 +21,7 @@ export const CompanyDetailTitleSection = ({ company }) => {
           </Link>
         </ul>
         <div className="mt-10 flex">
-          <img
-            src="https://marketplace.canva.com/EAE0rNNM2Fg/1/0/1600w/canva-letter-c-trade-marketing-logo-design-template-r9VFYrbB35Y.jpg"
-            alt="company"
-            className="w-32 h-32"
-          />
+          <img src={company.logo} alt="company" className="w-32 h-32" />
           <div className="ml-8 w-4/5">
             <h1 className="text-4xl font-bold mb-2">{company.name}</h1>
             <Link
